@@ -18,6 +18,7 @@ MiddReddit addresses the need for a online community to discuss Middlebury-centr
 # Project Skeleton
 
 TODO: Implement CI badges, provide a link to the deployed version of your application, and provide a brief description of the application functionality.
+![workflow status](https://github.com/csci312a-s23/MiddReddit/actions/workflows/node.js.yml/badge.svg)
 
 ## Creation
 
@@ -40,3 +41,7 @@ Tools for mocking fetch can be installed with
 ```
 
 Note we need to pin the `node-fetch` version due to breaking changes when used with Jest in newer versions.
+
+MiddReddit is an application that highlights issues, advertises events, and acts as a campus-wide resource for the Middlebury College community.
+
+The link to our deployed application is: https://fly.io/apps/icy-paper-5700/monitoring

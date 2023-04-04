@@ -1,6 +1,7 @@
 # fly.toml file generated for middreddit on 2023-04-03T19:04:03-04:00
 
 app = "middreddit"
+
 kill_signal = "SIGINT"
 kill_timeout = 5
 primary_region = "bos"
