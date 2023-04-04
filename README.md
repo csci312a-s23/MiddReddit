@@ -24,3 +24,7 @@ Tools for mocking fetch can be installed with
 ```
 
 Note we need to pin the `node-fetch` version due to breaking changes when used with Jest in newer versions.
+
+MiddReddit is an application that highlights issues, advertises events, and acts as a campus-wide resource for the Middlebury College community.
+
+The link to our deployed application is: https://fly.io/apps/icy-paper-5700/monitoring
