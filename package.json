@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "contributors": [
-    "Team Member 1 <member1@middlebury.edu>",
-    "Team Member 2 <member2@middlebury.edu>"
+    "Luka Becerra <lbecerra@middlebury.edu"
   ],
   "scripts": {
     "dev": "next dev",

@@ -1,6 +1,7 @@
 # Project Skeleton
 
 TODO: Implement CI badges, provide a link to the deployed version of your application, and provide a brief description of the application functionality.
+![workflow status](https://github.com/csci312a-s23/MiddReddit/actions/workflows/node.js.yml/badge.svg)
 
 ## Creation
 
