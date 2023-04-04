@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "contributors": [
-    "Luka Becerra <lbecerra@middlebury.edu"
+    "Luka Becerra <lbecerra@middlebury.edu>",
+    "Peter Hansen <phansen@middlebury.edu>",
+    "Sartaj Singh <sartajs@middlebury.edu>",
+    "Terry Luongo <tluongo@middlebury.edu>",
+    "Steven Shi <yirans@middlebury.edu>"
   ],
   "scripts": {
     "dev": "next dev",
