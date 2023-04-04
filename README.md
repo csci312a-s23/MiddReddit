@@ -1,3 +1,20 @@
+![workflow status](https://github.com/csci312a-s23/practical06-devops-mlinderm/actions/workflows/node.js.yml/badge.svg)
+
+# MiddReddit
+
+_TODO: populate readme_
+[Link](https://middreddit.fly.dev/)
+
+### Why MiddReddit
+
+MiddReddit addresses the need for a online community to discuss Middlebury-centric topics, such as:
+
+1. Courses
+2. Social Scene
+3. Athletics
+4. Extracurriculars
+   Currently few online communities exist to fill this role.
+
 # Project Skeleton
 
 TODO: Implement CI badges, provide a link to the deployed version of your application, and provide a brief description of the application functionality.
