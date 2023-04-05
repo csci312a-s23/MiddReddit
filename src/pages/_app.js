@@ -22,9 +22,6 @@ function MainApp({ Component, pageProps }) {
         <Menubar />
         <Sidebar />
         <MainPage data={data} />
-        <div>
-          <h1>Post Display</h1>
-        </div>
       </main>
 
       <footer>MiddReddit 2023</footer>

@@ -1,8 +1,11 @@
-export default function ScrollPost({ Post }) {
+export default function ScrollPost({ post }) {
   return (
-    <div>
-      <h4>I am a unique scroll item.</h4>
-      <p>{Post.title}</p>
-    </div>
+    <li>
+      <h4>{post.title}</h4>
+      <em>
+        {post.owner} - {new Date().toLocaleString()}
+      </em>
+      <p>{post.contents} </p>
+    </li>
   );
 }
