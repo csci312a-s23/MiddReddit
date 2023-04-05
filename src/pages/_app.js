@@ -16,17 +16,11 @@ function MainApp({ Component, pageProps }) {
           <h1>MiddReddit</h1>
         </div>
         <div>
-          <h2>Sidebar</h2>
-          <body>Display sub-reddit</body>
+          <h1>Sidebar</h1>
         </div>
         <div>
-          <h2>Post Display</h2>
-          <body>View posts in column</body>
+          <h1>Post Display</h1>
         </div>
-        {/* <Component /> */}
-      </main>
-      <main>
-        <h1></h1>
       </main>
 
       <footer>MiddReddit 2023</footer>
