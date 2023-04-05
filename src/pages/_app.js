@@ -6,32 +6,25 @@ import styles from "../styles/MiddReddit.module.css";
 
 function MainApp({ Component, pageProps }) {
   return (
-    <>
+    <div className={styles.container}>
       <Head>
         <title>MiddReddit</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <body>
-        <main>
-          <div className={styles.container}>
-            <div>
-              <h1>MiddReddit</h1>
-            </div>
-            <div>
-              <h2>Sidebar</h2>
-              Display sub-reddit
-            </div>
-            <div>
-              <h2>Post Display</h2>
-              <p>View posts in column</p>
-            </div>
-            {/* <Component /> */}
-          </div>
-        </main>
-      </body>
+      <main>
+        <div>
+          <h1>MiddReddit</h1>
+        </div>
+        <div>
+          <h1>Sidebar</h1>
+        </div>
+        <div>
+          <h1>Post Display</h1>
+        </div>
+      </main>
 
       <footer>MiddReddit 2023</footer>
-    </>
+    </div>
   );
 }
 
