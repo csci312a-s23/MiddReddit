@@ -5,10 +5,16 @@ import Sidebar from "../components/sidebar";
 import Menubar from "../components/menubar";
 import MainPage from "../components/mainPage";
 import data from "../../data/seed.json";
+import { useState } from "react";
 
 import styles from "../styles/MiddReddit.module.css";
 
 function MainApp({ Component, pageProps }) {
+
+  const [collection, setCollection] = useState(data);
+
+  //This is not going to work right now obviously but this is the idea we should go for so they can only edit their own posts
+  const MyPosts = collection.filter(post => post.owner === user.name);
   return (
     <div className={styles.container}>
       <Head>

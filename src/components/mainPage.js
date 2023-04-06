@@ -1,6 +1,9 @@
+import { useState } from "react";
+import PostView from "./PostView";
 import ScrollDisplay from "./scrollDisplay";
 
 export default function MainPage({ data }) {
+
   return (
     <div>
       <h2>
