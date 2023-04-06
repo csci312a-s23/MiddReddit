@@ -10,7 +10,6 @@
     "Luke Becerra <lbecerra@middlebury.edu>",
     "Peter Hansen <phansen@middlebury.edu>",
     "Asif-UI Islam <aislam@middlebury.edu>"
-
   ],
   "scripts": {
     "dev": "next dev",

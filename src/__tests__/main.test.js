@@ -1,4 +1,4 @@
-import Home from "@/pages/index";
+import Home from "@/pages/_app";
 import { render } from "@testing-library/react";
 
 describe("End-to-end testing", () => {
