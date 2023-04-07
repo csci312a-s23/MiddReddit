@@ -1,93 +1,92 @@
 [
-    {
-        "title": "Midd Snow Ball",
-        "owner": "Peter Hansen",
-        "contents": "What a wonderful night I had watching DJ Earworm!",
-        "comments": ["He was the best","#YOLO"],
-        "posted": "2023-1-16T04:10:08.250Z",
-        "subreddit": ["Events"],
-        "upvotes": 6,
-        "id": 0
-    },
-    {
-        "title": "Taylor Swift Concert",
-        "owner": "Lucca Becerra",
-        "contents": "For all the Swifties out there this is an event you cannot miss",
-        "comments": ["OMG","Literally Screaming"],
-        "posted": "2023-1-20T04:10:08.250Z",
-        "subreddit": ["Events"],
-        "upvotes": 12,
-        "id": 1
-    },
-    {
-        "title": "Graduation",
-        "owner": "James Hetherington",
-        "contents": "I am so sad to see all my friends leaving",
-        "comments": [""],
-        "posted": "2023-2-01T04:10:08.250Z",
-        "subreddit": ["Events"],
-        "upvotes": 2,
-        "id": 2
-    },
-    {
-        "title": "2/6 Ross Meal",
-        "owner": "Lucca Becerra",
-        "contents": "Hot Dogs /n Cheeseburgers /n Crinkle Fries /n Baked Beans",
-        "comments": ["Gross","Do you know what they put in hotdogs?"],
-        "posted": "2023-2-06T04:10:08.250Z",
-        "subreddit": ["Lunches"],
-        "upvotes": -3,
-        "id": 3
-    },
-    {
-        "title": "1/12 Ross Meal",
-        "owner": "Lucca Becerra",
-        "contents": "Halal Cart Style Chicken /n Haitian Pork Griot /n Jasmine Rice",
-        "comments": ["Best Meal Ever", "Ross Supremacy","Catch me with 3 plates"],
-        "posted": "2023-1-12T04:10:08.250Z",
-        "subreddit": ["Lunches"],
-        "upvotes": 30,
-        "id": 4
-    },
-    {
-        "title": "3/17 Indoor Meet",
-        "owner": "Peter Hansen",
-        "contents": "https://www.shutterstock.com/image-photo/athlete-track-running-nice-scenic-260nw-316386770.jpg",
-        "comments": ["Don't fall"],
-        "posted": "2023-3-17T04:10:08.250Z",
-        "subreddit": ["Events", "Track"],
-        "upvotes": 24,
-        "id": 5
-    },
-    {
-        "title": "Throwers Potluck",
-        "owner": "James Hetherington",
-        "contents": "Come one come all. We will provide food for everyone that comes",
-        "comments": ["Sounds so cool","Can I bring my dog?"],
-        "posted": "2023-3-02T04:10:08.250Z",
-        "subreddit": ["Lunches", "Track"],
-        "upvotes": 8,
-        "id": 6
-    },
-    {
-        "title": "Mold in the Bathtub",
-        "owner": "Lucca Becerra",
-        "contents": "https://cdn-prod.medicalnewstoday.com/content/images/articles/288/288651/mold-in-the-home.jpg",
-        "comments": ["I knew it was dangerous"],
-        "posted": "2023-3-26T04:10:08.250Z",
-        "subreddit": ["Dorms", "Battell"],
-        "upvotes": 13,
-        "id": 7
-    },
-    {
-        "title": "Rager in ABQ",
-        "owner": "Peter Hansen",
-        "contents": "Yo Broskis, I am totally hosting the most epic bestest party ever in ABQ this Saturday. It start at 9 and fashionably late is totally not in fashion any more.",
-        "comments": [""],
-        "posted": "2023-2-01T04:10:08.250Z",
-        "subreddit": ["Dorms", "Atwater_A"],
-        "upvotes": -1,
-        "id": 8
-    }
-
+  {
+    "title": "Midd Snow Ball",
+    "owner": "Peter Hansen",
+    "contents": "What a wonderful night I had watching DJ Earworm!",
+    "comments": ["He was the best", "#YOLO"],
+    "posted": "2023-1-16T04:10:08.250Z",
+    "subreddit": ["Events"],
+    "upvotes": 6,
+    "id": 0
+  },
+  {
+    "title": "Taylor Swift Concert",
+    "owner": "Luka Becerra",
+    "contents": "For all the Swifties out there this is an event you cannot miss",
+    "comments": ["OMG", "Literally Screaming"],
+    "posted": "2023-1-20T04:10:08.250Z",
+    "subreddit": ["Events"],
+    "upvotes": 12,
+    "id": 1
+  },
+  {
+    "title": "Graduation",
+    "owner": "James Hetherington",
+    "contents": "I am so sad to see all my friends leaving",
+    "comments": [""],
+    "posted": "2023-2-01T04:10:08.250Z",
+    "subreddit": ["Events"],
+    "upvotes": 2,
+    "id": 2
+  },
+  {
+    "title": "2/6 Ross Meal",
+    "owner": "Luka Becerra",
+    "contents": "Hot Dogs /n Cheeseburgers /n Crinkle Fries /n Baked Beans",
+    "comments": ["Gross", "Do you know what they put in hotdogs?"],
+    "posted": "2023-2-06T04:10:08.250Z",
+    "subreddit": ["Lunches"],
+    "upvotes": -3,
+    "id": 3
+  },
+  {
+    "title": "1/12 Ross Meal",
+    "owner": "Luka Becerra",
+    "contents": "Halal Cart Style Chicken /n Haitian Pork Griot /n Jasmine Rice",
+    "comments": ["Best Meal Ever", "Ross Supremacy", "Catch me with 3 plates"],
+    "posted": "2023-1-12T04:10:08.250Z",
+    "subreddit": ["Lunches"],
+    "upvotes": 30,
+    "id": 4
+  },
+  {
+    "title": "3/17 Indoor Meet",
+    "owner": "Peter Hansen",
+    "contents": "https://www.shutterstock.com/image-photo/athlete-track-running-nice-scenic-260nw-316386770.jpg",
+    "comments": ["Don't fall"],
+    "posted": "2023-3-17T04:10:08.250Z",
+    "subreddit": ["Events", "Track"],
+    "upvotes": 24,
+    "id": 5
+  },
+  {
+    "title": "Throwers Potluck",
+    "owner": "James Hetherington",
+    "contents": "Come one come all. We will provide food for everyone that comes",
+    "comments": ["Sounds so cool", "Can I bring my dog?"],
+    "posted": "2023-3-02T04:10:08.250Z",
+    "subreddit": ["Lunches", "Track"],
+    "upvotes": 8,
+    "id": 6
+  },
+  {
+    "title": "Mold in the Bathtub",
+    "owner": "Luka Becerra",
+    "contents": "https://cdn-prod.medicalnewstoday.com/content/images/articles/288/288651/mold-in-the-home.jpg",
+    "comments": ["I knew it was dangerous"],
+    "posted": "2023-3-26T04:10:08.250Z",
+    "subreddit": ["Dorms", "Battell"],
+    "upvotes": 13,
+    "id": 7
+  },
+  {
+    "title": "Rager in ABQ",
+    "owner": "Peter Hansen",
+    "contents": "Yo Broskis, I am totally hosting the most epic bestest party ever in ABQ this Saturday. It start at 9 and fashionably late is totally not in fashion any more.",
+    "comments": [""],
+    "posted": "2023-2-01T04:10:08.250Z",
+    "subreddit": ["Dorms", "Atwater_A"],
+    "upvotes": -1,
+    "id": 8
+  }
 ]

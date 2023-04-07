@@ -1,3 +1,9 @@
+/*
+  Menubar.js
+  
+  Displays the current categories focused on or the title of the post?
+*/
+
 export default function Menubar({}) {
   return (
     <div>

@@ -1,3 +1,12 @@
+/*
+  SideBar.js
+
+  Displays side bar options such as:
+  Home: takes user back to main index page
+  Profile: takes user to their profile
+  etc: (WIP)
+*/
+
 export default function Sidebar({}) {
   return (
     <div>
