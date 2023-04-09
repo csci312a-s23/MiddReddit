@@ -1,4 +1,12 @@
-import ScrollPost from "./scrollPosts";
+/*
+  ScrollDisplay.js
+
+  Displays the posts by a specific category. 
+
+  QUESTION: How do we want it to be filtered?
+*/
+
+import ScrollPost from "/ScrollPosts";
 //have to get this to involve scrollPosts i just wanted to get something off the ground
 export default function ScrollDisplay({ Posts }) {
   const postComponents = Posts.map((post) => (

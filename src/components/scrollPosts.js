@@ -1,8 +1,14 @@
+/*
+  ScrollPosts.js
+
+  Displays the posts within our scroll display, when clicked, takes user to the
+  corresponding page for the post (PostView component).
+*/
+
 import PostView from "./PostView";
 
 export default function ScrollPost({ post }) {
-
-  let allowEdit = false;
+  //let allowEdit = false;
 
   const currentPost = post;
 
@@ -15,7 +21,5 @@ export default function ScrollPost({ post }) {
       <p>{post.contents} </p>
       onClick={() => <PostView post={currentPost} />}
     </li>
-    
-    
   );
 }
