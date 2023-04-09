@@ -5,21 +5,30 @@
   corresponding page for the post (PostView component).
 */
 
-import PostView from "./PostView";
+//import PostView from "./PostView";
+import styles from "../styles/ScrollPosts.module.css";
+import PostShape from "./PostShape";
+import PropTypes from "prop-types";
 
-export default function ScrollPost({ post }) {
+export default function ScrollPost({ post, goToPost }) {
   //let allowEdit = false;
 
   const currentPost = post;
 
   return (
-    <li>
-      <h4>{post.title}</h4>
-      <em>
-        {post.owner} - {new Date().toLocaleString()}
-      </em>
-      <p>{post.contents} </p>
-      onClick={() => <PostView post={currentPost} />}
+    <li onClick={() => goToPost(currentPost)}>
+      <div className={styles.post}>
+        <h4>{post.title} </h4>
+        <em>
+          {post.owner} - {new Date().toLocaleString()}
+        </em>
+        <p>{post.contents} </p>
+      </div>
     </li>
   );
 }
+
+ScrollPost.propTypes = {
+  post: PostShape,
+  goToPost: PropTypes.func.isRequired,
+};

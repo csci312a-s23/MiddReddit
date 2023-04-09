@@ -5,7 +5,7 @@
 */
 import { useState } from "react";
 
-export default function Editor({ post }) {
+export default function Editor({ post, complete }) {
   const [title, setTitle] = useState(post ? post.title : "");
   const [contents, setContents] = useState(post ? post.contents : "");
 

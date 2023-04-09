@@ -14,7 +14,7 @@ export default function PostView({ post, allowEdit }) {
     );
   }
   return (
-    <div className={styles.article}>
+    <div>
       <h2>{post.title}</h2>
       <p>{post.contents}</p>
       <p className={styles.timestamp}>

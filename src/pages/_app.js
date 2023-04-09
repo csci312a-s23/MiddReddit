@@ -8,7 +8,8 @@
 /* eslint-disable */
 import "../styles/globals.css";
 import Head from "next/head";
-import Sidebar from "../components/sidebar";
+import LeftSidebar from "../components/leftSideBar";
+import RightSidebar from "../components/rightSideBar";
 import Menubar from "../components/menubar";
 //import MainPage from "../components/mainPage";
 import data from "../../data/seed.json";
@@ -20,11 +21,29 @@ import styles from "../styles/MiddReddit.module.css";
 
 function MainApp({ Component, pageProps }) {
   const router = useRouter();
-  const [collection, setCollection] = useState(data);
+  //const [collection, setCollection] = useState(data);
+
+  const handleClickMenubar = (menubarCase) => {
+    switch (menubarCase) {
+      case "create":
+        router.push("/posts/create");
+      case "mainPage":
+        router.push("/");
+      case "signIn":
+        router.push("signIn");
+    }
+  };
+  function goToPost(post) {
+    if (post) {
+      router.push(`/post/${post.id}`);
+    }
+  }
 
   const props = {
     ...pageProps,
+    goToPost,
   };
+
   //This is not going to work right now obviously but this is the idea we should go for so they can only edit their own posts
   //const MyPosts = collection.filter(post => post.owner === user.name);
   return (
@@ -34,16 +53,19 @@ function MainApp({ Component, pageProps }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div>
-          <h1>MiddReddit</h1>
-        </div>
-        <Menubar />
-        <Sidebar />
-        <Component {...props} />
+        <Menubar handleClick={handleClickMenubar} />
+        <body className={styles.body}>
+          <LeftSidebar />
+
+          <Component {...props} />
+          <RightSidebar />
+        </body>
       </main>
 
       <footer>MiddReddit 2023</footer>
     </div>
+    //We also want to send goToPost to scrollDisplay and ScrollPosts
+    //Right now those props aren't being passed through
   );
 }
 
