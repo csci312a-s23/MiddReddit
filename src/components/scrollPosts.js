@@ -12,13 +12,11 @@ import PropTypes from "prop-types";
 /* eslint-disable quotes */
 
 export default function ScrollPost({ post, goToPost, setCurrentPost }) {
-  const currentPost = post;
-
   return (
     <li
       onClick={() => {
         setCurrentPost(post.id);
-        goToPost(currentPost);
+        goToPost(post);
       }}
     >
       <div className={styles.post}>
