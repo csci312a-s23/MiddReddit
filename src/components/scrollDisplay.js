@@ -9,9 +9,14 @@
 import ScrollPost from "./scrollPosts";
 import styles from "../styles/ScrollDisplay.module.css";
 //have to get this to involve scrollPosts i just wanted to get something off the ground
-export default function ScrollDisplay({ Posts, goToPost }) {
+export default function ScrollDisplay({ Posts, goToPost, setCurrentPost }) {
   const postComponents = Posts.map((post) => (
-    <ScrollPost post={post} key={post.id} goToPost={goToPost} />
+    <ScrollPost
+      post={post}
+      key={post.id}
+      goToPost={goToPost}
+      setCurrentPost={setCurrentPost}
+    />
   ));
   return (
     <body className={styles.body}>

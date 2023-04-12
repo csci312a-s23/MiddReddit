@@ -10,18 +10,24 @@ import styles from "../styles/ScrollPosts.module.css";
 import PostShape from "./PostShape";
 import PropTypes from "prop-types";
 
-export default function ScrollPost({ post, goToPost }) {
+export default function ScrollPost({ post, goToPost, setCurrentPost }) {
   //let allowEdit = false;
 
   const currentPost = post;
 
   return (
-    <li onClick={() => goToPost(currentPost)}>
+    <li
+      onClick={() => {
+        setCurrentPost(post.id);
+        goToPost(currentPost);
+      }}
+    >
       <div className={styles.post}>
         <h4>{post.title} </h4>
         <em>
           {post.owner} - {new Date().toLocaleString()}
         </em>
+
         <p>{post.contents} </p>
       </div>
     </li>

@@ -17,9 +17,7 @@ export default function PostView({ post, allowEdit }) {
     <div>
       <h2>{post.title}</h2>
       <p>{post.contents}</p>
-      <p className={styles.timestamp}>
-        {new Date(article.edited).toLocaleString()}
-      </p>
+      <p>{new Date(post.edited).toLocaleString()}</p>
     </div>
   );
 }

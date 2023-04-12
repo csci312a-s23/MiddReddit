@@ -22,26 +22,28 @@ import styles from "../styles/MiddReddit.module.css";
 function MainApp({ Component, pageProps }) {
   const router = useRouter();
   //const [collection, setCollection] = useState(data);
-
+  const [currentPost, setCurrentPost] = useState();
   const handleClickMenubar = (menubarCase) => {
     switch (menubarCase) {
       case "create":
         router.push("/posts/create");
       case "mainPage":
         router.push("/");
-      case "signIn":
-        router.push("signIn");
+      /*case "signIn":
+        router.push("signIn"); */
     }
   };
   function goToPost(post) {
     if (post) {
-      router.push(`/post/${post.id}`);
+      router.push(`/posts/${post.id}`);
     }
   }
 
   const props = {
     ...pageProps,
     goToPost,
+    setCurrentPost,
+    currentPost,
   };
 
   //This is not going to work right now obviously but this is the idea we should go for so they can only edit their own posts
@@ -72,6 +74,6 @@ function MainApp({ Component, pageProps }) {
 export default MainApp;
 
 MainApp.propTypes = {
-  Component: PropTypes.elementType.isRequired,
+  Component: PropTypes.elementType,
   pageProps: PropTypes.shape({}),
 };

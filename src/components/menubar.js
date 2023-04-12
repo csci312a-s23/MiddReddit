@@ -29,7 +29,7 @@ export default function Menubar({ handleClick }) {
   return (
     <header className={styles.menuBar}>
       <ul>
-        <li className={styles.title}>{mainTitle}</li>
+        <li id={styles["title"]}>{mainTitle}</li>
         <li>{profileButton}</li>
         <li>{signInButton}</li>
         <li>{createArticleButton}</li>
