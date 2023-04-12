@@ -10,7 +10,9 @@ export default function Post({}) {
   const { postID } = router.query;
 
   async function getPostFromId(id) {
-    const result = data.filter((filterPost) => filterPost.id === id)[0];
+    const result = data.filter(
+      (filterPost) => filterPost.id === parseInt(id)
+    )[0];
     setPostToDisplay(await result);
   }
 
@@ -19,6 +21,7 @@ export default function Post({}) {
   }, [postID]);
 
   const allowEdit = false;
+
   /*if (currentPost.author === user.name)
     {
         allowEdit = true;

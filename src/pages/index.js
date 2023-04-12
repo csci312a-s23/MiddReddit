@@ -8,7 +8,7 @@
 import ScrollDisplay from "../components/scrollDisplay";
 import data from "../../data/seed.json";
 
-export default function MainPage({ goToPost, setCurrentPost }) {
+export default function MainPage({ goToPost, setCurrentPost, currentPost }) {
   //what props and callbacks should we use?
 
   return (
@@ -20,6 +20,7 @@ export default function MainPage({ goToPost, setCurrentPost }) {
         Posts={data}
         goToPost={goToPost}
         setCurrentPost={setCurrentPost}
+        currentPost={currentPost}
       />
     </div>
   );
