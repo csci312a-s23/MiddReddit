@@ -17,6 +17,7 @@ a {
 
 main {
   padding: 3rem 0;
+  padding-top: 0px;
   flex: 1;
   display: flex;
   height: 100%;

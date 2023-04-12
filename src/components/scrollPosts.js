@@ -5,21 +5,36 @@
   corresponding page for the post (PostView component).
 */
 
-import PostView from "./PostView";
+//import PostView from "./PostView";
+import styles from "../styles/ScrollPosts.module.css";
+import PostShape from "./PostShape";
+import PropTypes from "prop-types";
+/* eslint-disable quotes */
 
-export default function ScrollPost({ post }) {
-  //let allowEdit = false;
-
+export default function ScrollPost({ post, goToPost, setCurrentPost }) {
   const currentPost = post;
 
   return (
-    <li>
-      <h4>{post.title}</h4>
-      <em>
-        {post.owner} - {new Date().toLocaleString()}
-      </em>
-      <p>{post.contents} </p>
-      onClick={() => <PostView post={currentPost} />}
+    <li
+      onClick={() => {
+        setCurrentPost(post.id);
+        goToPost(currentPost);
+      }}
+    >
+      <div className={styles.post}>
+        <h4>{post.title} </h4>
+        <em suppressHydrationWarning /*have to suppress hydration with dates*/>
+          {/*eslint-disable-line */}
+          {post.owner} - {new Date(post.posted).toLocaleString()}
+        </em>
+
+        <p>{post.contents} </p>
+      </div>
     </li>
   );
 }
+
+ScrollPost.propTypes = {
+  post: PostShape,
+  goToPost: PropTypes.func.isRequired,
+};

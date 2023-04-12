@@ -1,5 +1,5 @@
 /*
-  SideBar.js
+  LeftSideBar.js
 
   Displays side bar options such as:
   Home: takes user back to main index page
@@ -7,7 +7,7 @@
   etc: (WIP)
 */
 
-export default function Sidebar({}) {
+export default function LeftSidebar({}) {
   return (
     <div>
       <h2>I am a sidebar.</h2>

@@ -1,0 +1,35 @@
+.menuBar {
+  width: 100%;
+  /* position:fixed; */
+}
+
+.menuBar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: lightblue;
+}
+
+.menuBar li {
+  float: right;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.menuBar li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+.menuBar li a:hover {
+  background-color: #111;
+}
+
+#title {
+  float: left;
+}

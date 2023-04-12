@@ -1,8 +1,24 @@
 .container {
   min-height: 100vh;
+  min-width: 100%;
   padding: 0 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.body {
+  font-family: serif;
+  display: grid;
+  grid-template-columns: auto 80% auto;
+}
+
+.mainContent {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.sidebar {
+  width: 10%;
 }
