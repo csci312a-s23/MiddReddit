@@ -9,10 +9,9 @@
 import styles from "../styles/ScrollPosts.module.css";
 import PostShape from "./PostShape";
 import PropTypes from "prop-types";
+/* eslint-disable quotes */
 
 export default function ScrollPost({ post, goToPost, setCurrentPost }) {
-  //let allowEdit = false;
-
   const currentPost = post;
 
   return (
@@ -24,8 +23,9 @@ export default function ScrollPost({ post, goToPost, setCurrentPost }) {
     >
       <div className={styles.post}>
         <h4>{post.title} </h4>
-        <em>
-          {post.owner} - {new Date().toLocaleString()}
+        <em suppressHydrationWarning /*have to suppress hydration with dates*/>
+          {/*eslint-disable-line */}
+          {post.owner} - {new Date(post.posted).toLocaleString()}
         </em>
 
         <p>{post.contents} </p>

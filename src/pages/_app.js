@@ -35,6 +35,7 @@ function MainApp({ Component, pageProps }) {
   };
   function goToPost(post) {
     if (post) {
+      setCurrentPost(post.id);
       router.push(`/posts/${post.id}`);
     }
   }
@@ -56,12 +57,17 @@ function MainApp({ Component, pageProps }) {
       </Head>
       <main>
         <Menubar handleClick={handleClickMenubar} />
-        <body className={styles.body}>
-          <LeftSidebar />
-
-          <Component {...props} />
-          <RightSidebar />
-        </body>
+        <div className={styles.body}>
+          <div className={styles.sidebar}>
+            <LeftSidebar />
+          </div>
+          <div className={styles.mainContent}>
+            <Component {...props} />
+          </div>
+          <div className={styles.sidebar}>
+            <RightSidebar />
+          </div>
+        </div>
       </main>
 
       <footer>MiddReddit 2023</footer>

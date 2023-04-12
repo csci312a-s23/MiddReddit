@@ -19,7 +19,7 @@ export default function ScrollDisplay({ Posts, goToPost, setCurrentPost }) {
     />
   ));
   return (
-    <body className={styles.body}>
+    <div className={styles.body}>
       <h3>
         Here is where I will implement the main scroller.
         <br />
@@ -28,6 +28,6 @@ export default function ScrollDisplay({ Posts, goToPost, setCurrentPost }) {
       <div>
         <ul>{postComponents}</ul>
       </div>
-    </body>
+    </div>
   );
 }

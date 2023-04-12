@@ -18,7 +18,7 @@ export default function Menubar({ handleClick }) {
   const profileButton = (
     <button type="button" name="Profile" onClick={() => handleClick("profile")}>
       <img
-        src="../../data/profilebutton.png"
+        src={require("../../data/profile.png")}
         width="20"
         height="20"
         alt="profile"

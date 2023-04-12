@@ -3,6 +3,7 @@
 
   Users can view and comment on a post, editing it if they are the author.
 */
+/* eslint-disable quotes */
 
 export default function PostView({ post, allowEdit }) {
   if (allowEdit) {
@@ -17,7 +18,8 @@ export default function PostView({ post, allowEdit }) {
     <div>
       <h2>{post.title}</h2>
       <p>{post.contents}</p>
-      <p>{new Date(post.edited).toLocaleString()}</p>
+      {/*eslint-disable-line */}
+      <p suppressHydrationWarning>{new Date(post.posted).toLocaleString()}</p>
     </div>
   );
 }
