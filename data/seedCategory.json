@@ -1,0 +1,50 @@
+[
+  {
+    "id": 0,
+    "parent": null,
+    "children": [1, 2],
+    "name": "events",
+    "description": "All courses at Middlebury",
+    "relatedPosts": [0, 1, 2]
+  },
+  {
+    "id": 1,
+    "parent": null,
+    "children": [1, 2],
+    "name": "confessionals",
+    "description": "All courses at Middlebury",
+    "relatedPosts": [0, 1, 2]
+  },
+  {
+    "id": 2,
+    "parent": null,
+    "children": [1, 2],
+    "name": "meals",
+    "description": "All courses at Middlebury",
+    "relatedPosts": [0, 1, 2]
+  },
+  {
+    "id": 3,
+    "parent": null,
+    "children": [1, 2],
+    "name": "sports",
+    "description": "All courses at Middlebury",
+    "relatedPosts": [0, 1, 2]
+  },
+  {
+    "id": 4,
+    "parent": null,
+    "children": [1, 2],
+    "name": "dorms",
+    "description": "All courses at Middlebury",
+    "relatedPosts": [0, 1, 2]
+  },
+  {
+    "id": 4,
+    "parent": null,
+    "children": [1, 2],
+    "name": "courses",
+    "description": "All courses at Middlebury",
+    "relatedPosts": [0, 1, 2]
+  }
+]
