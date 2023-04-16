@@ -12,9 +12,9 @@ import LeftSidebar from "../components/leftSideBar";
 import RightSidebar from "../components/rightSideBar";
 import Menubar from "../components/menubar";
 //import MainPage from "../components/mainPage";
-import data from "../../data/seed.json";
+//import data from "../../data/seed.json";
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 import styles from "../styles/MiddReddit.module.css";
@@ -23,6 +23,18 @@ function MainApp({ Component, pageProps }) {
   const router = useRouter();
   //const [collection, setCollection] = useState(data);
   const [currentPost, setCurrentPost] = useState();
+  const [searchQuery, setSearchQuery] = useState();
+  //const id = router.query.id;
+
+  useEffect(() => {
+    fetch("/api/generalPosts")
+      .then((resp) => resp.json())
+      .then((data) => {
+        setSearchQuery(data);
+      })
+      .catch((error) => console.log(error));
+  }, [currentPost]);
+
   const handleClickMenubar = (menubarCase) => {
     switch (menubarCase) {
       case "create":
@@ -45,6 +57,7 @@ function MainApp({ Component, pageProps }) {
     goToPost,
     setCurrentPost,
     currentPost,
+    searchQuery,
   };
 
   //This is not going to work right now obviously but this is the idea we should go for so they can only edit their own posts

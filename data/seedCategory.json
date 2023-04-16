@@ -4,47 +4,47 @@
     "parent": null,
     "children": [1, 2],
     "name": "events",
-    "description": "All courses at Middlebury",
-    "relatedPosts": [0, 1, 2]
+    "description": "Events at Middlebury",
+    "relatedPosts": [5, 3, 0]
   },
   {
     "id": 1,
     "parent": null,
     "children": [1, 2],
     "name": "confessionals",
-    "description": "All courses at Middlebury",
-    "relatedPosts": [0, 1, 2]
+    "description": "Confessionals at Middlebury",
+    "relatedPosts": [0, 3, 5]
   },
   {
     "id": 2,
     "parent": null,
     "children": [1, 2],
     "name": "meals",
-    "description": "All courses at Middlebury",
-    "relatedPosts": [0, 1, 2]
+    "description": "Meals at Middlebury",
+    "relatedPosts": [1, 4, 6]
   },
   {
     "id": 3,
     "parent": null,
     "children": [1, 2],
     "name": "sports",
-    "description": "All courses at Middlebury",
-    "relatedPosts": [0, 1, 2]
+    "description": "Sports at Middlebury",
+    "relatedPosts": [1, 4, 6]
   },
   {
     "id": 4,
     "parent": null,
     "children": [1, 2],
     "name": "dorms",
-    "description": "All courses at Middlebury",
-    "relatedPosts": [0, 1, 2]
+    "description": "All dorms at Middlebury",
+    "relatedPosts": [2, 4, 7]
   },
   {
-    "id": 4,
+    "id": 5,
     "parent": null,
     "children": [1, 2],
     "name": "courses",
     "description": "All courses at Middlebury",
-    "relatedPosts": [0, 1, 2]
+    "relatedPosts": [2, 4, 8]
   }
 ]

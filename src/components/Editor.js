@@ -15,7 +15,7 @@ export default function Editor({ post, complete }) {
     const currDateString = currentDate.toISOString();
 
     complete({
-      ...article,
+      ...post,
       title: title,
       contents: contents,
       edited: currDateString,

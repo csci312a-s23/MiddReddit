@@ -22,8 +22,27 @@ export default class Post extends BaseModel {
         contents: { type: "text" },
         comments: { type: "INT[]" },
         posted: { type: "string" },
-        tag: { type: "INT[]" },
         upvotes: { type: "integer" },
+      },
+    };
+  }
+  static get relationMappings() {
+    const Category = require("./Category");
+    const Tag = require("./Tag");
+    return {
+      Category: {
+        relation: Model.ManyToManyRelation,
+        modelClass: Category,
+        join: {
+          from: "Post.id",
+          through: {
+            // Tag is the join table.
+            modelClass: Tag,
+            from: "Tag.postID",
+            to: "Tag.categoryID",
+          },
+          to: "Category.id",
+        },
       },
     };
   }

@@ -10,7 +10,7 @@ exports.up = function (knex) {
     table.text("contents");
     table.specificType("comments", "INT[]");
     table.string("posted").notNullable();
-    table.specificType("tag", "INT[]"); //tags to a specific category
+    //table.specificType("tag", "INT[]"); //tags to a specific category
     table.integer("upvotes");
   });
 };

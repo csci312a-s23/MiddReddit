@@ -6,22 +6,28 @@
 // import { useState } from "react";
 // import PostView from "../components/PostView";
 import ScrollDisplay from "../components/scrollDisplay";
-import data from "../../data/seed.json";
+//import data from "../../data/seedPost.json";
 
-export default function MainPage({ goToPost, setCurrentPost, currentPost }) {
+export default function MainPage({
+  goToPost,
+  setCurrentPost,
+  currentPost,
+  searchQuery,
+}) {
   //what props and callbacks should we use?
-
   return (
     <div>
       <h2>
         I am the main content. You can scroll through me. This is a logic class
       </h2>
-      <ScrollDisplay
-        Posts={data}
-        goToPost={goToPost}
-        setCurrentPost={setCurrentPost}
-        currentPost={currentPost}
-      />
+      {searchQuery && (
+        <ScrollDisplay
+          Posts={searchQuery}
+          goToPost={goToPost}
+          setCurrentPost={setCurrentPost}
+          currentPost={currentPost}
+        />
+      )}
     </div>
   );
 }
