@@ -6,7 +6,7 @@ import Post from "../../../../models/Post";
 const handler = nc({ onError }).get(async (req, res) => {
   const post = await Post.query()
     .findById(req.query.id)
-    .withGraphFetched("Category")
+    //.withGraphFetched("category") this is the related thing that breaks it,
     .throwIfNotFound();
   res.status(200).json(post);
 

@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 // import { Model } from "objection";
 import BaseModel from "./BaseModel";
-
+import { Model } from "objection";
 export default class Post extends BaseModel {
   // Table name is the only required property.
   static get tableName() {
@@ -28,18 +28,16 @@ export default class Post extends BaseModel {
   }
   static get relationMappings() {
     const Category = require("./Category");
-    const Tag = require("./Tag");
     return {
-      Category: {
+      category: {
         relation: Model.ManyToManyRelation,
         modelClass: Category,
         join: {
           from: "Post.id",
           through: {
             // Tag is the join table.
-            modelClass: Tag,
-            from: "Tag.postID",
-            to: "Tag.categoryID",
+            from: "Tag.postId",
+            to: "Tag.categoryId",
           },
           to: "Category.id",
         },

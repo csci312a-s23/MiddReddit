@@ -24,6 +24,7 @@ function MainApp({ Component, pageProps }) {
   //const [collection, setCollection] = useState(data);
   const [currentPost, setCurrentPost] = useState();
   const [searchQuery, setSearchQuery] = useState();
+  const [categoryQuery, setCategoryQuery] = useState();
   //const id = router.query.id;
 
   useEffect(() => {
@@ -35,6 +36,14 @@ function MainApp({ Component, pageProps }) {
       .catch((error) => console.log(error));
   }, [currentPost]);
 
+  useEffect(() => {
+    fetch("/api/categories")
+      .then((resp) => resp.json())
+      .then((data) => {
+        setCategoryQuery(data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
   const handleClickMenubar = (menubarCase) => {
     switch (menubarCase) {
       case "create":
@@ -58,6 +67,7 @@ function MainApp({ Component, pageProps }) {
     setCurrentPost,
     currentPost,
     searchQuery,
+    categoryQuery,
   };
 
   //This is not going to work right now obviously but this is the idea we should go for so they can only edit their own posts
@@ -72,7 +82,7 @@ function MainApp({ Component, pageProps }) {
         <Menubar handleClick={handleClickMenubar} />
         <div className={styles.body}>
           <div className={styles.sidebar}>
-            <LeftSidebar />
+            <LeftSidebar categoryQuery={categoryQuery} />
           </div>
           <div className={styles.mainContent}>
             <Component {...props} />

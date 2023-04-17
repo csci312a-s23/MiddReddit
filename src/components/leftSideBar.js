@@ -6,11 +6,14 @@
   Profile: takes user to their profile
   etc: (WIP)
 */
+import CategorySidebar from "./categorySidebar";
+export default function LeftSidebar({ categoryQuery }) {
+  console.log(categoryQuery);
 
-export default function LeftSidebar({}) {
   return (
     <div>
       <h2>I am a sidebar.</h2>
+      {categoryQuery && <CategorySidebar categoryQuery={categoryQuery} />}
     </div>
   );
 }

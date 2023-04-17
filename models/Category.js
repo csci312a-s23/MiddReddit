@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 
-// import { Model } from "objection";
+import { Model } from "objection";
 import BaseModel from "./BaseModel";
 
 export default class Category extends BaseModel {
@@ -18,12 +18,25 @@ export default class Category extends BaseModel {
 
       properties: {
         id: { type: "integer" },
-        parentID: { type: "integer" },
-        children: { type: "INT[]" },
         name: { type: "string" },
         description: { type: "text" },
         posts: { type: "INT[]" },
       },
     };
   }
+  static relationMappings = {
+    parent: {
+      relation: Model.ManyToManyRelation,
+      modelClass: Category,
+      join: {
+        from: "Category.id",
+        through: {
+          // RelatedArticle is the join table. These names must match the schema
+          from: "RelatedCategories.childId",
+          to: "RelatedCategories.parentId",
+        },
+        to: "Category.id",
+      },
+    },
+  };
 }
