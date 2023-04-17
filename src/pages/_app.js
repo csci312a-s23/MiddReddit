@@ -24,7 +24,8 @@ function MainApp({ Component, pageProps }) {
   //const [collection, setCollection] = useState(data);
   const [currentPost, setCurrentPost] = useState();
   const [searchQuery, setSearchQuery] = useState();
-  const [categoryQuery, setCategoryQuery] = useState();
+  const [categories, setCategories] = useState();
+  const [categoryQuery, setCategoryQuery] = useState(); //will use for searching by category
   //const id = router.query.id;
 
   useEffect(() => {
@@ -40,7 +41,7 @@ function MainApp({ Component, pageProps }) {
     fetch("/api/categories")
       .then((resp) => resp.json())
       .then((data) => {
-        setCategoryQuery(data);
+        setCategories(data);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -61,13 +62,20 @@ function MainApp({ Component, pageProps }) {
     }
   }
 
+  function goToCategory(category) {
+    if (category) {
+      router.push(`/category/${category}`);
+    }
+  }
+
   const props = {
     ...pageProps,
     goToPost,
     setCurrentPost,
     currentPost,
     searchQuery,
-    categoryQuery,
+    categories,
+    goToCategory,
   };
 
   //This is not going to work right now obviously but this is the idea we should go for so they can only edit their own posts
@@ -82,7 +90,7 @@ function MainApp({ Component, pageProps }) {
         <Menubar handleClick={handleClickMenubar} />
         <div className={styles.body}>
           <div className={styles.sidebar}>
-            <LeftSidebar categoryQuery={categoryQuery} />
+            <LeftSidebar categories={categories} goToCategory={goToCategory} />
           </div>
           <div className={styles.mainContent}>
             <Component {...props} />

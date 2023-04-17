@@ -1,8 +1,8 @@
 [
   {
     "id": 0,
-    "name": "events",
-    "description": "Events at Middlebury",
+    "name": "courses",
+    "description": "Courses at Middlebury",
     "relatedPosts": [5, 3, 0]
   },
   {
@@ -31,8 +31,38 @@
   },
   {
     "id": 5,
-    "name": "courses",
-    "description": "All courses at Middlebury",
+    "name": "Events",
+    "description": "All events at Middlebury",
+    "relatedPosts": [2, 4, 8]
+  },
+  {
+    "id": 6,
+    "name": "cs",
+    "description": "CS at Middlebury",
+    "relatedPosts": [2, 4, 8]
+  },
+  {
+    "id": 7,
+    "name": "bio",
+    "description": "Bio at Middlebury",
+    "relatedPosts": [2, 4, 8]
+  },
+  {
+    "id": 8,
+    "name": "theatre",
+    "description": "Theatre at Middlebury",
+    "relatedPosts": [2, 4, 8]
+  },
+  {
+    "id": 9,
+    "name": "cs312",
+    "description": "CS312 at Middlebury",
+    "relatedPosts": [2, 4, 8]
+  },
+  {
+    "id": 10,
+    "name": "ross",
+    "description": "ross dining hall",
     "relatedPosts": [2, 4, 8]
   }
 ]

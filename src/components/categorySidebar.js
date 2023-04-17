@@ -1,29 +1,43 @@
-export default function CategorySidebar({ categoryQuery }) {
+export default function CategorySidebar({ categories, goToCategory }) {
   const childSubitem = (children) => {
     const listOfChildren = children.map((child) => {
-      console.log(child.name);
       return (
         <>
-          <li>{child.name}</li>
+          <li key={category}>
+            <p
+              key={child.name}
+              onClick={() => {
+                console.log(child);
+                goToCategory(child.id);
+              }}
+            >
+              {child.name}
+            </p>
+            {child.parent && childSubitem(child.child)}
+          </li>
           {/* child.parent && childSubitem(child.parent) || doesn't work recursively, probably have to update the api call to recurse  */}
           {/* also update function call to only pull into main list items that don't have a parent element, update parent and child calls appropiately*/}
         </>
       );
     });
-    console.log(listOfChildren);
     return <ul>{listOfChildren}</ul>;
   };
 
-  const categoriesRendered = categoryQuery.map((category) => (
-    <li
-      key={category}
-      data-testid="section"
-      onClick={() => {
-        //selectSection(ca);
-      }}
-    >
-      {category.name}
-      {childSubitem(category.parent)}
+  const categoriesRendered = categories.map((category) => (
+    <li key={category}>
+      <p
+        key={category}
+        data-testid="section"
+        onClick={() => {
+          //setCurrentPost(post.id);
+          console.log(category);
+          goToCategory(category.id);
+        }}
+      >
+        {category.name}
+      </p>
+
+      {childSubitem(category.child)}
     </li>
   ));
 

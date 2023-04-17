@@ -7,13 +7,13 @@
   etc: (WIP)
 */
 import CategorySidebar from "./categorySidebar";
-export default function LeftSidebar({ categoryQuery }) {
-  console.log(categoryQuery);
-
+export default function LeftSidebar({ categories, goToCategory }) {
   return (
     <div>
       <h2>I am a sidebar.</h2>
-      {categoryQuery && <CategorySidebar categoryQuery={categoryQuery} />}
+      {categories && (
+        <CategorySidebar categories={categories} goToCategory={goToCategory} />
+      )}
     </div>
   );
 }
