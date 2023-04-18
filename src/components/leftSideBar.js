@@ -6,11 +6,14 @@
   Profile: takes user to their profile
   etc: (WIP)
 */
-
-export default function LeftSidebar({}) {
+import CategorySidebar from "./categorySidebar";
+export default function LeftSidebar({ categories, goToCategory }) {
   return (
     <div>
       <h2>I am a sidebar.</h2>
+      {categories && (
+        <CategorySidebar categories={categories} goToCategory={goToCategory} />
+      )}
     </div>
   );
 }

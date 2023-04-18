@@ -1,4 +1,5 @@
 import MainApp from "@/pages/_app";
+import MainPage from "@/pages/index.js";
 import { render } from "@testing-library/react";
 /*
 import mockRouter from "next-router-mock";
@@ -9,6 +10,6 @@ jest.mock("next/router", () => require("next-router-mock"));
 
 describe("End-to-end testing", () => {
   test("Render index.js component", () => {
-    render(<MainApp />);
+    render(<MainApp Component={MainPage} />);
   });
 });

@@ -1,6 +1,6 @@
 import PostView from "../../../components/PostView";
 import { useRouter } from "next/router";
-import data from "../../../../data/seed.json"; //will be a database thing
+//import data from "../../../../data/seedPost.json"; //will be a database thing
 import { useEffect, useState } from "react";
 
 export default function Post({}) {
@@ -10,10 +10,13 @@ export default function Post({}) {
   const { postID } = router.query;
 
   async function getPostFromId(id) {
-    const result = data.filter(
-      (filterPost) => filterPost.id === parseInt(id)
-    )[0];
-    setPostToDisplay(await result);
+    fetch(`/api/posts/${id}`)
+      .then((resp) => resp.json())
+      .then((data) => {
+        setPostToDisplay(data);
+        console.log(data);
+      })
+      .catch((error) => console.log(error));
   }
 
   useEffect(() => {

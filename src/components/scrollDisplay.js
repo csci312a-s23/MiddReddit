@@ -26,11 +26,6 @@ export default function ScrollDisplay({
   ));
   return (
     <div className={styles.body}>
-      <h3>
-        Here is where I will implement the main scroller.
-        <br />
-        This is a display class.
-      </h3>
       <div>
         <ul>{postComponents}</ul>
       </div>

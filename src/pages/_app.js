@@ -12,9 +12,9 @@ import LeftSidebar from "../components/leftSideBar";
 import RightSidebar from "../components/rightSideBar";
 import Menubar from "../components/menubar";
 //import MainPage from "../components/mainPage";
-import data from "../../data/seed.json";
+//import data from "../../data/seed.json";
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 import styles from "../styles/MiddReddit.module.css";
@@ -23,6 +23,28 @@ function MainApp({ Component, pageProps }) {
   const router = useRouter();
   //const [collection, setCollection] = useState(data);
   const [currentPost, setCurrentPost] = useState();
+  const [searchQuery, setSearchQuery] = useState();
+  const [categories, setCategories] = useState();
+  const [categoryQuery, setCategoryQuery] = useState(); //will use for searching by category
+  //const id = router.query.id;
+
+  useEffect(() => {
+    fetch("/api/generalPosts")
+      .then((resp) => resp.json())
+      .then((data) => {
+        setSearchQuery(data);
+      })
+      .catch((error) => console.log(error));
+  }, [currentPost]);
+
+  useEffect(() => {
+    fetch("/api/categories")
+      .then((resp) => resp.json())
+      .then((data) => {
+        setCategories(data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
   const handleClickMenubar = (menubarCase) => {
     switch (menubarCase) {
       case "create":
@@ -33,10 +55,17 @@ function MainApp({ Component, pageProps }) {
         router.push("signIn"); */
     }
   };
+
   function goToPost(post) {
     if (post) {
       setCurrentPost(post.id);
       router.push(`/posts/${post.id}`);
+    }
+  }
+
+  function goToCategory(category) {
+    if (category) {
+      router.push(`/category/${category}`);
     }
   }
 
@@ -45,6 +74,9 @@ function MainApp({ Component, pageProps }) {
     goToPost,
     setCurrentPost,
     currentPost,
+    searchQuery,
+    categories,
+    goToCategory,
   };
 
   //This is not going to work right now obviously but this is the idea we should go for so they can only edit their own posts
@@ -59,7 +91,7 @@ function MainApp({ Component, pageProps }) {
         <Menubar handleClick={handleClickMenubar} />
         <div className={styles.body}>
           <div className={styles.sidebar}>
-            <LeftSidebar />
+            <LeftSidebar categories={categories} goToCategory={goToCategory} />
           </div>
           <div className={styles.mainContent}>
             <Component {...props} />
