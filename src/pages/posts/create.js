@@ -14,8 +14,9 @@ export default function PostCreator({ setCurrentPost }) {
         }),
       };
 
-      const response = await fetch("/api/articles", params);
+      const response = await fetch("/api/generalPosts", params);
       if (response.ok) {
+        console.log(response.json());
         setCurrentPost(await response.json());
       }
     } else {
