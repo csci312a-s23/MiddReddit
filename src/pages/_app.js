@@ -45,6 +45,7 @@ function MainApp({ Component, pageProps }) {
         router.push("signIn"); */
     }
   };
+
   function goToPost(post) {
     if (post) {
       setCurrentPost(post.id);

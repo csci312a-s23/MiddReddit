@@ -22,12 +22,10 @@ const handler = nc({ onError })
     // }
     const posts = await query;
     res.status(200).json(posts);
-    //res.status(500).end("Endpoint not yet implemented");
   })
   .post(async (req, res) => {
     // endpoint to create a new post
     const posts = await Post.query().insertAndFetch(req.body);
     res.status(200).json(posts);
-    //res.status(500).end("Endpoint not yet implemented");
   });
 export default handler;
