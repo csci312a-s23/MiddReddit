@@ -5,15 +5,16 @@ export default function PostCreator({ setCurrentPost }) {
   const router = useRouter();
   const complete = async (post) => {
     if (post) {
-      const response = await fetch("/api/articles", {
+      const params = {
         method: "POST",
         body: JSON.stringify(post),
         headers: new Headers({
           Accept: "application/json",
           "Content-Type": "application/json",
         }),
-      });
+      };
 
+      const response = await fetch("/api/articles", params);
       if (response.ok) {
         setCurrentPost(await response.json());
       }
