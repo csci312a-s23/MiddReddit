@@ -3,7 +3,7 @@ export default function CategorySidebar({ categories, goToCategory }) {
     const listOfChildren = children.map((child) => {
       return (
         <>
-          <li key={category}>
+          <li key={child}>
             <p
               key={child.name}
               onClick={() => {

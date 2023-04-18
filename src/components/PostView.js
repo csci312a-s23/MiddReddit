@@ -18,7 +18,7 @@ export default function PostView({ post, allowEdit }) {
     <div>
       <h2>{post.title}</h2>
       <p>{post.contents}</p>
-      {/*<p>{post.Category[0].name}</p>*/}
+      <p>{post.category[0].name}</p>
       {/*eslint-disable-line */}
       <p suppressHydrationWarning>{new Date(post.posted).toLocaleString()}</p>
     </div>

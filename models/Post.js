@@ -2,6 +2,7 @@
 // import { Model } from "objection";
 import BaseModel from "./BaseModel";
 import { Model } from "objection";
+import Category from "./Category";
 export default class Post extends BaseModel {
   // Table name is the only required property.
   static get tableName() {
@@ -27,7 +28,6 @@ export default class Post extends BaseModel {
     };
   }
   static get relationMappings() {
-    const Category = require("./Category");
     return {
       category: {
         relation: Model.ManyToManyRelation,

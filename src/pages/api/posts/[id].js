@@ -4,11 +4,17 @@ import Post from "../../../../models/Post";
 // Notice the `onError` middleware for aspect-oriented error handler. That middleware
 // will be invoked if the handler code throws an exception.
 const handler = nc({ onError }).get(async (req, res) => {
-  const post = await Post.query()
-    .findById(req.query.id)
-    //.withGraphFetched("category") this is the related thing that breaks it,
-    .throwIfNotFound();
-  res.status(200).json(post);
+  try {
+    const post = await Post.query()
+      //.withGraphFetched("category") //this is the related thing that breaks it,
+      .withGraphFetched("category")
+      .findById(req.query.id)
+      .throwIfNotFound();
+    console.log(post);
+    res.status(200).json(post);
+  } catch (error) {
+    console.log(error);
+  }
 
   // let query = Post.query();
   // if (req.query.section) {
