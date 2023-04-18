@@ -1,7 +1,7 @@
 import Editor from "../../components/Editor";
 import { useRouter } from "next/router";
 
-export default function PostCreator({ setCurrentPost }) {
+export default function PostCreator({ goToPost }) {
   const router = useRouter();
   const complete = async (post) => {
     if (post) {
@@ -13,11 +13,11 @@ export default function PostCreator({ setCurrentPost }) {
           "Content-Type": "application/json",
         }),
       };
-
       const response = await fetch("/api/generalPosts", params);
       if (response.ok) {
-        console.log(response.json());
-        setCurrentPost(await response.json());
+        //console.log(response.json());
+        const newPost = await response.json();
+        goToPost(newPost);
       }
     } else {
       router.back();
@@ -44,7 +44,7 @@ export default function PostCreator({ setCurrentPost }) {
 
   return (
     <>
-      <Editor setCurrentPost={setCurrentPost} complete={complete} />
+      <Editor complete={complete} />
     </>
   );
 }

@@ -5,12 +5,12 @@
 exports.up = function (knex) {
   return knex.schema.createTable("Post", (table) => {
     table.increments("id").primary();
-    table.string("title").notNullable();
+    table.string("title");
     table.string("author");
     table.text("contents");
     table.specificType("comments", "INT[]");
-    table.string("posted").notNullable();
-    //table.specificType("tag", "INT[]"); //tags to a specific category
+    table.string("posted");
+    // table.specificType("tag", "INT[]"); //tags to a specific category
     table.integer("upvotes");
   });
 };

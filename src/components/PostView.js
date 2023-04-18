@@ -14,11 +14,15 @@ export default function PostView({ post, allowEdit }) {
       </div>
     );
   }
+  let category;
+  if (post.category.length > 0) {
+    category = post.category[0].name;
+  }
   return (
     <div>
       <h2>{post.title}</h2>
       <p>{post.contents}</p>
-      <p>{post.category[0].name}</p>
+      <p>{category}</p>
       {/*eslint-disable-line */}
       <p suppressHydrationWarning>{new Date(post.posted).toLocaleString()}</p>
     </div>

@@ -25,7 +25,12 @@ const handler = nc({ onError })
   })
   .post(async (req, res) => {
     // endpoint to create a new post
-    const posts = await Post.query().insertAndFetch(req.body);
-    res.status(200).json(posts);
+    const { ...newPost } = req.body;
+    const post = await Post.query()
+      .insertAndFetch({
+        ...newPost,
+      })
+      .throwIfNotFound();
+    res.status(200).json(post);
   });
 export default handler;
