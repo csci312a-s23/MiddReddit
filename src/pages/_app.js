@@ -46,6 +46,7 @@ function MainApp({ Component, pageProps }) {
       })
       .catch((error) => console.log(error));
   }, []);
+
   const handleClickMenubar = (menubarCase) => {
     switch (menubarCase) {
       case "create":

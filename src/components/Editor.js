@@ -24,7 +24,7 @@ export default function Editor({ post, complete }) {
         ...post,
         title: title,
         contents: contents,
-        edited: new Date().toISOString(),
+        posted: new Date().toISOString(),
       });
     }
   }
