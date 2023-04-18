@@ -16,6 +16,7 @@ import Menubar from "../components/menubar";
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import fetch from "node-fetch";
 
 import styles from "../styles/MiddReddit.module.css";
 
