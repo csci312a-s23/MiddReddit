@@ -19,13 +19,42 @@ import { useRouter } from "next/router";
 import fetch from "node-fetch";
 
 import styles from "../styles/MiddReddit.module.css";
+import { styled } from "@mui/material/styles";
 
-function MainApp({ Component, pageProps }) {
+import PrimarySearchAppBar from "@/components/menubar1";
+import { ButtonGroup, CssBaseline, Fab } from "@mui/material";
+import { useScrollTrigger } from "@mui/material";
+import * as React from "react";
+import { Toolbar } from "@mui/material";
+import { CacheProvider } from "@emotion/react";
+import theme from "../material/theme";
+import createEmotionCache from "../material/createEmotionCache";
+import { Button } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+
+const clientSideEmotionCache = createEmotionCache();
+
+const fabStyle = {
+  position: "fixed",
+  bottom: 30,
+  right: 200,
+};
+
+function MainApp({
+  Component,
+  pageProps,
+  emotionCache = clientSideEmotionCache,
+}) {
   const router = useRouter();
   //const [collection, setCollection] = useState(data);
   const [currentPost, setCurrentPost] = useState();
   const [searchQuery, setSearchQuery] = useState();
   const [categories, setCategories] = useState();
+  //These two states are used to enable buttons in the menubar and create posts
+  const [createPost, setCreatePost] = useState(true);
+  //To test signed in functionality change false -> true
+  const [signedIn, setSignedIn] = useState(false);
+
   const [categoryQuery, setCategoryQuery] = useState(); //will use for searching by category
   //const id = router.query.id;
 
@@ -46,19 +75,26 @@ function MainApp({ Component, pageProps }) {
       })
       .catch((error) => console.log(error));
   }, []);
+
   const handleClickMenubar = (menubarCase) => {
     switch (menubarCase) {
       case "create":
+        //Removes Button
+        setCreatePost(false);
         router.push("/posts/create");
       case "mainPage":
+        //Adds Button
+        setCreatePost(true);
         router.push("/");
       /*case "signIn":
+        setCreatePost(false);
         router.push("signIn"); */
     }
   };
 
   function goToPost(post) {
     if (post) {
+      setCreatePost(false);
       setCurrentPost(post.id);
       router.push(`/posts/${post.id}`);
     }
@@ -83,20 +119,45 @@ function MainApp({ Component, pageProps }) {
   //This is not going to work right now obviously but this is the idea we should go for so they can only edit their own posts
   //const MyPosts = collection.filter(post => post.owner === user.name);
   return (
-    <div className={styles.container}>
+    <CacheProvider value={emotionCache}>
       <Head>
         <title>MiddReddit</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <CssBaseline />
       <main>
-        <Menubar handleClick={handleClickMenubar} />
+        {/*<Menubar handleClick={handleClickMenubar} />*/}
+
+        <PrimarySearchAppBar
+          handleClick={handleClickMenubar}
+          signedIn={signedIn}
+        />
+        <Toolbar />
+
         <div className={styles.body}>
-          <div className={styles.sidebar}>
+          <div className={styles.sidebar} position="fixed">
             <LeftSidebar categories={categories} goToCategory={goToCategory} />
           </div>
+
           <div className={styles.mainContent}>
             <Component {...props} />
+
+            {createPost && (
+              <Fab
+                sx={fabStyle}
+                color="primary"
+                name="Create"
+                onClick={() => {
+                  handleClickMenubar("create");
+                  setCreatePost(false);
+                }}
+                disabled={signedIn === false}
+              >
+                <AddIcon />
+              </Fab>
+            )}
           </div>
+
           <div className={styles.sidebar}>
             <RightSidebar />
           </div>
@@ -104,7 +165,7 @@ function MainApp({ Component, pageProps }) {
       </main>
 
       <footer>MiddReddit 2023</footer>
-    </div>
+    </CacheProvider>
     //We also want to send goToPost to scrollDisplay and ScrollPosts
     //Right now those props aren't being passed through
   );

@@ -9,26 +9,36 @@
 import styles from "../styles/ScrollPosts.module.css";
 import PostShape from "./PostShape";
 import PropTypes from "prop-types";
+import { styled } from "@mui/material/styles";
 /* eslint-disable quotes */
+
+const NoBulletList = styled("ul")(() => ({
+  listStyle: "none",
+  paddingLeft: 0,
+}));
 
 export default function ScrollPost({ post, goToPost, setCurrentPost }) {
   return (
-    <li
+    <NoBulletList
       onClick={() => {
         setCurrentPost(post.id);
         goToPost(post);
       }}
     >
       <div className={styles.post}>
-        <h4>{post.title} </h4>
-        <em suppressHydrationWarning /*have to suppress hydration with dates*/>
-          {/*eslint-disable-line */}
-          {post.owner} - {new Date(post.posted).toLocaleString()}
-        </em>
+        <center>
+          <h4>{post.title} </h4>
+          <em
+            suppressHydrationWarning /*have to suppress hydration with dates*/
+          >
+            {/*eslint-disable-line */}
+            {post.owner} - {new Date(post.posted).toLocaleString()}
+          </em>
 
-        <p>{post.contents} </p>
+          <p>{post.contents} </p>
+        </center>
       </div>
-    </li>
+    </NoBulletList>
   );
 }
 
