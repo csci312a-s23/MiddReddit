@@ -27,7 +27,9 @@ export default function ScrollDisplay({
   return (
     <div className={styles.body}>
       <div>
-        <ul>{postComponents}</ul>
+        {/*<ul>{postComponents}</ul>*/}
+
+        {postComponents}
       </div>
     </div>
   );

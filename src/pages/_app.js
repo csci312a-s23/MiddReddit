@@ -31,13 +31,14 @@ import theme from "../material/theme";
 import createEmotionCache from "../material/createEmotionCache";
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import { VerticalAlignBottom } from "@mui/icons-material";
 
 const clientSideEmotionCache = createEmotionCache();
 
 const fabStyle = {
-  position: "fixed",
+  position: "absolute",
   bottom: 30,
-  right: 200,
+  right: "15%",
 };
 
 function MainApp({
@@ -53,7 +54,9 @@ function MainApp({
   //These two states are used to enable buttons in the menubar and create posts
   const [createPost, setCreatePost] = useState(true);
   //To test signed in functionality change false -> true
-  const [signedIn, setSignedIn] = useState(false);
+  const [signedIn, setSignedIn] = useState(true);
+  const [openLeftSideBar, setOpenLeftSideBar] = useState(false);
+  const [openRightSideBar, setOpenRightSideBar] = useState(true);
 
   const [categoryQuery, setCategoryQuery] = useState(); //will use for searching by category
   //const id = router.query.id;
@@ -123,21 +126,32 @@ function MainApp({
       <Head>
         <title>MiddReddit</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <CssBaseline />
-      <main>
+      <main className={styles.main}>
         {/*<Menubar handleClick={handleClickMenubar} />*/}
 
         <PrimarySearchAppBar
           handleClick={handleClickMenubar}
           signedIn={signedIn}
+          openLeftSideBar={openLeftSideBar}
+          setOpenLeftSideBar={setOpenLeftSideBar}
+          setOpenRightSideBar={setOpenRightSideBar}
         />
         <Toolbar />
 
         <div className={styles.body}>
-          <div className={styles.sidebar} position="fixed">
-            <LeftSidebar categories={categories} goToCategory={goToCategory} />
-          </div>
+          {openLeftSideBar && (
+            <div className={styles.sidebarleft}>
+              {
+                <LeftSidebar
+                  categories={categories}
+                  goToCategory={goToCategory}
+                />
+              }
+            </div>
+          )}
 
           <div className={styles.mainContent}>
             <Component {...props} />
@@ -150,6 +164,8 @@ function MainApp({
                 onClick={() => {
                   handleClickMenubar("create");
                   setCreatePost(false);
+                  setOpenLeftSideBar(false);
+                  setOpenRightSideBar(false);
                 }}
                 disabled={signedIn === false}
               >
@@ -158,18 +174,28 @@ function MainApp({
             )}
           </div>
 
-          <div className={styles.sidebar}>
-            <RightSidebar />
-          </div>
+          {openRightSideBar && (
+            <div className={styles.sidebarright}>
+              <RightSidebar />
+            </div>
+          )}
         </div>
       </main>
 
-      <footer>MiddReddit 2023</footer>
+      <Footer>MiddReddit 2023</Footer>
     </CacheProvider>
     //We also want to send goToPost to scrollDisplay and ScrollPosts
     //Right now those props aren't being passed through
   );
 }
+
+const Footer = styled("footer")(({ theme: styledTheme }) => ({
+  borderTop: "1px solid #eaeaea",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  paddingTop: styledTheme.spacing(2),
+}));
 
 export default MainApp;
 

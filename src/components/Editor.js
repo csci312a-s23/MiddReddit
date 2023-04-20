@@ -11,6 +11,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import PostShape from "./PostShape";
 import { TextField, Stack } from "@mui/material";
+//import styles from "../styles/MiddReddit.module.css";
 
 export default function Editor({ post, complete }) {
   const [title, setTitle] = useState(post ? post.title : "");
@@ -53,6 +54,9 @@ export default function Editor({ post, complete }) {
         id="contents"
         label="Contents"
       />
+      {
+        //Need to add onClick so that the button reappears
+      }
       <Stack spacing={2} direction="row">
         <button onClick={() => submitPost(true)} disabled={title === ""}>
           Save

@@ -56,7 +56,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar({ handleClick, signedIn }) {
+export default function PrimarySearchAppBar({
+  handleClick,
+  signedIn,
+  openLeftSideBar,
+  setOpenLeftSideBar,
+  setOpenRightSideBar,
+}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
@@ -117,6 +123,13 @@ export default function PrimarySearchAppBar({ handleClick, signedIn }) {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
+            onClick={() => {
+              if (openLeftSideBar === true) {
+                setOpenLeftSideBar(false);
+              } else {
+                setOpenLeftSideBar(true);
+              }
+            }}
           >
             <MenuIcon />
           </IconButton>
@@ -125,7 +138,10 @@ export default function PrimarySearchAppBar({ handleClick, signedIn }) {
             noWrap
             component="div"
             sx={{ display: { xs: "none", sm: "block" } }}
-            onClick={() => handleClick("mainPage")}
+            onClick={() => {
+              handleClick("mainPage");
+              setOpenRightSideBar(true);
+            }}
           >
             MiddReddit
           </Typography>
