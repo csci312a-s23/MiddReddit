@@ -1,7 +1,11 @@
 import Editor from "../../components/Editor";
 import { useRouter } from "next/router";
 
-export default function PostCreator({ setCurrentPost }) {
+export default function PostCreator({
+  setCurrentPost,
+  setOpenRightSideBar,
+  setCreatePost,
+}) {
   const router = useRouter();
   const complete = async (post) => {
     if (post) {
@@ -44,7 +48,12 @@ export default function PostCreator({ setCurrentPost }) {
 
   return (
     <>
-      <Editor setCurrentPost={setCurrentPost} complete={complete} />
+      <Editor
+        setCurrentPost={setCurrentPost}
+        complete={complete}
+        setCreatePost={setCreatePost}
+        setOpenRightSideBar={setOpenRightSideBar}
+      />
     </>
   );
 }

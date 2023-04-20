@@ -55,6 +55,7 @@ function MainApp({
   const [createPost, setCreatePost] = useState(true);
   //To test signed in functionality change false -> true
   const [signedIn, setSignedIn] = useState(true);
+
   const [openLeftSideBar, setOpenLeftSideBar] = useState(false);
   const [openRightSideBar, setOpenRightSideBar] = useState(true);
 
@@ -117,6 +118,8 @@ function MainApp({
     searchQuery,
     categories,
     goToCategory,
+    setOpenRightSideBar,
+    setCreatePost,
   };
 
   //This is not going to work right now obviously but this is the idea we should go for so they can only edit their own posts
