@@ -37,8 +37,8 @@ const clientSideEmotionCache = createEmotionCache();
 
 const fabStyle = {
   position: "absolute",
-  bottom: 30,
-  right: "15%",
+  bottom: "5%",
+  right: "5%",
 };
 
 function MainApp({
@@ -142,7 +142,6 @@ function MainApp({
           setOpenLeftSideBar={setOpenLeftSideBar}
           setOpenRightSideBar={setOpenRightSideBar}
         />
-        <Toolbar />
 
         <div className={styles.body}>
           {openLeftSideBar && (
@@ -156,25 +155,27 @@ function MainApp({
             </div>
           )}
 
-          <div className={styles.mainContent}>
-            <Component {...props} />
+          <div className={styles.mainContentOut}>
+            <div className={styles.mainContent}>
+              <Component {...props} />
 
-            {createPost && (
-              <Fab
-                sx={fabStyle}
-                color="primary"
-                name="Create"
-                onClick={() => {
-                  handleClickMenubar("create");
-                  setCreatePost(false);
-                  setOpenLeftSideBar(false);
-                  setOpenRightSideBar(false);
-                }}
-                disabled={signedIn === false}
-              >
-                <AddIcon />
-              </Fab>
-            )}
+              {createPost && (
+                <Fab
+                  sx={fabStyle}
+                  color="primary"
+                  name="Create"
+                  onClick={() => {
+                    handleClickMenubar("create");
+                    setCreatePost(false);
+                    setOpenLeftSideBar(false);
+                    setOpenRightSideBar(false);
+                  }}
+                  disabled={signedIn === false}
+                >
+                  <AddIcon />
+                </Fab>
+              )}
+            </div>
           </div>
 
           {openRightSideBar && (

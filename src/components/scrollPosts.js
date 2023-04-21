@@ -10,6 +10,10 @@ import styles from "../styles/ScrollPosts.module.css";
 import PostShape from "./PostShape";
 import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
+//import { Button } from "@mui/material";
+import UpVoteButtons from "./UpVoteButtons";
+//import { Typography } from "@mui/material";
+//import { Box } from "@mui/material";
 /* eslint-disable quotes */
 
 const NoBulletList = styled("ul")(() => ({
@@ -18,25 +22,44 @@ const NoBulletList = styled("ul")(() => ({
 }));
 
 export default function ScrollPost({ post, goToPost, setCurrentPost }) {
-  return (
-    <NoBulletList
-      onClick={() => {
-        setCurrentPost(post.id);
-        goToPost(post);
-      }}
-    >
-      <div className={styles.post}>
-        <center>
-          <h4>{post.title} </h4>
-          <em
-            suppressHydrationWarning /*have to suppress hydration with dates*/
-          >
-            {/*eslint-disable-line */}
-            {post.author} - {new Date(post.posted).toLocaleString()}
-          </em>
+  const allowVote = false;
 
-          <p>{post.contents} </p>
-        </center>
+  return (
+    <NoBulletList>
+      <div className={styles.post}>
+        <div className={styles.votes}>
+          <UpVoteButtons
+            post={post}
+            upVotes={post.upvotes}
+            allowVote={allowVote}
+          />
+        </div>
+
+        {/*
+        <div className={styles.float}>
+          {{"\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0"}
+        </div>
+        */}
+
+        <div
+          className={styles.body}
+          onClick={() => {
+            setCurrentPost(post.id);
+            goToPost(post);
+          }}
+        >
+          <center>
+            <h4>{post.title} </h4>
+            <em
+              suppressHydrationWarning /*have to suppress hydration with dates*/
+            >
+              {/*eslint-disable-line */}
+              {post.author} - {new Date(post.posted).toLocaleString()}
+            </em>
+
+            <p>{post.contents} </p>
+          </center>
+        </div>
       </div>
     </NoBulletList>
   );
