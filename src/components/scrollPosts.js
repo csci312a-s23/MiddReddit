@@ -32,7 +32,7 @@ export default function ScrollPost({ post, goToPost, setCurrentPost }) {
             suppressHydrationWarning /*have to suppress hydration with dates*/
           >
             {/*eslint-disable-line */}
-            {post.owner} - {new Date(post.posted).toLocaleString()}
+            {post.author} - {new Date(post.posted).toLocaleString()}
           </em>
 
           <p>{post.contents} </p>
@@ -44,5 +44,5 @@ export default function ScrollPost({ post, goToPost, setCurrentPost }) {
 
 ScrollPost.propTypes = {
   post: PostShape,
-  goToPost: PropTypes.func.isRequired,
+  goToPost: PropTypes.func,
 };

@@ -4,6 +4,7 @@ export function onError(error, request, response, next) {
   if (response.headersSent) {
     next(error);
   }
+  console.log(error);
   const wrappedError = wrapError(error);
   if (wrappedError instanceof DBError) {
     response.status(400).send(wrappedError.data || wrappedError.message || {});

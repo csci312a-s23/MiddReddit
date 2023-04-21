@@ -30,7 +30,7 @@ export default function Editor({
         ...post,
         title: title,
         contents: contents,
-        edited: new Date().toISOString(),
+        posted: new Date().toISOString(),
       });
     }
   }
