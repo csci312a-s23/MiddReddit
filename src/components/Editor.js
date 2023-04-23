@@ -30,6 +30,7 @@ export default function Editor({
         ...post,
         title: title,
         contents: contents,
+        upvotes: 0,
         posted: new Date().toISOString(),
       });
     }
