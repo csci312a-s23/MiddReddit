@@ -21,7 +21,7 @@ export default class Post extends BaseModel {
         title: { type: "string" },
         author: { type: "string" },
         contents: { type: "string" },
-        // comments: { type: "INT[]" },
+        //comments: { type: "INT[]" },
         posted: { type: "string" },
         upvotes: { type: "integer" },
       },

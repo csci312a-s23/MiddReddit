@@ -9,26 +9,59 @@
 import styles from "../styles/ScrollPosts.module.css";
 import PostShape from "./PostShape";
 import PropTypes from "prop-types";
+import { styled } from "@mui/material/styles";
+//import { Button } from "@mui/material";
+import UpVoteButtons from "./UpVoteButtons";
+//import { Typography } from "@mui/material";
+//import { Box } from "@mui/material";
 /* eslint-disable quotes */
 
-export default function ScrollPost({ post, goToPost, setCurrentPost }) {
-  return (
-    <li
-      onClick={() => {
-        setCurrentPost(post.id);
-        goToPost(post);
-      }}
-    >
-      <div className={styles.post}>
-        <h4>{post.title} </h4>
-        <em suppressHydrationWarning /*have to suppress hydration with dates*/>
-          {/*eslint-disable-line */}
-          {post.author} - {new Date(post.posted).toLocaleString()}
-        </em>
+const NoBulletList = styled("ul")(() => ({
+  listStyle: "none",
+  paddingLeft: 0,
+}));
 
-        <p>{post.contents} </p>
+export default function ScrollPost({ post, goToPost, setCurrentPost }) {
+  const allowVote = false;
+
+  return (
+    <NoBulletList>
+      <div className={styles.post}>
+        <div className={styles.votes}>
+          <UpVoteButtons
+            post={post}
+            upVotes={post.upvotes}
+            allowVote={allowVote}
+          />
+        </div>
+
+        {/*
+        <div className={styles.float}>
+          {{"\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0"}
+        </div>
+        */}
+
+        <div
+          className={styles.body}
+          onClick={() => {
+            setCurrentPost(post.id);
+            goToPost(post);
+          }}
+        >
+          <center>
+            <h4>{post.title} </h4>
+            <em
+              suppressHydrationWarning /*have to suppress hydration with dates*/
+            >
+              {/*eslint-disable-line */}
+              {post.author} - {new Date(post.posted).toLocaleString()}
+            </em>
+
+            <p>{post.contents} </p>
+          </center>
+        </div>
       </div>
-    </li>
+    </NoBulletList>
   );
 }
 

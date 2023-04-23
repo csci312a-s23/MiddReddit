@@ -1,6 +1,28 @@
 .post {
-  background-color: azure;
-  border: 5px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  background-color: rgb(224, 211, 255);
+  border: 5px outset rgba(45, 37, 37, 0.1);
+  border-radius: 15px;
   cursor: pointer;
+  position: static;
+  align-items: center;
+  display: grid;
+  grid: "votes float body";
+}
+/* I have to adjust this for bigger screens*/
+.body {
+  grid-area: body;
+  position: static;
+  width: 700px;
+}
+
+.votes {
+  grid-area: votes;
+  position: static;
+  width: 50px;
+}
+
+.float {
+  grid-area: float;
+  position: static;
+  height: 100%;
 }

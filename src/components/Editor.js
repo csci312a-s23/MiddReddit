@@ -11,8 +11,14 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import PostShape from "./PostShape";
 import { TextField, Stack } from "@mui/material";
+//import styles from "../styles/MiddReddit.module.css";
 
-export default function Editor({ post, complete }) {
+export default function Editor({
+  post,
+  complete,
+  setCreatePost,
+  setOpenRightSideBar,
+}) {
   const [title, setTitle] = useState(post ? post.title : "");
   const [contents, setContents] = useState(post ? post.contents : "");
 
@@ -24,6 +30,7 @@ export default function Editor({ post, complete }) {
         ...post,
         title: title,
         contents: contents,
+        upvotes: 0,
         posted: new Date().toISOString(),
       });
     }
@@ -53,11 +60,22 @@ export default function Editor({ post, complete }) {
         id="contents"
         label="Contents"
       />
+      {
+        //Need to add onClick so that the button reappears
+      }
       <Stack spacing={2} direction="row">
         <button onClick={() => submitPost(true)} disabled={title === ""}>
           Save
         </button>
-        <button onClick={() => submitPost(false)}>Cancel</button>
+        <button
+          onClick={() => {
+            submitPost(false);
+            setOpenRightSideBar(true);
+            setCreatePost(true);
+          }}
+        >
+          Cancel
+        </button>
       </Stack>
     </div>
   );

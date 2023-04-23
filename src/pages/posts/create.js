@@ -1,7 +1,11 @@
 import Editor from "../../components/Editor";
 import { useRouter } from "next/router";
 
-export default function PostCreator({ goToPost }) {
+export default function PostCreator({
+  goToPost,
+  setOpenRightSideBar,
+  setCreatePost,
+}) {
   const router = useRouter();
   const complete = async (post) => {
     if (post) {
@@ -14,6 +18,7 @@ export default function PostCreator({ goToPost }) {
         }),
       };
       const response = await fetch("/api/generalPosts", params);
+      console.log("here2");
       if (response.ok) {
         //console.log(response.json());
         const newPost = await response.json();
@@ -44,7 +49,11 @@ export default function PostCreator({ goToPost }) {
 
   return (
     <>
-      <Editor complete={complete} />
+      <Editor
+        complete={complete}
+        setCreatePost={setCreatePost}
+        setOpenRightSideBar={setOpenRightSideBar}
+      />
     </>
   );
 }

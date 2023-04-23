@@ -19,13 +19,46 @@ import { useRouter } from "next/router";
 import fetch from "node-fetch";
 
 import styles from "../styles/MiddReddit.module.css";
+import { styled } from "@mui/material/styles";
 
-function MainApp({ Component, pageProps }) {
+import PrimarySearchAppBar from "@/components/menubar1";
+import { ButtonGroup, CssBaseline, Fab } from "@mui/material";
+import { useScrollTrigger } from "@mui/material";
+import * as React from "react";
+import { Toolbar } from "@mui/material";
+import { CacheProvider } from "@emotion/react";
+import theme from "../material/theme";
+import createEmotionCache from "../material/createEmotionCache";
+import { Button } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import { VerticalAlignBottom } from "@mui/icons-material";
+
+const clientSideEmotionCache = createEmotionCache();
+
+const fabStyle = {
+  position: "absolute",
+  bottom: "5%",
+  right: "5%",
+};
+
+function MainApp({
+  Component,
+  pageProps,
+  emotionCache = clientSideEmotionCache,
+}) {
   const router = useRouter();
   //const [collection, setCollection] = useState(data);
   const [currentPost, setCurrentPost] = useState();
   const [searchQuery, setSearchQuery] = useState();
   const [categories, setCategories] = useState();
+  //These two states are used to enable buttons in the menubar and create posts
+  const [createPost, setCreatePost] = useState(true);
+  //To test signed in functionality change false -> true
+  const [signedIn, setSignedIn] = useState(true);
+
+  const [openLeftSideBar, setOpenLeftSideBar] = useState(false);
+  const [openRightSideBar, setOpenRightSideBar] = useState(true);
+
   const [categoryQuery, setCategoryQuery] = useState(); //will use for searching by category
   //const id = router.query.id;
 
@@ -50,16 +83,22 @@ function MainApp({ Component, pageProps }) {
   const handleClickMenubar = (menubarCase) => {
     switch (menubarCase) {
       case "create":
+        //Removes Button
+        setCreatePost(false);
         router.push("/posts/create");
       case "mainPage":
+        //Adds Button
+        setCreatePost(true);
         router.push("/");
       /*case "signIn":
+        setCreatePost(false);
         router.push("signIn"); */
     }
   };
 
   function goToPost(post) {
     if (post) {
+      setCreatePost(false);
       setCurrentPost(post.id);
       router.push(`/posts/${post.id}`);
     }
@@ -79,37 +118,88 @@ function MainApp({ Component, pageProps }) {
     searchQuery,
     categories,
     goToCategory,
+    setOpenRightSideBar,
+    setCreatePost,
   };
 
   //This is not going to work right now obviously but this is the idea we should go for so they can only edit their own posts
   //const MyPosts = collection.filter(post => post.owner === user.name);
   return (
-    <div className={styles.container}>
+    <CacheProvider value={emotionCache}>
       <Head>
         <title>MiddReddit</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-      <main>
-        <Menubar handleClick={handleClickMenubar} />
+      <CssBaseline />
+      <main className={styles.main}>
+        {/*<Menubar handleClick={handleClickMenubar} />*/}
+
+        <PrimarySearchAppBar
+          handleClick={handleClickMenubar}
+          signedIn={signedIn}
+          openLeftSideBar={openLeftSideBar}
+          setOpenLeftSideBar={setOpenLeftSideBar}
+          setOpenRightSideBar={setOpenRightSideBar}
+        />
+
         <div className={styles.body}>
-          <div className={styles.sidebar}>
-            <LeftSidebar categories={categories} goToCategory={goToCategory} />
+          {openLeftSideBar && (
+            <div className={styles.sidebarleft}>
+              {
+                <LeftSidebar
+                  categories={categories}
+                  goToCategory={goToCategory}
+                />
+              }
+            </div>
+          )}
+
+          <div className={styles.mainContentOut}>
+            <div className={styles.mainContent}>
+              <Component {...props} />
+
+              {createPost && (
+                <Fab
+                  sx={fabStyle}
+                  color="primary"
+                  name="Create"
+                  onClick={() => {
+                    handleClickMenubar("create");
+                    setCreatePost(false);
+                    setOpenLeftSideBar(false);
+                    setOpenRightSideBar(false);
+                  }}
+                  disabled={signedIn === false}
+                >
+                  <AddIcon />
+                </Fab>
+              )}
+            </div>
           </div>
-          <div className={styles.mainContent}>
-            <Component {...props} />
-          </div>
-          <div className={styles.sidebar}>
-            <RightSidebar />
-          </div>
+
+          {openRightSideBar && (
+            <div className={styles.sidebarright}>
+              <RightSidebar />
+            </div>
+          )}
         </div>
       </main>
 
-      <footer>MiddReddit 2023</footer>
-    </div>
+      <Footer>MiddReddit 2023</Footer>
+    </CacheProvider>
     //We also want to send goToPost to scrollDisplay and ScrollPosts
     //Right now those props aren't being passed through
   );
 }
+
+const Footer = styled("footer")(({ theme: styledTheme }) => ({
+  borderTop: "1px solid #eaeaea",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  paddingTop: styledTheme.spacing(2),
+}));
 
 export default MainApp;
 
