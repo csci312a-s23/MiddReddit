@@ -17,7 +17,7 @@ export default function PostCreator({
           "Content-Type": "application/json",
         }),
       };
-      const response = await fetch("/api/generalPosts", params);
+      const response = await fetch("/api/posts", params);
       console.log("here2");
       if (response.ok) {
         //console.log(response.json());
