@@ -10,7 +10,6 @@ const handler = nc({ onError }).get(async (req, res) => {
       .withGraphFetched("category")
       .findById(req.query.id)
       .throwIfNotFound();
-    console.log(post);
     res.status(200).json(post);
   } catch (error) {
     console.log(error);

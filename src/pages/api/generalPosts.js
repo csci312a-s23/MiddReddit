@@ -25,9 +25,7 @@ const handler = nc({ onError })
   })
   .post(async (req, res) => {
     // endpoint to create a new post
-    console.log("here");
     const { ...newPost } = req.body;
-    console.log(newPost);
     const post = await Post.query()
       .insertAndFetch({
         ...newPost,
