@@ -1,6 +1,11 @@
+/*
+  index.js
+  Endpoints for getting and putting specific posts and updating likes/dislikes
+*/
+
 import nc from "next-connect";
-import { onError } from "../../../lib/middleware";
-import Post from "../../../../models/Post";
+import { onError } from "../../../../lib/middleware";
+import Post from "../../../../../models/Post";
 // Notice the `onError` middleware for aspect-oriented error handler. That middleware
 // will be invoked if the handler code throws an exception.
 const handler = nc({ onError }).get(async (req, res) => {

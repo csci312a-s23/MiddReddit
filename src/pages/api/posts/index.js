@@ -1,12 +1,12 @@
 /*
-  generalPosts.js
-  Methods for getting and putting posts in mass
+  index.js
+  Endpoints for getting and putting posts in mass
 */
 
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import nc from "next-connect";
-import { onError } from "../../lib/middleware";
-import Post from "../../../models/Post";
+import { onError } from "../../../lib/middleware";
+import Post from "../../../../models/Post";
 
 // Notice the `onError` middleware for aspect-oriented error handler. That middleware
 // will be invoked if the handler code throws an exception.

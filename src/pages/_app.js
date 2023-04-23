@@ -63,7 +63,7 @@ function MainApp({
   //const id = router.query.id;
 
   useEffect(() => {
-    fetch("/api/generalPosts")
+    fetch("/api/posts")
       .then((resp) => resp.json())
       .then((data) => {
         setSearchQuery(data);
