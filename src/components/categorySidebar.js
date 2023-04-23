@@ -13,7 +13,7 @@ export default function CategorySidebar({ categories, goToCategory }) {
             >
               {child.name}
             </p>
-            {child.parent && childSubitem(child.child)}
+            {child.child && childSubitem(child.child)}
           </li>
           {/* child.parent && childSubitem(child.parent) || doesn't work recursively, probably have to update the api call to recurse  */}
           {/* also update function call to only pull into main list items that don't have a parent element, update parent and child calls appropiately*/}

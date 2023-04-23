@@ -26,29 +26,19 @@ export default class Category extends BaseModel {
   }
   static relationMappings = {
     parent: {
-      relation: Model.ManyToManyRelation,
+      relation: Model.BelongsToOneRelation,
       modelClass: Category,
       join: {
-        from: "Category.id",
-        through: {
-          // RelatedArticle is the join table. These names must match the schema
-          from: "RelatedCategories.childId",
-          to: "RelatedCategories.parentId",
-        },
+        from: "Category.parentId",
         to: "Category.id",
       },
     },
     child: {
-      relation: Model.ManyToManyRelation,
+      relation: Model.HasManyRelation,
       modelClass: Category,
       join: {
         from: "Category.id",
-        through: {
-          // RelatedArticle is the join table. These names must match the schema
-          from: "RelatedCategories.parentId",
-          to: "RelatedCategories.childId",
-        },
-        to: "Category.id",
+        to: "Category.parentId",
       },
     },
   };
