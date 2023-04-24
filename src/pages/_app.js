@@ -8,8 +8,8 @@
 /* eslint-disable */
 import "../styles/globals.css";
 import Head from "next/head";
-import LeftSidebar from "../components/leftSideBar";
-import RightSidebar from "../components/rightSideBar";
+import LeftSidebar from "../components/sidebar/leftSideBar";
+import RightSidebar from "../components/sidebar/rightSideBar";
 import Menubar from "../components/menubar";
 //import MainPage from "../components/mainPage";
 //import data from "../../data/seed.json";

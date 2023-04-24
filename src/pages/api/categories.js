@@ -13,7 +13,7 @@ import Category from "../../../models/Category";
 const handler = nc({ onError }).get(async (req, res) => {
   // Endpoint to fetch all posts, possible filtering by category
   const query = Category.query()
-    .withGraphJoined("[parent, child.^3]")
+    .withGraphJoined("[parent, children.^3]")
     .where("parent.name", null); //only works for 1 level of nesting, have to refine how I deduplicate
 
   //NEED TO WORK ON FILTERING BY...

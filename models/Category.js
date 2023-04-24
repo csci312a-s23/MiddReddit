@@ -33,7 +33,7 @@ export default class Category extends BaseModel {
         to: "Category.id",
       },
     },
-    child: {
+    children: {
       relation: Model.HasManyRelation,
       modelClass: Category,
       join: {
