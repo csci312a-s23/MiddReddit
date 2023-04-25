@@ -1,6 +1,5 @@
 import PostView from "../../../components/PostView";
 import { useRouter } from "next/router";
-//import data from "../../../../data/seedPost.json"; //will be a database thing
 import { useEffect, useState } from "react";
 
 export default function Post({}) {

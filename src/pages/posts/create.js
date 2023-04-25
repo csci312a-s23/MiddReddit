@@ -1,4 +1,5 @@
 import Editor from "../../components/Editor";
+import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 
 export default function PostCreator({
@@ -18,9 +19,7 @@ export default function PostCreator({
         }),
       };
       const response = await fetch("/api/posts", params);
-      console.log("here2");
       if (response.ok) {
-        //console.log(response.json());
         const newPost = await response.json();
         goToPost(newPost);
       }
@@ -29,35 +28,19 @@ export default function PostCreator({
     }
   };
 
-  //   const handleComplete = (newPost) => {
-  //     if (newPost) {
-  //       fetch("/api/articles", {
-  //         method: "POST",
-  //         body: JSON.stringify(newArticle),
-  //         headers: new Headers({
-  //           Accept: "application/json",
-  //           "Content-Type": "application/json",
-  //         }),
-  //       })
-  //         .then((resp) => resp.json())
-  //         .then((data) => setCurrentArticle(data))
-  //         .catch((err) => console.log(err));
-  //     } else {
-  //       router.back();
-  //     }
-  //   };
-
   return (
-    <>
+    <main>
       <Editor
         complete={complete}
         setCreatePost={setCreatePost}
         setOpenRightSideBar={setOpenRightSideBar}
       />
-    </>
+    </main>
   );
 }
-/*
+
 PostCreator.propTypes = {
-  setCurrentArticle: PropTypes.func.isRequired,
-}; */
+  goToPost: PropTypes.func.isRequired,
+  setOpenRightSideBar: PropTypes.func.isRequired,
+  setCreatePost: PropTypes.func.isRequired,
+};
