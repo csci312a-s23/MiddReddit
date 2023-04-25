@@ -44,12 +44,6 @@ export default function UpVoteButtons({ post, allowVote }) {
   const primary = blue[900];
   const secondary = blue[500];
 
-  function update(setButton, bool) {
-    setUpVotes(post.upvotes);
-    setButtonPressed(bool);
-    setButton(bool);
-  }
-
   return (
     <Box position="static">
       <Stack alignItems="center">
@@ -58,10 +52,14 @@ export default function UpVoteButtons({ post, allowVote }) {
           onClick={() => {
             if (buttonPressed === false) {
               post.upvotes = post.upvotes + 1;
-              update(setUpButton, true);
+              setUpVotes(post.upvotes);
+              setButtonPressed(true);
+              setUpButton(true);
             } else {
               post.upvotes = post.upvotes - 1;
-              update(setUpButton, false);
+              setUpVotes(post.upvotes);
+              setButtonPressed(false);
+              setUpButton(false);
             }
             // fetch the database
             updateVotes(post);
@@ -79,10 +77,14 @@ export default function UpVoteButtons({ post, allowVote }) {
           onClick={() => {
             if (buttonPressed === false) {
               post.upvotes = post.upvotes - 1;
-              update(setDownButton, true);
+              setUpVotes(post.upvotes);
+              setButtonPressed(true);
+              setDownButton(true);
             } else {
               post.upvotes = post.upvotes + 1;
-              update(setDownButton, false);
+              setUpVotes(post.upvotes);
+              setButtonPressed(false);
+              setDownButton(false);
             }
             updateVotes(post);
           }}
