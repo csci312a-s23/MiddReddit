@@ -18,7 +18,6 @@ export default function PostCreator({
         }),
       };
       const response = await fetch("/api/posts", params);
-      console.log("here2");
       if (response.ok) {
         //console.log(response.json());
         const newPost = await response.json();
