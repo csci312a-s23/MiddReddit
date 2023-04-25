@@ -5,7 +5,7 @@ import ListItemText from "@mui/material/ListItemText";
 export default function SingleLevel({ item, goToCategory }) {
   const handleClick = () => {
     console.log(item);
-    goToCategory(item.id);
+    goToCategory(item.name);
   };
   return (
     <ListItem button onClick={handleClick}>

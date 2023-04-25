@@ -9,12 +9,12 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MenuItem from "./MenuItem";
 
 export default function MultiLevel({ item, goToCategory }) {
-  const {children} = item;
+  const { children } = item;
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
     console.log(item);
-    goToCategory(item.id);
+    goToCategory(item.name);
     setOpen((prev) => !prev);
   };
 
