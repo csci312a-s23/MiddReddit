@@ -32,6 +32,7 @@ import createEmotionCache from "../material/createEmotionCache";
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { VerticalAlignBottom } from "@mui/icons-material";
+import { SessionProvider } from "next-auth/react";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -43,7 +44,7 @@ const fabStyle = {
 
 function MainApp({
   Component,
-  pageProps,
+  pageProps: { session, ...pageProps },
   emotionCache = clientSideEmotionCache,
 }) {
   const router = useRouter();
@@ -54,7 +55,7 @@ function MainApp({
   //These two states are used to enable buttons in the menubar and create posts
   const [createPost, setCreatePost] = useState(true);
   //To test signed in functionality change false -> true
-  const [signedIn, setSignedIn] = useState(true);
+  //const [signedIn, setSignedIn] = useState(true);
 
   const [openLeftSideBar, setOpenLeftSideBar] = useState(false);
   const [openRightSideBar, setOpenRightSideBar] = useState(true);
@@ -125,6 +126,7 @@ function MainApp({
   //This is not going to work right now obviously but this is the idea we should go for so they can only edit their own posts
   //const MyPosts = collection.filter(post => post.owner === user.name);
   return (
+    <SessionProvider session={session}>
     <CacheProvider value={emotionCache}>
       <Head>
         <title>MiddReddit</title>
@@ -137,7 +139,7 @@ function MainApp({
 
         <PrimarySearchAppBar
           handleClick={handleClickMenubar}
-          signedIn={signedIn}
+          // signedIn={signedIn}
           openLeftSideBar={openLeftSideBar}
           setOpenLeftSideBar={setOpenLeftSideBar}
           setOpenRightSideBar={setOpenRightSideBar}
@@ -157,8 +159,7 @@ function MainApp({
 
           <div className={styles.mainContentOut}>
             <div className={styles.mainContent}>
-              <Component {...props} />
-
+                <Component {...props} />
               {createPost && (
                 <Fab
                   sx={fabStyle}
@@ -170,7 +171,7 @@ function MainApp({
                     setOpenLeftSideBar(false);
                     setOpenRightSideBar(false);
                   }}
-                  disabled={signedIn === false}
+                  disabled={!session}
                 >
                   <AddIcon />
                 </Fab>
@@ -188,6 +189,7 @@ function MainApp({
 
       <Footer>MiddReddit 2023</Footer>
     </CacheProvider>
+    </SessionProvider>
     //We also want to send goToPost to scrollDisplay and ScrollPosts
     //Right now those props aren't being passed through
   );

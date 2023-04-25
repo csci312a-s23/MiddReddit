@@ -5,7 +5,7 @@
 
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import nc from "next-connect";
-import { onError } from "../../lib/middleware";
+import { onError, authenticated } from "../../lib/middleware";
 import Post from "../../../models/Post";
 
 // Notice the `onError` middleware for aspect-oriented error handler. That middleware
@@ -23,7 +23,7 @@ const handler = nc({ onError })
     const posts = await query;
     res.status(200).json(posts);
   })
-  .post(async (req, res) => {
+  .post(authenticated, async (req, res) => {
     // endpoint to create a new post
     const { ...newPost } = req.body;
     const post = await Post.query()
