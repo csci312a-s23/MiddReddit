@@ -13,8 +13,17 @@ import Post from "../../../../models/Post";
 // will be invoked if the handler code throws an exception.
 const handler = nc({ onError })
   .get(async (req, res) => {
-    // Endpoint to fetch all posts, possible filtering by category
-    const query = Post.query();
+    if (req.query) {
+      const { category } = req.query;
+      const query = Post.query()
+        .withGraphJoined("category")
+        .skipUndefined()
+        .where("category.name", category); //only works for 1 level of nesting, have to refine how I deduplicate
+      const posts = await query;
+      res.status(200).json(posts);
+    } else {
+      // Endpoint to fetch all posts, possible filtering by category
+      /*const query = Post.query();
     //NEED TO WORK ON FILTERING BY...
     // if (req.query.tag) {
     //   query = query.where("UPPER(SUBSTRING(title, 1, 1)) = ?", [
@@ -22,7 +31,8 @@ const handler = nc({ onError })
     //   ]);
     // }
     const posts = await query;
-    res.status(200).json(posts);
+    res.status(200).json(posts); */
+    }
   })
   .post(authenticated, async (req, res) => {
     // endpoint to create a new post
@@ -31,4 +41,5 @@ const handler = nc({ onError })
     const post = await Post.query().insertAndFetch(newPost).throwIfNotFound();
     res.status(200).json(post);
   });
+
 export default handler;

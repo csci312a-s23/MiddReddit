@@ -62,15 +62,23 @@ function MainApp({
 
   const [categoryQuery, setCategoryQuery] = useState(); //will use for searching by category
   //const id = router.query.id;
-
   useEffect(() => {
-    fetch("/api/posts")
-      .then((resp) => resp.json())
-      .then((data) => {
-        setSearchQuery(data);
-      })
-      .catch((error) => console.log(error));
-  }, [currentPost]);
+    if (categoryQuery) {
+      fetch(`/api/posts?category=${categoryQuery}`)
+        .then((resp) => resp.json())
+        .then((data) => {
+          setSearchQuery(data);
+        })
+        .catch((error) => console.log(error));
+    } else {
+      fetch("/api/posts")
+        .then((resp) => resp.json())
+        .then((data) => {
+          setSearchQuery(data);
+        })
+        .catch((error) => console.log(error));
+    }
+  }, [currentPost, categoryQuery]);
 
   useEffect(() => {
     fetch("/api/categories")
@@ -90,6 +98,7 @@ function MainApp({
       case "mainPage":
         //Adds Button
         setCreatePost(true);
+        setCategoryQuery();
         router.push("/");
       /*case "signIn":
         setCreatePost(false);
@@ -108,6 +117,7 @@ function MainApp({
   function goToCategory(category) {
     if (category) {
       router.push(`/category/${category}`);
+      setCategoryQuery(category); //so i don't have to figure out how to access id from name yet
     }
   }
 
