@@ -16,9 +16,10 @@ const handler = nc({ onError })
     if (req.query) {
       const { category } = req.query;
       const query = Post.query()
-        .withGraphJoined("category")
+        .withGraphJoined("category.[parent.^2]")
         .skipUndefined()
-        .where("category.name", category); //only works for 1 level of nesting, have to refine how I deduplicate
+        .where("category.name", category) //only works for 1 level of nesting, have to refine how I deduplicate
+        .orWhere("category:parent.name", category);
       const posts = await query;
       res.status(200).json(posts);
     } else {

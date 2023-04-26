@@ -88,5 +88,10 @@
     "id": 17,
     "postID": 8,
     "categoryID": 5
+  },
+  {
+    "id": 18,
+    "postID": 9,
+    "categoryID": 11
   }
 ]
