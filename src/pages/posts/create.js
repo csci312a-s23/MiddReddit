@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 
 export default function PostCreator({
   goToPost,
+  categories,
   setOpenRightSideBar,
   setCreatePost,
 }) {
@@ -32,6 +33,7 @@ export default function PostCreator({
     <main>
       <Editor
         complete={complete}
+        categories={categories}
         setCreatePost={setCreatePost}
         setOpenRightSideBar={setOpenRightSideBar}
       />
@@ -41,6 +43,7 @@ export default function PostCreator({
 
 PostCreator.propTypes = {
   goToPost: PropTypes.func.isRequired,
+  categories: PropTypes.array.isRequired,
   setOpenRightSideBar: PropTypes.func.isRequired,
   setCreatePost: PropTypes.func.isRequired,
 };

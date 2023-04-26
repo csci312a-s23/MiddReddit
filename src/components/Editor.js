@@ -10,17 +10,33 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import PostShape from "./PostShape";
-import { TextField, Stack } from "@mui/material";
+import {
+  TextField,
+  Stack,
+  ToggleButton,
+  ToggleButtonGroup,
+} from "@mui/material";
 //import styles from "../styles/MiddReddit.module.css";
 
 export default function Editor({
   post,
+  categories,
   complete,
   setCreatePost,
   setOpenRightSideBar,
 }) {
   const [title, setTitle] = useState(post ? post.title : "");
   const [contents, setContents] = useState(post ? post.contents : "");
+
+  let categoryDisp;
+  if (categories) {
+    const currentCategory = [...categories];
+    categoryDisp = currentCategory.map((category) => (
+      <ToggleButton key={category.id} value={category.name}>
+        {category.name}
+      </ToggleButton>
+    ));
+  }
 
   function submitPost(submit) {
     if (!submit) {
@@ -60,12 +76,15 @@ export default function Editor({
         id="contents"
         label="Contents"
       />
+      <ToggleButtonGroup color="primary" exclusive size="small">
+        {categoryDisp}
+      </ToggleButtonGroup>
       {
         //Need to add onClick so that the button reappears
       }
       <Stack spacing={2} direction="row">
         <button onClick={() => submitPost(true)} disabled={title === ""}>
-          Save
+          Post
         </button>
         <button
           onClick={() => {
@@ -83,5 +102,8 @@ export default function Editor({
 
 Editor.propTypes = {
   post: PostShape,
+  categories: PropTypes.array.isRequired,
+  setCreatePost: PropTypes.func.isRequired,
+  setOpenRightSideBar: PropTypes.func.isRequired,
   complete: PropTypes.func.isRequired,
 };
