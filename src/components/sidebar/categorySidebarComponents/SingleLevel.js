@@ -4,11 +4,10 @@ import ListItemText from "@mui/material/ListItemText";
 
 export default function SingleLevel({ item, goToCategory }) {
   const handleClick = () => {
-    console.log(item);
     goToCategory(item.name);
   };
   return (
-    <ListItem button onClick={handleClick}>
+    <ListItem sx={{ pl: 4 }} button onClick={handleClick}>
       <ListItemText primary={item.name} />
     </ListItem>
   );

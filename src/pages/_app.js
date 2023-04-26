@@ -8,30 +8,22 @@
 /* eslint-disable */
 import "../styles/globals.css";
 import Head from "next/head";
-//import Menubar from "../components/menubar";
 import LeftSidebar from "../components/sidebar/leftSideBar";
 import RightSidebar from "../components/sidebar/rightSideBar";
-//import MainPage from "../components/mainPage";
-//import data from "../../data/seed.json";
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import fetch from "node-fetch";
-
 import styles from "../styles/MiddReddit.module.css";
 import { styled } from "@mui/material/styles";
-
 import PrimarySearchAppBar from "@/components/menubar1";
 import { ButtonGroup, CssBaseline, Fab } from "@mui/material";
 import { useScrollTrigger } from "@mui/material";
 import * as React from "react";
 import { Toolbar } from "@mui/material";
 import { CacheProvider } from "@emotion/react";
-import theme from "../material/theme";
 import createEmotionCache from "../material/createEmotionCache";
-import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import { VerticalAlignBottom } from "@mui/icons-material";
 import { SessionProvider } from "next-auth/react";
 
 const clientSideEmotionCache = createEmotionCache();
@@ -48,7 +40,6 @@ function MainApp({
   emotionCache = clientSideEmotionCache,
 }) {
   const router = useRouter();
-  //const [collection, setCollection] = useState(data);
   const [currentPost, setCurrentPost] = useState();
   const [searchQuery, setSearchQuery] = useState();
   const [categories, setCategories] = useState();
@@ -63,21 +54,14 @@ function MainApp({
   const [categoryQuery, setCategoryQuery] = useState(); //will use for searching by category
   //const id = router.query.id;
   useEffect(() => {
-    if (categoryQuery) {
-      fetch(`/api/posts?category=${categoryQuery}`)
-        .then((resp) => resp.json())
-        .then((data) => {
-          setSearchQuery(data);
-        })
-        .catch((error) => console.log(error));
-    } else {
-      fetch("/api/posts")
-        .then((resp) => resp.json())
-        .then((data) => {
-          setSearchQuery(data);
-        })
-        .catch((error) => console.log(error));
-    }
+    //handles if we are within a category or not, gets rid of if statement
+    const searchQuery = categoryQuery ? `?category=${categoryQuery}` : "";
+    fetch(`/api/posts${searchQuery}`)
+      .then((resp) => resp.json())
+      .then((data) => {
+        setSearchQuery(data);
+      })
+      .catch((error) => console.log(error));
   }, [currentPost, categoryQuery]);
 
   useEffect(() => {
@@ -131,6 +115,7 @@ function MainApp({
     goToCategory,
     setOpenRightSideBar,
     setCreatePost,
+    setCategoryQuery,
   };
 
   //This is not going to work right now obviously but this is the idea we should go for so they can only edit their own posts

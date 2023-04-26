@@ -6,11 +6,14 @@
   Profile: takes user to their profile
   etc: (WIP)
 */
+import { Typography } from "@mui/material";
 import CategorySidebar from "./categorySidebar";
 export default function LeftSidebar({ categories, goToCategory }) {
   return (
     <div>
-      <h2>I am a sidebar.</h2>
+      <Typography p={4} pb={1} variant="h6" component="h6">
+        Categories
+      </Typography>
       {categories && (
         <CategorySidebar categories={categories} goToCategory={goToCategory} />
       )}

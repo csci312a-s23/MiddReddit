@@ -12,20 +12,33 @@ export default function MultiLevel({ item, goToCategory }) {
   const { children } = item;
   const [open, setOpen] = useState(false);
 
-  const handleClick = () => {
-    console.log(item);
-    goToCategory(item.name);
-    setOpen((prev) => !prev);
+  const handleClick = (clickBool) => {
+    //goToCategory(item.name);
+    if (clickBool) {
+      goToCategory(item.name);
+    } else {
+      setOpen((prev) => !prev);
+    }
   };
 
   return (
     <React.Fragment>
-      <ListItem button onClick={handleClick}>
-        {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-        <ListItemText primary={item.name} />
+      <ListItem button sx={{ pl: 1 }}>
+        {open ? (
+          <ExpandLessIcon
+            onClick={() => handleClick(false)}
+            sx={{ width: 25 }}
+          />
+        ) : (
+          <ExpandMoreIcon
+            onClick={() => handleClick(false)}
+            sx={{ width: 25 }}
+          />
+        )}
+        <ListItemText onClick={() => handleClick(true)} primary={item.name} />
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
+        <List sx={{ pl: 1 }} component="div" disablePadding>
           {children.map((child) => (
             <MenuItem key={child.id} item={child} goToCategory={goToCategory} />
           ))}
