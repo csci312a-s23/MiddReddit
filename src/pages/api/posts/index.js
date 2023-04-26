@@ -1,12 +1,13 @@
 /*
-  generalPosts.js
-  Methods for getting and putting posts in mass
+  index.js
+  Endpoints for getting and putting posts in mass
 */
 
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import nc from "next-connect";
-import { onError, authenticated } from "../../lib/middleware";
-import Post from "../../../models/Post";
+
+import { onError, authenticated } from "../../../lib/middleware";
+import Post from "../../../../models/Post";
 
 // Notice the `onError` middleware for aspect-oriented error handler. That middleware
 // will be invoked if the handler code throws an exception.
@@ -27,9 +28,7 @@ const handler = nc({ onError })
     // endpoint to create a new post
     const { ...newPost } = { ...req.body, author: req.user.name };
     //newPost.author = req.user.id;
-    const post = await Post.query()
-      .insertAndFetch(newPost)
-      .throwIfNotFound();
+    const post = await Post.query().insertAndFetch(newPost).throwIfNotFound();
     res.status(200).json(post);
   });
 export default handler;

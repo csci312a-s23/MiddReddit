@@ -3,10 +3,8 @@
  * @returns { Promise<void> }
  */
 exports.up = function (knex) {
-  return knex.schema.createTable("RelatedCategories", (table) => {
-    table.increments("id").primary();
-    table.integer("childId");
-    table.integer("parentId");
+  return knex.schema.table("Category", (table) => {
+    table.dropColumn("relatedPosts");
   });
 };
 
@@ -15,5 +13,7 @@ exports.up = function (knex) {
  * @returns { Promise<void> }
  */
 exports.down = function (knex) {
-  return knex.schema.dropTableIfExists("RelatedCategories");
+  return knex.schema.table("Category", (table) => {
+    table.specificType("relatedPosts", "INT[]");
+  });
 };

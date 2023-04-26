@@ -8,9 +8,9 @@
 /* eslint-disable */
 import "../styles/globals.css";
 import Head from "next/head";
-import LeftSidebar from "../components/leftSideBar";
-import RightSidebar from "../components/rightSideBar";
-import Menubar from "../components/menubar";
+//import Menubar from "../components/menubar";
+import LeftSidebar from "../components/sidebar/leftSideBar";
+import RightSidebar from "../components/sidebar/rightSideBar";
 //import MainPage from "../components/mainPage";
 //import data from "../../data/seed.json";
 import PropTypes from "prop-types";
@@ -64,7 +64,7 @@ function MainApp({
   //const id = router.query.id;
 
   useEffect(() => {
-    fetch("/api/generalPosts")
+    fetch("/api/posts")
       .then((resp) => resp.json())
       .then((data) => {
         setSearchQuery(data);
@@ -127,68 +127,68 @@ function MainApp({
   //const MyPosts = collection.filter(post => post.owner === user.name);
   return (
     <SessionProvider session={session}>
-    <CacheProvider value={emotionCache}>
-      <Head>
-        <title>MiddReddit</title>
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-      </Head>
-      <CssBaseline />
-      <main className={styles.main}>
-        {/*<Menubar handleClick={handleClickMenubar} />*/}
+      <CacheProvider value={emotionCache}>
+        <Head>
+          <title>MiddReddit</title>
+          <link rel="icon" href="/favicon.ico" />
+          <meta name="viewport" content="initial-scale=1, width=device-width" />
+        </Head>
+        <CssBaseline />
+        <main className={styles.main}>
+          {/*<Menubar handleClick={handleClickMenubar} />*/}
 
-        <PrimarySearchAppBar
-          handleClick={handleClickMenubar}
-          // signedIn={signedIn}
-          openLeftSideBar={openLeftSideBar}
-          setOpenLeftSideBar={setOpenLeftSideBar}
-          setOpenRightSideBar={setOpenRightSideBar}
-        />
+          <PrimarySearchAppBar
+            handleClick={handleClickMenubar}
+            // signedIn={signedIn}
+            openLeftSideBar={openLeftSideBar}
+            setOpenLeftSideBar={setOpenLeftSideBar}
+            setOpenRightSideBar={setOpenRightSideBar}
+          />
 
-        <div className={styles.body}>
-          {openLeftSideBar && (
-            <div className={styles.sidebarleft}>
-              {
-                <LeftSidebar
-                  categories={categories}
-                  goToCategory={goToCategory}
-                />
-              }
-            </div>
-          )}
+          <div className={styles.body}>
+            {openLeftSideBar && (
+              <div className={styles.sidebarleft}>
+                {
+                  <LeftSidebar
+                    categories={categories}
+                    goToCategory={goToCategory}
+                  />
+                }
+              </div>
+            )}
 
-          <div className={styles.mainContentOut}>
-            <div className={styles.mainContent}>
+            <div className={styles.mainContentOut}>
+              <div className={styles.mainContent}>
                 <Component {...props} />
-              {createPost && (
-                <Fab
-                  sx={fabStyle}
-                  color="primary"
-                  name="Create"
-                  onClick={() => {
-                    handleClickMenubar("create");
-                    setCreatePost(false);
-                    setOpenLeftSideBar(false);
-                    setOpenRightSideBar(false);
-                  }}
-                  // disabled={!!session}
-                >
-                  <AddIcon />
-                </Fab>
-              )}
+                {createPost && (
+                  <Fab
+                    sx={fabStyle}
+                    color="primary"
+                    name="Create"
+                    onClick={() => {
+                      handleClickMenubar("create");
+                      setCreatePost(false);
+                      setOpenLeftSideBar(false);
+                      setOpenRightSideBar(false);
+                    }}
+                    // disabled={!!session}
+                  >
+                    <AddIcon />
+                  </Fab>
+                )}
+              </div>
             </div>
+
+            {openRightSideBar && (
+              <div className={styles.sidebarright}>
+                <RightSidebar />
+              </div>
+            )}
           </div>
+        </main>
 
-          {openRightSideBar && (
-            <div className={styles.sidebarright}>
-              <RightSidebar />
-            </div>
-          )}
-        </div>
-      </main>
-
-      <Footer>MiddReddit 2023</Footer>
-    </CacheProvider>
+        <Footer>MiddReddit 2023</Footer>
+      </CacheProvider>
     </SessionProvider>
     //We also want to send goToPost to scrollDisplay and ScrollPosts
     //Right now those props aren't being passed through

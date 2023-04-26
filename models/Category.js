@@ -2,6 +2,7 @@
 
 import { Model } from "objection";
 import BaseModel from "./BaseModel";
+//import Post from "./Post";
 
 export default class Category extends BaseModel {
   // Table name is the only required property.
@@ -20,36 +21,43 @@ export default class Category extends BaseModel {
         id: { type: "integer" },
         name: { type: "string" },
         description: { type: "text" },
-        posts: { type: "INT[]" },
+        posts2: { type: "INT[]" },
       },
     };
   }
-  static relationMappings = {
-    parent: {
-      relation: Model.ManyToManyRelation,
-      modelClass: Category,
-      join: {
-        from: "Category.id",
-        through: {
-          // RelatedArticle is the join table. These names must match the schema
-          from: "RelatedCategories.childId",
-          to: "RelatedCategories.parentId",
+  static get relationMappings() {
+    const Post = require("./Post");
+
+    return {
+      parent: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: Category,
+        join: {
+          from: "Category.parentId",
+          to: "Category.id",
         },
-        to: "Category.id",
       },
-    },
-    child: {
-      relation: Model.ManyToManyRelation,
-      modelClass: Category,
-      join: {
-        from: "Category.id",
-        through: {
-          // RelatedArticle is the join table. These names must match the schema
-          from: "RelatedCategories.parentId",
-          to: "RelatedCategories.childId",
+      children: {
+        relation: Model.HasManyRelation,
+        modelClass: Category,
+        join: {
+          from: "Category.id",
+          to: "Category.parentId",
         },
-        to: "Category.id",
       },
-    },
-  };
+      posts: {
+        relation: Model.ManyToManyRelation,
+        modelClass: Post,
+        join: {
+          from: "Category.id",
+          through: {
+            // Tag is the join table.
+            from: "Tag.categoryId",
+            to: "Tag.postId",
+          },
+          to: "Post.id",
+        },
+      },
+    };
+  }
 }
