@@ -12,6 +12,7 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import { signIn, signOut, useSession } from "next-auth/react";
 //import MailIcon from "@mui/icons-material/Mail";
 //import NotificationsIcon from "@mui/icons-material/Notifications";
 //import MoreIcon from "@mui/icons-material/MoreVert";
@@ -58,7 +59,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function PrimarySearchAppBar({
   handleClick,
-  signedIn,
   openLeftSideBar,
   setOpenLeftSideBar,
   setOpenRightSideBar,
@@ -70,6 +70,7 @@ export default function PrimarySearchAppBar({
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
+  const { data: session } = useSession();
   /*
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -102,14 +103,16 @@ export default function PrimarySearchAppBar({
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      {signedIn && <MenuItem onClick={handleMenuClose}>Profile</MenuItem>}
-      {signedIn && <MenuItem onClick={handleMenuClose}>My account</MenuItem>}
-      {signedIn === false && (
+      {!!session && <MenuItem onClick={handleMenuClose}>Profile</MenuItem>}
+      {!!session && <MenuItem onClick={handleMenuClose}>My account</MenuItem>}
+      {!!session && <MenuItem onClick={signOut}>Sign out</MenuItem>}
+      {!session && <MenuItem onClick={() => signIn("google")}>Sign in</MenuItem>}
+      {/* {signedIn === false && (
         <MenuItem onClick={() => handleClick("signIn")}>Sign In</MenuItem>
       )}
       {signedIn === false && (
         <MenuItem onClick={handleMenuClose}>Log In</MenuItem>
-      )}
+      )} */}
     </Menu>
   );
 
@@ -156,6 +159,7 @@ export default function PrimarySearchAppBar({
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
+          {!!session && <p>{session.user.name}</p>}
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>

@@ -32,6 +32,7 @@ import createEmotionCache from "../material/createEmotionCache";
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { VerticalAlignBottom } from "@mui/icons-material";
+import { SessionProvider } from "next-auth/react";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -43,7 +44,7 @@ const fabStyle = {
 
 function MainApp({
   Component,
-  pageProps,
+  pageProps: { session, ...pageProps },
   emotionCache = clientSideEmotionCache,
 }) {
   const router = useRouter();
@@ -54,7 +55,7 @@ function MainApp({
   //These two states are used to enable buttons in the menubar and create posts
   const [createPost, setCreatePost] = useState(true);
   //To test signed in functionality change false -> true
-  const [signedIn, setSignedIn] = useState(true);
+  //const [signedIn, setSignedIn] = useState(true);
 
   const [openLeftSideBar, setOpenLeftSideBar] = useState(false);
   const [openRightSideBar, setOpenRightSideBar] = useState(true);
@@ -125,69 +126,70 @@ function MainApp({
   //This is not going to work right now obviously but this is the idea we should go for so they can only edit their own posts
   //const MyPosts = collection.filter(post => post.owner === user.name);
   return (
-    <CacheProvider value={emotionCache}>
-      <Head>
-        <title>MiddReddit</title>
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-      </Head>
-      <CssBaseline />
-      <main className={styles.main}>
-        {/*<Menubar handleClick={handleClickMenubar} />*/}
+    <SessionProvider session={session}>
+      <CacheProvider value={emotionCache}>
+        <Head>
+          <title>MiddReddit</title>
+          <link rel="icon" href="/favicon.ico" />
+          <meta name="viewport" content="initial-scale=1, width=device-width" />
+        </Head>
+        <CssBaseline />
+        <main className={styles.main}>
+          {/*<Menubar handleClick={handleClickMenubar} />*/}
 
-        <PrimarySearchAppBar
-          handleClick={handleClickMenubar}
-          signedIn={signedIn}
-          openLeftSideBar={openLeftSideBar}
-          setOpenLeftSideBar={setOpenLeftSideBar}
-          setOpenRightSideBar={setOpenRightSideBar}
-        />
+          <PrimarySearchAppBar
+            handleClick={handleClickMenubar}
+            // signedIn={signedIn}
+            openLeftSideBar={openLeftSideBar}
+            setOpenLeftSideBar={setOpenLeftSideBar}
+            setOpenRightSideBar={setOpenRightSideBar}
+          />
 
-        <div className={styles.body}>
-          {openLeftSideBar && (
-            <div className={styles.sidebarleft}>
-              {
-                <LeftSidebar
-                  categories={categories}
-                  goToCategory={goToCategory}
-                />
-              }
+          <div className={styles.body}>
+            {openLeftSideBar && (
+              <div className={styles.sidebarleft}>
+                {
+                  <LeftSidebar
+                    categories={categories}
+                    goToCategory={goToCategory}
+                  />
+                }
+              </div>
+            )}
+
+            <div className={styles.mainContentOut}>
+              <div className={styles.mainContent}>
+                <Component {...props} />
+                {createPost && (
+                  <Fab
+                    sx={fabStyle}
+                    color="primary"
+                    name="Create"
+                    onClick={() => {
+                      handleClickMenubar("create");
+                      setCreatePost(false);
+                      setOpenLeftSideBar(false);
+                      setOpenRightSideBar(false);
+                    }}
+                    // disabled={!!session}
+                  >
+                    <AddIcon />
+                  </Fab>
+                )}
+              </div>
             </div>
-          )}
 
-          <div className={styles.mainContentOut}>
-            <div className={styles.mainContent}>
-              <Component {...props} />
-
-              {createPost && (
-                <Fab
-                  sx={fabStyle}
-                  color="primary"
-                  name="Create"
-                  onClick={() => {
-                    handleClickMenubar("create");
-                    setCreatePost(false);
-                    setOpenLeftSideBar(false);
-                    setOpenRightSideBar(false);
-                  }}
-                  disabled={signedIn === false}
-                >
-                  <AddIcon />
-                </Fab>
-              )}
-            </div>
+            {openRightSideBar && (
+              <div className={styles.sidebarright}>
+                <RightSidebar />
+              </div>
+            )}
           </div>
+        </main>
 
-          {openRightSideBar && (
-            <div className={styles.sidebarright}>
-              <RightSidebar />
-            </div>
-          )}
-        </div>
-      </main>
-
-      <Footer>MiddReddit 2023</Footer>
-    </CacheProvider>
+        <Footer>MiddReddit 2023</Footer>
+      </CacheProvider>
+    </SessionProvider>
     //We also want to send goToPost to scrollDisplay and ScrollPosts
     //Right now those props aren't being passed through
   );

@@ -3,7 +3,7 @@ import MultiLevel from "./MultiLevel";
 
 import SingleLevel from "./SingleLevel";
 function hasChildren(item) {
-  const {children} = item;
+  const { children } = item;
 
   if (children === undefined) {
     return false;
