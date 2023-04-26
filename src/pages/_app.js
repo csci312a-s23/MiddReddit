@@ -171,7 +171,7 @@ function MainApp({
                     setOpenLeftSideBar(false);
                     setOpenRightSideBar(false);
                   }}
-                  disabled={!session}
+                  // disabled={!!session}
                 >
                   <AddIcon />
                 </Fab>

@@ -159,7 +159,7 @@ export default function PrimarySearchAppBar({
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
-          {!!session && <p>{session.user.email}</p>}
+          {!!session && <p>{session.user.name}</p>}
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
