@@ -64,5 +64,77 @@
     "name": "ross",
     "description": "ross dining hall",
     "parentId": 2
+  },
+  {
+    "id": 11,
+    "name": "anthro",
+    "description": "Anthropology at middlebury",
+    "parentId": 0
+  },
+  {
+    "id": 12,
+    "name": "music",
+    "description": "music at middlebury",
+    "parentId": 0
+  },
+  {
+    "id": 13,
+    "name": "math",
+    "description": "math at middlebury",
+    "parentId": 0
+  },
+  {
+    "id": 14,
+    "name": "econ",
+    "description": "econ at middlebury",
+    "parentId": 0
+  },
+  {
+    "id": 15,
+    "name": "russian",
+    "description": "russian at Middlebury",
+    "parentId": 0
+  },
+  {
+    "id": 16,
+    "name": "anth 103",
+    "description": "Anthropology 103 at Middlebury",
+    "parentId": 11
+  },
+  {
+    "id": 17,
+    "name": "anth 306",
+    "description": "Anthropology 306 at Middlebury",
+    "parentId": 11
+  },
+  {
+    "id": 18,
+    "name": "musc 101",
+    "description": "Music 101 at Middlebury",
+    "parentId": 12
+  },
+  {
+    "id": 19,
+    "name": "musc 260",
+    "description": "Music 260 at Middlebury",
+    "parentId": 12
+  },
+  {
+    "id": 20,
+    "name": "musc 500",
+    "description": "Music 500 at Middlebury",
+    "parentId": 12
+  },
+  {
+    "id": 21,
+    "name": "math 118",
+    "description": "Math 118 at Middlebury",
+    "parentId": 13
+  },
+  {
+    "id": 22,
+    "name": "math 323",
+    "description": "Math 323 at Middlebury",
+    "parentId": 13
   }
 ]
