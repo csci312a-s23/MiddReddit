@@ -13,7 +13,6 @@ import RightSidebar from "../components/sidebar/rightSideBar";
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { SessionProvider } from "next-auth/react";
 import fetch from "node-fetch";
 import styles from "../styles/MiddReddit.module.css";
 import { styled } from "@mui/material/styles";
@@ -21,13 +20,11 @@ import MenuBar from "@/components/menubar";
 import { ButtonGroup, CssBaseline, Fab } from "@mui/material";
 //import { useScrollTrigger } from "@mui/material";
 import * as React from "react";
-//import { Toolbar } from "@mui/material";
 import { CacheProvider } from "@emotion/react";
 import createEmotionCache from "../material/createEmotionCache";
 import AddIcon from "@mui/icons-material/Add";
 import { SessionProvider, useSession } from "next-auth/react";
 import AddButton from "@/components/AddButton";
-//import EventView from "../components/EventView"
 
 const clientSideEmotionCache = createEmotionCache();
 
