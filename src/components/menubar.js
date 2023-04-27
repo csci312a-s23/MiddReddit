@@ -82,21 +82,12 @@ export default function MenuBar({
     setAnchorEl(event.currentTarget);
   };
   const { data: session } = useSession();
-  /*
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-*/
+  
   const handleMenuClose = () => {
     setAnchorEl(null);
     //handleMobileMenuClose();
   };
-  /*
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-*/
-  //const signedin = false;
+  
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
