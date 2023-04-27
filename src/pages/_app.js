@@ -13,7 +13,6 @@ import RightSidebar from "../components/sidebar/rightSideBar";
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { SessionProvider } from "next-auth/react";
 import fetch from "node-fetch";
 import styles from "../styles/MiddReddit.module.css";
 import { styled } from "@mui/material/styles";
@@ -21,10 +20,11 @@ import MenuBar from "@/components/menubar";
 import { ButtonGroup, CssBaseline, Fab } from "@mui/material";
 //import { useScrollTrigger } from "@mui/material";
 import * as React from "react";
-//import { Toolbar } from "@mui/material";
 import { CacheProvider } from "@emotion/react";
 import createEmotionCache from "../material/createEmotionCache";
 import AddIcon from "@mui/icons-material/Add";
+import { SessionProvider, useSession } from "next-auth/react";
+import AddButton from "@/components/AddButton";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -155,7 +155,15 @@ function MainApp({
             <div className={styles.mainContentOut}>
               <div className={styles.mainContent}>
                 <Component {...props} />
-                {createPost && (
+
+                {createPost && <AddButton 
+                  handleClick={handleClickMenubar}
+                  setCreatePost={setCreatePost}
+                  setOpenLeftSideBar={setOpenLeftSideBar}
+                  setOpenRightSideBar={setOpenRightSideBar}
+                />}
+
+                {/*createPost && (
                   <Fab
                     sx={fabStyle}
                     color="primary"
@@ -170,7 +178,9 @@ function MainApp({
                   >
                     <AddIcon />
                   </Fab>
-                )}
+                  )*/}
+
+
               </div>
             </div>
 
