@@ -2,8 +2,8 @@ import { render } from "@testing-library/react";
 import { testApiHandler } from "next-test-api-route-handler";
 import { knex } from "../../knex/knex.js";
 //pages
-import MainApp from "@/pages/_app";
-import MainPage from "@/pages/index.js";
+import MainApp from "../pages/_app.js";
+import MainPage from "../pages/index.js";
 //endpoints
 import categories_endpoint from "../pages/api/categories.js";
 import posts_endpoint from "../pages/api/posts/index.js";
