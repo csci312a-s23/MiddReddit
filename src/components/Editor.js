@@ -10,13 +10,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import PostShape from "./PostShape";
-import {
-  TextField,
-  Stack,
-  ToggleButton,
-  ToggleButtonGroup,
-} from "@mui/material";
-//import styles from "../styles/MiddReddit.module.css";
+import { TextField, Stack, Autocomplete, Button } from "@mui/material";
 
 export default function Editor({
   post,
@@ -27,18 +21,18 @@ export default function Editor({
 }) {
   const [title, setTitle] = useState(post ? post.title : "");
   const [contents, setContents] = useState(post ? post.contents : "");
+  const [postCategory, setPostCategory] = useState();
 
-  let categoryDisp;
-  if (categories) {
-    const currentCategory = [...categories];
-    categoryDisp = currentCategory.map((category) => (
-      <ToggleButton key={category.id} value={category.name}>
-        {category.name}
-      </ToggleButton>
-    ));
+  if (!categories) {
+    // fetch categories here if solve the refresh -> error
+    // fetch("/api/categories")
+    //   .then((resp) => resp.json())
+    //   .then((data) => {
+    //     categories = data;
+    //   })
   }
 
-  function submitPost(submit) {
+  const submitPost = (submit) => {
     if (!submit) {
       complete();
     } else {
@@ -49,52 +43,72 @@ export default function Editor({
         upvotes: 0,
         posted: new Date().toISOString(),
       });
+      // TODO: inaddition wants to append to the tag table to add new category to post
+      // For post category submission, I think we should create a model for the Tag table.
     }
-  }
-
+  };
   return (
     <div>
-      <TextField
-        required
-        fullWidth
-        margin="normal"
-        id="title"
-        label="Title"
-        value={title}
-        onChange={(event) => setTitle(event.target.value)}
-        error={!title}
-        helperText={!title ? "Add a title for your post" : " "}
-      />
-      <TextField
-        fullWidth
-        multiline
-        rows={10}
-        value={contents}
-        onChange={(event) => setContents(event.target.value)}
-        helperText={!contents ? "What do you want to post about?" : ""}
-        margin="normal"
-        id="contents"
-        label="Contents"
-      />
-      <ToggleButtonGroup color="primary" exclusive size="small">
-        {categoryDisp}
-      </ToggleButtonGroup>
-      {
-        //Need to add onClick so that the button reappears
-      }
-      <Stack spacing={2} direction="row">
-        <button onClick={() => submitPost(true)} disabled={title === ""}>
-          Post
-        </button>
-        <button
-          onClick={() => {
-            submitPost(false);
-            setOpenRightSideBar(true);
-            setCreatePost(true);
+      <Stack spacing={2} sx={{ width: 600 }}>
+        <TextField
+          required
+          fullWidth
+          margin="normal"
+          id="title"
+          label="Title"
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
+          error={!title}
+          helperText={!title ? "Add a title for your post" : " "}
+        />
+        <TextField
+          fullWidth
+          multiline
+          rows={10}
+          value={contents}
+          onChange={(event) => setContents(event.target.value)}
+          helperText={!contents ? "What do you want to post about?" : ""}
+          margin="normal"
+          id="contents"
+          label="Contents"
+        />
+        <Autocomplete
+          disablePortal
+          value={postCategory}
+          id="category-search-bar"
+          options={categories.map((cat) => cat.name)}
+          onChange={(event, newValue) => {
+            setPostCategory(newValue);
           }}
-        >
-          Cancel
-        </button>
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Add a category"
+              InputProps={{
+                ...params.InputProps,
+                type: "search",
+              }}
+            />
+          )}
+        />
+        <Stack spacing={2} direction="row">
+          <Button
+            variant="contained"
+            onClick={() => submitPost(true)}
+            disabled={title === ""}
+          >
+            Post
+          </Button>
+          <Button
+            onClick={() => {
+              submitPost(false);
+              setOpenRightSideBar(true);
+              setCreatePost(true);
+            }}
+          >
+            Cancel
+          </Button>
+        </Stack>
       </Stack>
     </div>
   );
