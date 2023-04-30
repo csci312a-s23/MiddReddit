@@ -6,6 +6,9 @@
 // import { useState } from "react";
 // import PostView from "../components/PostView";
 import ScrollDisplay from "../components/scrollDisplay";
+import EventView from "../components/EventView";
+import events from "../../data/seedEvent.json";
+//import { Events } from "pg";
 //import data from "../../data/seedPost.json";
 // import LoginWidget from "../components/LoginWidget.js";
 import PropTypes from "prop-types";
@@ -30,7 +33,12 @@ export default function MainPage({
           searchBarQuery={searchBarQuery}
         />
       )}
+
+        <EventView
+          events={events}
+        />
     </div>
+    
   );
 }
 

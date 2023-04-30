@@ -25,6 +25,7 @@ import createEmotionCache from "../material/createEmotionCache";
 import AddIcon from "@mui/icons-material/Add";
 import { SessionProvider, useSession } from "next-auth/react";
 import AddButton from "@/components/AddButton";
+import EventView from "../components/EventView"
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -214,6 +215,7 @@ function MainApp({
                 <RightSidebar />
               </div>
             )}
+
           </div>
         </main>
 
