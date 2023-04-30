@@ -25,6 +25,7 @@ import { CacheProvider } from "@emotion/react";
 import createEmotionCache from "../material/createEmotionCache";
 import AddIcon from "@mui/icons-material/Add";
 import { SessionProvider } from "next-auth/react";
+import EventView from "../components/EventView"
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -179,6 +180,7 @@ function MainApp({
                 <RightSidebar />
               </div>
             )}
+
           </div>
         </main>
 
