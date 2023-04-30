@@ -36,9 +36,10 @@ const handler = nc({ onError })
     }
   })
   .post(authenticated, async (req, res) => {
+    // skipping authentication because is returning a 404 error as a
+    // signed in user
     // endpoint to create a new post
     const { ...newPost } = { ...req.body, author: req.user.name };
-    //newPost.author = req.user.id;
     const post = await Post.query().insertAndFetch(newPost).throwIfNotFound();
     res.status(200).json(post);
   });

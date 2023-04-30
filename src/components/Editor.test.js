@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import Editor from "./Editor";
 
 describe("Editor: Editor tests", () => {
-  let post;
+  let post, categories;
   const completeHandler = jest.fn();
 
   beforeEach(() => {
@@ -12,11 +12,14 @@ describe("Editor: Editor tests", () => {
       posted: new Date("2020-06-10T14:54:40Z").toISOString(),
       upvotes: 0,
     };
+    categories = [{ name: "A" }, { name: "B" }];
     completeHandler.mockReset();
   });
 
   test("Editor: Post button is disabled without title", () => {
-    const { container } = render(<Editor complete={completeHandler} />);
+    const { container } = render(
+      <Editor submitPost={completeHandler} categories={categories} />
+    );
 
     const titleInput = container.querySelector("input[type=text]");
     expect(titleInput).toHaveValue("");
