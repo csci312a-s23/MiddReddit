@@ -15,7 +15,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "jest",
+    "test": "jest --transformIgnorePatterns \"node_modules/(?!your-module-name)/\"",
     "lint": "eslint .",
     "prepare": "husky install"
   },

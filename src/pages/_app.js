@@ -16,7 +16,7 @@ import { useRouter } from "next/router";
 import fetch from "node-fetch";
 import styles from "../styles/MiddReddit.module.css";
 import { styled } from "@mui/material/styles";
-import PrimarySearchAppBar from "@/components/menubar1";
+import PrimarySearchAppBar from "@/components/menubar";
 import { ButtonGroup, CssBaseline, Fab } from "@mui/material";
 import { useScrollTrigger } from "@mui/material";
 import * as React from "react";
@@ -24,7 +24,7 @@ import { Toolbar } from "@mui/material";
 import { CacheProvider } from "@emotion/react";
 import createEmotionCache from "../material/createEmotionCache";
 import AddIcon from "@mui/icons-material/Add";
-import { SessionProvider } from "next-auth/react";
+import { SessionProvider, useSession } from "next-auth/react";
 
 const clientSideEmotionCache = createEmotionCache();
 

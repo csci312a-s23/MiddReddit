@@ -102,8 +102,8 @@ export default function Editor({
 
 Editor.propTypes = {
   post: PostShape,
-  categories: PropTypes.array.isRequired,
-  setCreatePost: PropTypes.func.isRequired,
-  setOpenRightSideBar: PropTypes.func.isRequired,
-  complete: PropTypes.func.isRequired,
+  categories: PropTypes.array,
+  setCreatePost: PropTypes.func,
+  setOpenRightSideBar: PropTypes.func,
+  complete: PropTypes.func,
 };

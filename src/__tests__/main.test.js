@@ -1,3 +1,9 @@
+/**
+ * @jest-environment node
+ *
+ * Use Node environment for server-side tests to avoid loading browser libraries
+ */
+
 import { render } from "@testing-library/react";
 import { testApiHandler } from "next-test-api-route-handler";
 import { knex } from "../../knex/knex.js";
@@ -11,6 +17,8 @@ import posts_endpoint from "../pages/api/posts/index.js";
 //data
 import category_data from "../../data/test-data/test-seedCategory.json";
 import post_data from "../../data/test-data/test-seedPost.json";
+import { getServerSession } from "next-auth/next";
+jest.mock("next-auth/next");
 //import tag_data from "../../data/test-data/test-seedTag.json";
 
 //models
@@ -27,7 +35,15 @@ describe("MiddReddit API", () => {
     return knex.migrate.rollback().then(() => knex.migrate.latest());
   });
   beforeEach(() => {
+    getServerSession.mockResolvedValue({
+      user: {
+        id: 1,
+      },
+    });
     return knex.seed.run();
+  });
+  afterEach(() => {
+    getServerSession.mockReset();
   });
   jest.mock("next/router", () => require("next-router-mock"));
 
