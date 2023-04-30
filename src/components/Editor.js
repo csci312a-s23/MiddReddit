@@ -12,16 +12,42 @@ import PropTypes from "prop-types";
 import PostShape from "./PostShape";
 import { TextField, Stack, Autocomplete, Button } from "@mui/material";
 
+const fetchAllCategoryOptions = (categories) => {
+  const categoryFlat = [];
+  const bfs = (nodes) => {
+    let queue = [...nodes];
+    while (true) {
+      if (queue.length === 0) {
+        break;
+      }
+      let nextQueue = [];
+      const len = queue.length;
+      for (let i = 0; i < len; i++) {
+        const cat = queue.shift();
+        categoryFlat.push({
+          label: cat.name,
+          id: cat.id,
+        });
+        if (cat.children) {
+          nextQueue = nextQueue.concat(cat.children);
+        }
+      }
+      queue = nextQueue;
+    }
+  };
+  bfs(categories);
+  return categoryFlat;
+};
 export default function Editor({
   post,
   categories,
-  complete,
+  submitPost,
   setCreatePost,
   setOpenRightSideBar,
 }) {
   const [title, setTitle] = useState(post ? post.title : "");
   const [contents, setContents] = useState(post ? post.contents : "");
-  const [postCategory, setPostCategory] = useState();
+  const [postCategory, setPostCategory] = useState(null);
 
   if (!categories) {
     // fetch categories here if solve the refresh -> error
@@ -32,19 +58,21 @@ export default function Editor({
     //   })
   }
 
-  const submitPost = (submit) => {
+  const complete = (submit) => {
     if (!submit) {
-      complete();
+      submitPost();
     } else {
-      complete({
-        ...post,
+      const newPost = {
         title: title,
         contents: contents,
         upvotes: 0,
         posted: new Date().toISOString(),
-      });
-      // TODO: inaddition wants to append to the tag table to add new category to post
-      // For post category submission, I think we should create a model for the Tag table.
+      };
+      if (postCategory) {
+        submitPost(newPost, postCategory.id);
+      } else {
+        submitPost(newPost);
+      }
     }
   };
   return (
@@ -76,7 +104,7 @@ export default function Editor({
           disablePortal
           value={postCategory}
           id="category-search-bar"
-          options={categories.map((cat) => cat.name)}
+          options={fetchAllCategoryOptions(categories)}
           onChange={(event, newValue) => {
             setPostCategory(newValue);
           }}
@@ -94,14 +122,14 @@ export default function Editor({
         <Stack spacing={2} direction="row">
           <Button
             variant="contained"
-            onClick={() => submitPost(true)}
+            onClick={() => complete(true)}
             disabled={title === ""}
           >
             Post
           </Button>
           <Button
             onClick={() => {
-              submitPost(false);
+              complete(false);
               setOpenRightSideBar(true);
               setCreatePost(true);
             }}
@@ -116,8 +144,8 @@ export default function Editor({
 
 Editor.propTypes = {
   post: PostShape,
+  submitPost: PropTypes.func.isRequired,
   categories: PropTypes.array.isRequired,
   setCreatePost: PropTypes.func.isRequired,
   setOpenRightSideBar: PropTypes.func.isRequired,
-  complete: PropTypes.func.isRequired,
 };

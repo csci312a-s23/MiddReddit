@@ -9,7 +9,31 @@ export default function PostCreator({
   setCreatePost,
 }) {
   const router = useRouter();
-  const complete = async (post) => {
+
+  const submitTag = async (postId, categoryId) => {
+    if (!postId || !categoryId) {
+      return;
+    }
+    const newTag = {
+      postId: postId,
+      categoryId: categoryId,
+    };
+    const params = {
+      method: "POST",
+      body: JSON.stringify(newTag),
+      headers: new Headers({
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      }),
+    };
+    const response = await fetch("/api/tag", params);
+    if (!response.ok) {
+      // updated tag table
+      console.error("tag update failed");
+    }
+  };
+
+  const submitPost = async (post, categoryId) => {
     if (post) {
       const params = {
         method: "POST",
@@ -22,6 +46,9 @@ export default function PostCreator({
       const response = await fetch("/api/posts", params);
       if (response.ok) {
         const newPost = await response.json();
+        if (categoryId) {
+          await submitTag(newPost.id, categoryId);
+        }
         goToPost(newPost);
       }
     } else {
@@ -32,7 +59,7 @@ export default function PostCreator({
   return (
     <main>
       <Editor
-        complete={complete}
+        submitPost={submitPost}
         categories={categories}
         setCreatePost={setCreatePost}
         setOpenRightSideBar={setOpenRightSideBar}

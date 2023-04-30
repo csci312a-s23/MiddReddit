@@ -18,7 +18,7 @@ describe("Editor: Editor tests", () => {
 
   test("Editor: Post button is disabled without title", () => {
     const { container } = render(
-      <Editor complete={completeHandler} categories={categories} />
+      <Editor submitPost={completeHandler} categories={categories} />
     );
 
     const titleInput = container.querySelector("input[type=text]");

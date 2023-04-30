@@ -24,6 +24,5 @@ const handler = nc({ onError }).get(async (req, res) => {
   // }
   const categories = await query;
   res.status(200).json(categories);
-  //res.status(500).end("Endpoint not yet implemented");
 });
 export default handler;
