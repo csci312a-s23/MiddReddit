@@ -1,4 +1,6 @@
 /* 
+
+  index.js 
     Our main page with its corresponding components.
 */
 
@@ -8,6 +10,8 @@
 import ScrollDisplay from "../../../components/scrollDisplay";
 //import data from "../../data/seedPost.json";
 import { useRouter } from "next/router";
+import PropTypes from "prop-types";
+import PostShape from "../../../components/PostShape";
 
 export default function MainPageCategory({
   goToPost,
@@ -33,3 +37,11 @@ export default function MainPageCategory({
     </div>
   );
 }
+
+MainPageCategory.propTypes = {
+  goToPost: PropTypes.func,
+  setCurrentPost: PropTypes.func,
+  currentPost: PostShape,
+  searchQuery: PropTypes.array,
+  setCategoryQuery: PropTypes.func,
+};

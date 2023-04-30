@@ -16,7 +16,7 @@ import { useRouter } from "next/router";
 import fetch from "node-fetch";
 import styles from "../styles/MiddReddit.module.css";
 import { styled } from "@mui/material/styles";
-import PrimarySearchAppBar from "@/components/menubar1";
+import MenuBar from "@/components/menubar";
 import { ButtonGroup, CssBaseline, Fab } from "@mui/material";
 import { useScrollTrigger } from "@mui/material";
 import * as React from "react";
@@ -132,7 +132,7 @@ function MainApp({
         <main className={styles.main}>
           {/*<Menubar handleClick={handleClickMenubar} />*/}
 
-          <PrimarySearchAppBar
+          <MenuBar
             handleClick={handleClickMenubar}
             // signedIn={signedIn}
             openLeftSideBar={openLeftSideBar}
