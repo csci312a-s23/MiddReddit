@@ -198,7 +198,7 @@ export default function MenuBar({
 
 MenuBar.propTypes = {
   handleClick: PropTypes.func,
-  openLeftSideBar: PropTypes.func,
+  openLeftSideBar: PropTypes.bool,
   setOpenLeftSideBar: PropTypes.func,
   setOpenRightSideBar: PropTypes.func,
 };
