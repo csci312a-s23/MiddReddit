@@ -24,7 +24,7 @@ import { Toolbar } from "@mui/material";
 import { CacheProvider } from "@emotion/react";
 import createEmotionCache from "../material/createEmotionCache";
 import AddIcon from "@mui/icons-material/Add";
-import { SessionProvider } from "next-auth/react";
+import { SessionProvider, useSession } from "next-auth/react";
 
 const clientSideEmotionCache = createEmotionCache();
 
