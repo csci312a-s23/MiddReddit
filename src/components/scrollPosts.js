@@ -35,12 +35,6 @@ export default function ScrollPost({ post, goToPost, setCurrentPost }) {
           />
         </div>
 
-        {/*
-        <div className={styles.float}>
-          {{"\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0"}
-        </div>
-        */}
-
         <div
           className={styles.body}
           onClick={() => {

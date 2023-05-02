@@ -156,31 +156,14 @@ function MainApp({
               <div className={styles.mainContent}>
                 <Component {...props} />
 
-                {createPost && <AddButton 
-                  handleClick={handleClickMenubar}
-                  setCreatePost={setCreatePost}
-                  setOpenLeftSideBar={setOpenLeftSideBar}
-                  setOpenRightSideBar={setOpenRightSideBar}
-                />}
-
-                {/*createPost && (
-                  <Fab
-                    sx={fabStyle}
-                    color="primary"
-                    name="Create"
-                    onClick={() => {
-                      handleClickMenubar("create");
-                      setCreatePost(false);
-                      setOpenLeftSideBar(false);
-                      setOpenRightSideBar(false);
-                    }}
-                    // disabled={!!session}
-                  >
-                    <AddIcon />
-                  </Fab>
-                  )*/}
-
-
+                {createPost && (
+                  <AddButton
+                    handleClick={handleClickMenubar}
+                    setCreatePost={setCreatePost}
+                    setOpenLeftSideBar={setOpenLeftSideBar}
+                    setOpenRightSideBar={setOpenRightSideBar}
+                  />
+                )}
               </div>
             </div>
 
