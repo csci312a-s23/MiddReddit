@@ -1,48 +1,61 @@
 import { render } from "@testing-library/react";
-//import { testApiHandler } from "next-test-api-route-handler";
-//import { knex } from "../../knex/knex.js";
-//pages
-import MainApp from "../pages/_app.js";
-import MainPage from "../pages/index.js";
-//endpoints
-//import specific_post_endpoint from "../pages/api/posts/[id]/index.js";
-//data
-import { getServerSession } from "next-auth/next";
-jest.mock("next-auth/next");
-
-//import tag_data from "../../data/test-data/test-seedTag.json";
-
-//models
-// import Post from "../../models/Post.js";
-// import Category from "../../models/Category.js";
-/*
+import { knex } from "../../knex/knex.js";
 import mockRouter from "next-router-mock";
 import { createDynamicRouteParser } from "next-router-mock/dynamic-routes";
-*/
+
+// components
+import MainApp from "../pages/_app.js";
+import MainPage from "../pages/index.js";
+
 // Replace the router with the mock
+jest.mock("next/router", () => require("next-router-mock"));
 
-describe("MiddReddit API", () => {
+// Tell the mock router about the pages we will use (so we can use dynamic routes)
+mockRouter.useParser(
+  createDynamicRouteParser([
+    // These paths should match those found in the `/pages` folder:
+    "/category/[catName]",
+    "/posts/[postID]",
+    "/posts/create",
+    "/index",
+  ])
+);
+
+// We wrap the actual fetch implementation during testing so that we can introduce
+// the absolute URL (needed on the server but not on the browser)
+const originalFetch = global.fetch;
+global.fetch = (url, ...params) => {
+  if (typeof url === "string" && url.startsWith("/")) {
+    return originalFetch(`http://0.0.0.0:3000${url}`, ...params);
+  }
+  return originalFetch(url, ...params);
+};
+
+describe("End-to-end testing", () => {
   beforeAll(() => {
-    //return knex.migrate.rollback().then(() => knex.migrate.latest());
+    // Ensure test database is initialized before an tests
+    return knex.migrate.rollback().then(() => knex.migrate.latest());
   });
-  beforeEach(() => {
-    getServerSession.mockResolvedValue({
-      user: {
-        name: "Jeff",
-        email: "Jeff@gmail.com",
-        id: 1,
-      },
-    });
-    //return knex.seed.run();
-  });
-  afterEach(() => {
-    getServerSession.mockReset();
-  });
-  jest.mock("next/router", () => require("next-router-mock"));
 
-  describe("End-to-end testing", () => {
-    test.skip("Render index.js component", () => {
-      render(<MainApp Component={MainPage} />);
+  beforeEach(() => {
+    mockRouter.setCurrentUrl("/");
+    // Reset contents of the test database
+    return knex.seed.run();
+  });
+
+  describe.skip("Testing MiddReddit end-to-end behavior", () => {
+    test("Render index.js component", () => {
+      const mockSession = {
+        expires: "1",
+        user: { email: "a", name: "Delta", image: "c" },
+      };
+      const mockUseSession = jest.fn();
+
+      mockUseSession.mockReturnValueOnce([mockSession, false]);
+
+      const pageProps = { mockSession };
+
+      render(<MainApp Component={MainPage} pageProps={pageProps} />);
     });
   });
 });

@@ -146,6 +146,6 @@ Editor.propTypes = {
   post: PostShape,
   submitPost: PropTypes.func.isRequired,
   categories: PropTypes.array.isRequired,
-  setCreatePost: PropTypes.func.isRequired,
-  setOpenRightSideBar: PropTypes.func.isRequired,
+  setCreatePost: PropTypes.func,
+  setOpenRightSideBar: PropTypes.func,
 };
