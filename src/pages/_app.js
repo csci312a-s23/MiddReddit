@@ -52,7 +52,7 @@ function MainApp({
   const [openRightSideBar, setOpenRightSideBar] = useState(true);
 
   const [categoryQuery, setCategoryQuery] = useState(); //will use for searching by category
-  //const id = router.query.id;
+
   useEffect(() => {
     //handles if we are within a category or not, gets rid of if statement
     const searchQuery = categoryQuery ? `?category=${categoryQuery}` : "";
