@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import Editor from "../../../components/Editor";
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 import PostShape from "../../../components/PostShape";
 
 export default function PostEditor({ currentPost }) {
@@ -34,6 +34,5 @@ export default function PostEditor({ currentPost }) {
 }
 
 PostEditor.propTypes = {
-  setCurrentPost: PropTypes.func.isRequired,
   currentPost: PostShape,
 };

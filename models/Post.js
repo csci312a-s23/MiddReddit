@@ -1,9 +1,8 @@
 /* eslint-disable camelcase */
-// import { Model } from "objection";
 import BaseModel from "./BaseModel";
 import { Model } from "objection";
 import Category from "./Category";
-import User from "./User"
+import User from "./User";
 export default class Post extends BaseModel {
   // Table name is the only required property.
   static get tableName() {
@@ -48,9 +47,9 @@ export default class Post extends BaseModel {
         modelClass: User,
         join: {
           from: "Post.madeBy",
-          to: "User.id"
-        }
-      }
+          to: "User.id",
+        },
+      },
     };
   }
 }

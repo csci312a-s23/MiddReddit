@@ -3,7 +3,10 @@
 
   Users can view and comment on a post, editing it if they are the author.
 */
+
 /* eslint-disable quotes */
+import PropTypes from "prop-types";
+import PostShape from "./PostShape";
 
 export default function PostView({ post, allowEdit }) {
   if (allowEdit) {
@@ -28,3 +31,8 @@ export default function PostView({ post, allowEdit }) {
     </div>
   );
 }
+
+PostView.propTypes = {
+  post: PostShape,
+  allowEdit: PropTypes.bool.isRequired,
+};

@@ -1,3 +1,11 @@
+/*
+  Menubar.js
+
+  Displays the hamburger to pull up side bar, the title of the website, the search bar
+  and an icon for users to either sign in or drop down profile options.
+*/
+
+//MUI Imports
 import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
@@ -16,6 +24,9 @@ import { signIn, signOut, useSession } from "next-auth/react";
 //import MailIcon from "@mui/icons-material/Mail";
 //import NotificationsIcon from "@mui/icons-material/Notifications";
 //import MoreIcon from "@mui/icons-material/MoreVert";
+
+//Other imports
+import PropTypes from "prop-types";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -57,7 +68,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar({
+export default function MenuBar({
   handleClick,
   openLeftSideBar,
   setOpenLeftSideBar,
@@ -184,3 +195,10 @@ export default function PrimarySearchAppBar({
     </Box>
   );
 }
+
+MenuBar.propTypes = {
+  handleClick: PropTypes.func,
+  openLeftSideBar: PropTypes.bool,
+  setOpenLeftSideBar: PropTypes.func,
+  setOpenRightSideBar: PropTypes.func,
+};
