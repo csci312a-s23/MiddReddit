@@ -19,6 +19,7 @@ export default function MainPageCategory({
   currentPost,
   searchQuery,
   setCategoryQuery,
+  searchBarQuery,
 }) {
   const router = useRouter();
   const { catName } = router.query;
@@ -32,6 +33,7 @@ export default function MainPageCategory({
           goToPost={goToPost}
           setCurrentPost={setCurrentPost}
           currentPost={currentPost}
+          searchBarQuery={searchBarQuery}
         />
       )}
     </div>

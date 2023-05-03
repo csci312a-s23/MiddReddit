@@ -28,12 +28,6 @@ import AddButton from "@/components/AddButton";
 
 const clientSideEmotionCache = createEmotionCache();
 
-const fabStyle = {
-  position: "absolute",
-  bottom: "5%",
-  right: "5%",
-};
-
 function MainApp({
   Component,
   pageProps: { session, ...pageProps },
@@ -52,6 +46,8 @@ function MainApp({
   const [openRightSideBar, setOpenRightSideBar] = useState(true);
 
   const [categoryQuery, setCategoryQuery] = useState(); //will use for searching by category
+
+  const [searchBarQuery, setSearchBarQuery] = useState("");
 
   useEffect(() => {
     //handles if we are within a category or not, gets rid of if statement
@@ -112,6 +108,7 @@ function MainApp({
     currentPost,
     searchQuery,
     categories,
+    searchBarQuery,
     goToCategory,
     setOpenRightSideBar,
     setCreatePost,
@@ -138,6 +135,7 @@ function MainApp({
             openLeftSideBar={openLeftSideBar}
             setOpenLeftSideBar={setOpenLeftSideBar}
             setOpenRightSideBar={setOpenRightSideBar}
+            setSearchBarQuery={setSearchBarQuery}
           />
 
           <div className={styles.body}>
