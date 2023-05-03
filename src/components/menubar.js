@@ -73,6 +73,7 @@ export default function MenuBar({
   openLeftSideBar,
   setOpenLeftSideBar,
   setOpenRightSideBar,
+  setSearchBarQuery,
 }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -82,12 +83,12 @@ export default function MenuBar({
     setAnchorEl(event.currentTarget);
   };
   const { data: session } = useSession();
-  
+
   const handleMenuClose = () => {
     setAnchorEl(null);
     //handleMobileMenuClose();
   };
-  
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -148,6 +149,7 @@ export default function MenuBar({
             component="div"
             sx={{ display: { xs: "none", sm: "block" } }}
             onClick={() => {
+              setSearchBarQuery("");
               handleClick("mainPage");
               setOpenRightSideBar(true);
             }}
@@ -161,6 +163,18 @@ export default function MenuBar({
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
+              onKeyDown={(event) => {
+                //console.log(event.key);
+                //console.log(event.target.value);
+                if (event.key === "Enter") {
+                  setSearchBarQuery(event.target.value);
+                }
+              }}
+
+              /*onChange={(event) => {
+                setSearchFor(event.target.value);
+                setSearchBarQuery(event.target.value);
+              }}*/
             />
           </Search>
           {!!session && <p>{session.user.name}</p>}

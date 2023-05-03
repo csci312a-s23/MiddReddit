@@ -10,6 +10,7 @@ export default function CategorySidebar({ categories, goToCategory }) {
   const [currentCategory, setCurrentCategory] = useState();
   const router = useRouter();
   const { catName } = router.query;
+
   useEffect(() => {
     const currentCategoryFiltered = categories.filter(
       (category) => category.name === catName
