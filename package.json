@@ -26,6 +26,7 @@
     "@emotion/styled": "^11.9.3",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.12.1",
+    "@tomfreudenberg/next-auth-mock": "^0.5.6",
     "ajv-formats": "^2.1.1",
     "knex": "^2.4.2",
     "next": "13.2.4",

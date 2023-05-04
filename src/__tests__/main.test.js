@@ -7,8 +7,12 @@ import MainPage from "../pages/index.js";
 //endpoints
 //import specific_post_endpoint from "../pages/api/posts/[id]/index.js";
 //data
-import { getServerSession } from "next-auth/next";
-jest.mock("next-auth/next");
+import { useSession } from "next-auth/react";
+jest.mock("next-auth/react");
+import { withMockAuth } from "@tomfreudenberg/next-auth-mock/jest";
+
+//import client, { Session } from "next-auth/next";
+//jest.mock("next-auth/client");
 
 //import tag_data from "../../data/test-data/test-seedTag.json";
 
@@ -26,23 +30,37 @@ describe("MiddReddit API", () => {
     //return knex.migrate.rollback().then(() => knex.migrate.latest());
   });
   beforeEach(() => {
-    getServerSession.mockResolvedValue({
-      user: {
-        name: "Jeff",
-        email: "Jeff@gmail.com",
-        id: 1,
+    /*jest.spyOn(useSession).mockResolvedValue({
+      data: [
+        {
+          user: "jeff",
+          id: 1,
+          email: "email"
+        }
+      ]
+    }); */
+    //const { data : session, status } = useSession();
+    useSession.mockResolvedValue({
+      data: {
+        user: {
+          id: 1,
+          name: "Jeff",
+          email: "jeff@gmail.com",
+        },
+        expires: 1,
       },
+      status: "authenticated",
     });
-    //return knex.seed.run();
   });
-  afterEach(() => {
-    getServerSession.mockReset();
-  });
+
+  //return knex.seed.run();
+
+  afterEach(() => {});
   jest.mock("next/router", () => require("next-router-mock"));
 
   describe("End-to-end testing", () => {
-    test.skip("Render index.js component", () => {
-      render(<MainApp Component={MainPage} />);
+    test("Render index.js component", () => {
+      render(withMockAuth(<MainApp Component={MainPage} />, "userAuthed"));
     });
   });
 });
