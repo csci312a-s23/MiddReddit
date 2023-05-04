@@ -1,7 +1,7 @@
 import PostView from "../../../components/PostView";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-
+import CommentView from "@/components/comments/CommentView";
 export default function Post({}) {
   const [postToDisplay, setPostToDisplay] = useState();
   const router = useRouter();
@@ -31,6 +31,7 @@ export default function Post({}) {
   return (
     <>
       {postToDisplay && <PostView allowEdit={allowEdit} post={postToDisplay} />}
+      {postToDisplay && <CommentView comments={postToDisplay.comments} />}
     </>
   );
 }
