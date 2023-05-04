@@ -13,7 +13,7 @@ const handler = nc({ onError })
     try {
       const post = await Post.query()
         //.withGraphFetched("category") //this is the related thing that breaks it,
-        .withGraphFetched("category")
+        .withGraphJoined("[category, comments.[parent,children.^3,author]]")
         .findById(req.query.id)
         .throwIfNotFound();
       res.status(200).json(post);
