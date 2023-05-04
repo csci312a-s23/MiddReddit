@@ -21,6 +21,7 @@ export default function PostView({ post, allowEdit }) {
   if (post.category.length > 0) {
     category = post.category[0].name;
   }
+  console.log(post.comments);
   return (
     <div>
       <h2>{post.title}</h2>
