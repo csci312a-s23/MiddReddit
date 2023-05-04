@@ -35,7 +35,9 @@ const fetchAllCategoryOptions = (categories) => {
       queue = nextQueue;
     }
   };
-  bfs(categories);
+  if (categories) {
+    bfs(categories);
+  }
   return categoryFlat;
 };
 export default function Editor({
@@ -49,14 +51,14 @@ export default function Editor({
   const [contents, setContents] = useState(post ? post.contents : "");
   const [postCategory, setPostCategory] = useState(null);
 
-  if (!categories) {
-    // fetch categories here if solve the refresh -> error
-    // fetch("/api/categories")
-    //   .then((resp) => resp.json())
-    //   .then((data) => {
-    //     categories = data;
-    //   })
-  }
+  // if (!categories) {
+  //   fetch categories here if solve the refresh -> error
+  //   fetch("/api/categories")
+  //     .then((resp) => resp.json())
+  //     .then((data) => {
+  //       categories = data;
+  //     })
+  // }
 
   const complete = (submit) => {
     if (!submit) {

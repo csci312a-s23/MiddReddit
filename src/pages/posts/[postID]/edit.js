@@ -30,7 +30,7 @@ export default function PostEditor({ currentPost }) {
   //     }
   //   }
 
-  return <Editor article={currentPost} complete={complete} />;
+  return <Editor post={currentPost} complete={complete} />;
 }
 
 PostEditor.propTypes = {
