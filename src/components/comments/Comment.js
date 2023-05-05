@@ -5,8 +5,10 @@ export default function Comment({ comment }) {
 
   return (
     <>
-      <p>{comment.parent}</p>
-      <p> {dayjs(comment.posted).fromNow()}</p>
+      <p>
+        {comment.author.name} &emsp; <em>{dayjs(comment.posted).fromNow()}</em>{" "}
+      </p>
+      <p> </p>
       <p>{comment.contents}</p>
     </>
   );
