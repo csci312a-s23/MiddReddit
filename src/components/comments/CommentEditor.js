@@ -1,11 +1,20 @@
 import { useState } from "react";
 import { TextField, Stack, Button } from "@mui/material";
 import { useRouter } from "next/router";
-export default function CommentEditor({ parentComment, submitComment }) {
+export default function CommentEditor({
+  parentComment,
+  submitComment,
+  setEditorVisible,
+}) {
   const [contents, setContents] = useState();
+  const collapseEditor = () => {
+    if (setEditorVisible) {
+      setEditorVisible(false);
+    }
+  }; //need a wrapper function because sometimes we call editor without collapse option
   const router = useRouter();
   const { postID } = router.query;
-  const parentID = parentComment ? parentComment.parentId : null;
+  const parentID = parentComment ? parentComment.id : null;
   const complete = (submit) => {
     if (!submit) {
       submitComment();
@@ -19,7 +28,8 @@ export default function CommentEditor({ parentComment, submitComment }) {
       if (0 === 0) {
         //if postCategory
         submitComment(newComment, 0);
-        setContents();
+        setContents("");
+        collapseEditor();
       } else {
         submitComment(newPost);
       }
@@ -48,6 +58,7 @@ export default function CommentEditor({ parentComment, submitComment }) {
         <Button
           onClick={() => {
             complete(false);
+            collapseEditor();
             //setOpenRightSideBar(true);
             //setCreatePost(true);
           }}
