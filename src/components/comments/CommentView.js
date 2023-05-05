@@ -2,7 +2,7 @@ import Comment from "./Comment";
 import CommentEditor from "./CommentEditor";
 export default function CommentView({ comments, submitComment }) {
   const commentComponents = comments.map((comment) => (
-    <Comment key={comment.id} comment={comment} />
+    <Comment key={comment.id} comment={comment} submitComment={submitComment} />
   ));
 
   return (
