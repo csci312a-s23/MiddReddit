@@ -1,5 +1,5 @@
 //import PostView from "./PostView";
-import styles from "../styles/ScrollPosts.module.css";
+//import styles from "../styles/ScrollPosts.module.css";
 import PostShape from "./PostShape";
 import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
@@ -8,14 +8,15 @@ import UpVoteButtons from "./UpVoteButtons";
 import EventShape from "./EventShape";
 import { useState } from "react";
 //import { Typography } from "@mui/material";
-//import { Box } from "@mui/material";
+import { Box } from "@mui/material";
+import styles from "../styles/Events.module.css";
 /* eslint-disable quotes */
 
 //https://stackoverflow.com/questions/75354703/show-specific-item-when-button-clicked-from-list-of-items-in-react
 
 const NoBulletList = styled("ul")(() => ({
-  listStyle: "none",
-  paddingLeft: 0,
+  listStyle: "square",
+  paddingLeft: 10,
 }));
 
 export default function EventView({ events }) {
@@ -29,41 +30,51 @@ export default function EventView({ events }) {
 
     const eventdetails = sortedEvents.map((event) => (
         <li
-            data-testid="posted"
+            data-testid="details"
+            onClick={() => HandlerFunc(event, showMore)}
             key={event.id}
         >
             {event.details}
         </li>
     ))
 
-    const eventtitles = sortedEvents.map((event) => (
+    const eventtitles = sortedEvents.map((event, showMore) => ( //Need to be rendering the title and render the conditional in the same loop that is generating the titles.
         <li
             data-testid="title"
             onClick={() => HandlerFunc(event, showMore)}
             key={event.id}
         >
             {event.title}
+            
         </li>
     ))
 
     const HandlerFunc = (event, showMore) => {
-        let oldevent = event;
         setCurrentEvent(event)
 
-        if (currentEvent === oldevent)
-        {
-            setShowMore(!showMore)
-        }
+        setShowMore(!showMore)
         //return {...showMore ? console.log(currentEvent.details) : console.log("GOODBYE")}
       };
     //console.log(showMore)
 
+    const FinalReturnArray = []
+    const PrintEvents = (eventtitles, showMore) => {
+        for (let i = 0; i < eventtitles.length; i++)
+        {
+            FinalReturnArray[i] = [<h5>{eventtitles[i]}</h5>,
+            showMore ? eventdetails[i] : null]
+        }
+        return FinalReturnArray;
+    }
+
   return (
     <>
+    <Box>
+        <h1>Upcoming Events: </h1>    
         <NoBulletList>
-            {eventtitles}
-            {showMore ? currentEvent.details : null}
+            {PrintEvents(eventtitles, showMore)}
         </NoBulletList>
+    </Box>
     </>
 
      //{/* <div>
@@ -113,5 +124,5 @@ export default function EventView({ events }) {
 }
 
 EventView.propTypes = {
-  event: EventShape,
+  event: EventShape.isRequired,
 };
