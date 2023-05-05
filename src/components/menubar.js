@@ -3,6 +3,17 @@
 
   Displays the hamburger to pull up side bar, the title of the website, the search bar
   and an icon for users to either sign in or drop down profile options.
+
+
+
+  Need to work on:
+  - The chip stays in search bar until separate category is hit or the chip is exited
+    out of using the x button
+  - Dropdown contains the right search values
+  - Limit height of Dropdown
+  - onClick of dropdown we go to category (this will be tricky, deal with managing autocomplete)
+  - If category is hit in leftsidebar create a chip is search bar
+
 */
 
 //MUI Imports
@@ -24,9 +35,11 @@ import { signIn, signOut, useSession } from "next-auth/react";
 //import MailIcon from "@mui/icons-material/Mail";
 //import NotificationsIcon from "@mui/icons-material/Notifications";
 //import MoreIcon from "@mui/icons-material/MoreVert";
+import Autocomplete from "@mui/material/Autocomplete";
 
 //Other imports
 import PropTypes from "prop-types";
+import { Chip } from "@mui/material";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -59,11 +72,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    //paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("md")]: {
-      width: "20ch",
+      width: "40ch",
     },
   },
 }));
@@ -76,6 +89,7 @@ export default function MenuBar({
   setSearchBarQuery,
 }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [searchOpen, setSearchOpen] = React.useState(false);
 
   const isMenuOpen = Boolean(anchorEl);
 
@@ -121,6 +135,16 @@ export default function MenuBar({
     </Menu>
   );
 
+  const top100Films = [
+    { title: "The Shawshank Redemption", year: 1994 },
+    { title: "The Godfather", year: 1972 },
+    { title: "The Godfather: Part II", year: 1974 },
+    { title: "The Dark Knight", year: 2008 },
+    { title: "12 Angry Men", year: 1957 },
+    { title: "Schindler's List", year: 1993 },
+    { title: "Pulp Fiction", year: 1994 },
+  ];
+
   return (
     <Box
       sx={{ flexGrow: 1, width: 1, position: "relative", maxHeight: "65px" }}
@@ -160,7 +184,7 @@ export default function MenuBar({
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase
+            {/*<StyledInputBase
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
               onKeyDown={(event) => {
@@ -171,12 +195,51 @@ export default function MenuBar({
                 }
               }}
 
-              /*onChange={(event) => {
-                setSearchFor(event.target.value);
-                setSearchBarQuery(event.target.value);
-              }}*/
+            /> */}
+            <Autocomplete
+              open={searchOpen}
+              onOpen={() => setSearchOpen(true)}
+              onClose={() => setSearchOpen(false)}
+              style={{ width: 600, maxHeight: 39 }}
+              multiple
+              limitTags={1}
+              id="tag-outlined"
+              options={top100Films}
+              getOptionLabel={(option) => option.title}
+              //defaultValue={[top100Films[1]]}
+              //filterSelectedOptions
+
+              //Need to work to make the tags stay after search
+              renderTags={(tagValue, getTagProps) => (
+                <Chip
+                  key={tagValue[0].title}
+                  label={tagValue[0].title}
+                  {...getTagProps(0)}
+                />
+              )}
+              renderInput={(params) => {
+                const { InputLabelProps, InputProps, ...rest } = params;
+                return (
+                  <StyledInputBase
+                    {...params.InputProps}
+                    {...rest}
+                    style={{ paddingLeft: 50 }}
+                    placeholder="Search…"
+                    onKeyDown={(event) => {
+                      //console.log(event.key);
+                      //console.log(event.target.value);
+                      if (event.key === "Enter") {
+                        setSearchBarQuery(event.target.value);
+                        setSearchOpen(false);
+                      }
+                    }}
+                  />
+                );
+              }}
             />
           </Search>
+
+          {/*Change location of name*/}
           {!!session && <p>{session.user.name}</p>}
 
           <Box sx={{ flexGrow: 1 }} />
