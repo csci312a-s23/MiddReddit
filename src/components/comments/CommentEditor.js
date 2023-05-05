@@ -10,6 +10,8 @@ export default function CommentEditor({
   const collapseEditor = () => {
     if (setEditorVisible) {
       setEditorVisible(false);
+    } else {
+      setContents("");
     }
   }; //need a wrapper function because sometimes we call editor without collapse option
   const router = useRouter();
