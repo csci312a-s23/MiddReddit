@@ -18,14 +18,14 @@ import styles from "../styles/MiddReddit.module.css";
 import { styled } from "@mui/material/styles";
 import PrimarySearchAppBar from "@/components/menubar1";
 import { ButtonGroup, CssBaseline, Fab } from "@mui/material";
-import { useScrollTrigger } from "@mui/material";
+//import { useScrollTrigger } from "@mui/material";
 import * as React from "react";
-import { Toolbar } from "@mui/material";
+//import { Toolbar } from "@mui/material";
 import { CacheProvider } from "@emotion/react";
 import createEmotionCache from "../material/createEmotionCache";
 import AddIcon from "@mui/icons-material/Add";
 import { SessionProvider } from "next-auth/react";
-import EventView from "../components/EventView"
+//import EventView from "../components/EventView"
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -180,7 +180,6 @@ function MainApp({
                 <RightSidebar />
               </div>
             )}
-
           </div>
         </main>
 
