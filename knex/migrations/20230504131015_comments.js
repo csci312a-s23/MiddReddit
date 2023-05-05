@@ -8,7 +8,7 @@ exports.up = function (knex) {
     table.integer("authorId");
     table.foreign("authorId").references("User.id").onDelete("SET NULL");
     table.text("contents");
-    table.integer("parentID");
+    table.integer("parentId");
     table.integer("postId");
     table.string("posted").notNullable();
     //table.specificType("tag", "INT[]"); //tags to a specific category

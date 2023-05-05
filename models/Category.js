@@ -21,7 +21,6 @@ export default class Category extends BaseModel {
         id: { type: "integer" },
         name: { type: "string" },
         description: { type: "text" },
-        posts2: { type: "INT[]" },
       },
     };
   }

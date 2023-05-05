@@ -3,7 +3,7 @@
 import { Model } from "objection";
 import BaseModel from "./BaseModel";
 import User from "./User";
-//import Post from "./Post";
+import Post from "./Post";
 
 export default class Comment extends BaseModel {
   // Table name is the only required property.
@@ -21,18 +21,20 @@ export default class Comment extends BaseModel {
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["name"],
+      required: ["contents"],
 
       properties: {
         id: { type: "integer" },
         authorId: { type: "integer" },
-        contents: { type: "text" },
-        posted: { type: "text" },
+        postId: { type: "integer" },
+        parentId: { type: ["integer", "null"] },
+        contents: { type: "string" },
+        posted: { type: "string" },
       },
     };
   }
   static get relationMappings() {
-    const Post = require("./Post");
+    //const Post = require("./Post");
 
     return {
       parent: {
