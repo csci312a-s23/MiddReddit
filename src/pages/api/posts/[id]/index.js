@@ -10,7 +10,7 @@ import Post from "../../../../../models/Post";
 // will be invoked if the handler code throws an exception.
 
 function r(expr, depth) {
-  return expr.replace("?", depth > 0 ? `.${  r(expr, depth - 1)}` : "");
+  return expr.replace("?", depth > 0 ? `.${r(expr, depth - 1)}` : "");
 }
 const handler = nc({ onError })
   .get(async (req, res) => {
@@ -20,8 +20,6 @@ const handler = nc({ onError })
         .withGraphJoined(
           `[category, comments.${r("[children?, author, post,parent]", 4)}]`
         )
-        //`[category, comments.${r('[children?, author]', 0)}, author,post]]`//          "[category, comments.[parent,children.^3, author,post]]"
-        //`[category, comments.${r('[children?, author]', 0)}, author,post]]`//
 
         .modifyGraph("comments", (builder) => {
           builder.where("parentId", null);
