@@ -12,16 +12,27 @@ const handler = nc({ onError })
   .get(async (req, res) => {
     try {
       const post = await Post.query()
-        //.withGraphFetched("category") //this is the related thing that breaks it,
-        .withGraphJoined(
-          "[category, comments.[parent,children.^3,author,post]]"
-        )
         .findById(req.query.id)
+        .withGraphJoined(
+          "[category, comments.[parent,children.^3, author,post]]"
+        )
+        .modifyGraph("comments", (builder) => {
+          builder.where("parentId", null);
+        })
         .throwIfNotFound();
       res.status(200).json(post);
     } catch (error) {
       console.log(error);
     }
+    /* 
+    ...
+  .query()
+  .eager(`[children.${r('[children?, pets]', 3)}, pets]`)
+...
+
+function r(expr, depth) {
+  return expr.replace('?', depth > 0 ? '.' + r(expr, depth - 1) : '');
+  */ //implenet this, so I can have nested comments have names also
 
     // let query = Post.query();
     // if (req.query.section) {

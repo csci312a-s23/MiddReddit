@@ -1,7 +1,7 @@
 import * as dayjs from "dayjs";
 import CommentEditor from "./CommentEditor";
 import { useState } from "react";
-export default function Comment({ comment, submitComment }) {
+export default function Comment({ comment, submitComment, indent }) {
   const [enterReplyColor, setEnterReplyColor] = useState(true);
   const [editorVisible, setEditorVisible] = useState(false); //don't need authz to show editor, but to submit comment
   const relativeTime = require("dayjs/plugin/relativeTime");
@@ -12,8 +12,17 @@ export default function Comment({ comment, submitComment }) {
   const handleClick = () => {
     setEditorVisible(true);
   };
+
+  const childrenComments = comment.children.map((child) => (
+    <Comment
+      key={child.id}
+      comment={child}
+      indent={indent + 1}
+      submitComment={submitComment}
+    />
+  )); //
   return (
-    <>
+    <div style={{ paddingLeft: 20 * indent }}>
       <p>
         {comment.author.name} &emsp; <em>{dayjs(comment.posted).fromNow()}</em>{" "}
       </p>
@@ -28,8 +37,13 @@ export default function Comment({ comment, submitComment }) {
       </p>
 
       {editorVisible && (
-        <CommentEditor parentComment={comment} submitComment={submitComment} />
+        <CommentEditor
+          parentComment={comment}
+          submitComment={submitComment}
+          setEditorVisible={setEditorVisible}
+        />
       )}
-    </>
+      {childrenComments}
+    </div>
   );
 }
