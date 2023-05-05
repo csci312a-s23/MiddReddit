@@ -13,6 +13,7 @@ import RightSidebar from "../components/sidebar/rightSideBar";
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { SessionProvider } from "next-auth/react";
 import fetch from "node-fetch";
 import styles from "../styles/MiddReddit.module.css";
 import { styled } from "@mui/material/styles";
