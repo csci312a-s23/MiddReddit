@@ -16,7 +16,7 @@ import { useRouter } from "next/router";
 import fetch from "node-fetch";
 import styles from "../styles/MiddReddit.module.css";
 import { styled } from "@mui/material/styles";
-import PrimarySearchAppBar from "@/components/menubar1";
+import MenuBar from "@/components/menubar";
 import { ButtonGroup, CssBaseline, Fab } from "@mui/material";
 //import { useScrollTrigger } from "@mui/material";
 import * as React from "react";
@@ -24,8 +24,6 @@ import * as React from "react";
 import { CacheProvider } from "@emotion/react";
 import createEmotionCache from "../material/createEmotionCache";
 import AddIcon from "@mui/icons-material/Add";
-import { SessionProvider } from "next-auth/react";
-//import EventView from "../components/EventView"
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -53,7 +51,7 @@ function MainApp({
   const [openRightSideBar, setOpenRightSideBar] = useState(true);
 
   const [categoryQuery, setCategoryQuery] = useState(); //will use for searching by category
-  //const id = router.query.id;
+
   useEffect(() => {
     //handles if we are within a category or not, gets rid of if statement
     const searchQuery = categoryQuery ? `?category=${categoryQuery}` : "";
@@ -133,7 +131,7 @@ function MainApp({
         <main className={styles.main}>
           {/*<Menubar handleClick={handleClickMenubar} />*/}
 
-          <PrimarySearchAppBar
+          <MenuBar
             handleClick={handleClickMenubar}
             // signedIn={signedIn}
             openLeftSideBar={openLeftSideBar}

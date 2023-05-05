@@ -11,7 +11,8 @@
 */
 
 import PropTypes from "prop-types";
-
+import PostShape from "./PostShape";
+//MUI Imports
 import { Box, Stack, Typography } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
@@ -95,5 +96,6 @@ export default function UpVoteButtons({ post, allowVote }) {
 }
 
 UpVoteButtons.propTypes = {
+  post: PostShape.isRequired,
   allowVote: PropTypes.bool.isRequired,
 };

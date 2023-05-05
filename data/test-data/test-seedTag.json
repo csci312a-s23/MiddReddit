@@ -1,0 +1,92 @@
+[
+  {
+    "id": 0,
+    "postID": 5,
+    "categoryID": 0
+  },
+  {
+    "id": 1,
+    "postID": 0,
+    "categoryID": 1
+  },
+  {
+    "id": 2,
+    "postID": 1,
+    "categoryID": 2
+  },
+  {
+    "id": 3,
+    "postID": 1,
+    "categoryID": 3
+  },
+  {
+    "id": 5,
+    "postID": 2,
+    "categoryID": 4
+  },
+  {
+    "id": 4,
+    "postID": 2,
+    "categoryID": 5
+  },
+  {
+    "id": 6,
+    "postID": 3,
+    "categoryID": 0
+  },
+  {
+    "id": 7,
+    "postID": 3,
+    "categoryID": 1
+  },
+  {
+    "id": 8,
+    "postID": 4,
+    "categoryID": 2
+  },
+  {
+    "id": 9,
+    "postID": 4,
+    "categoryID": 3
+  },
+  {
+    "id": 10,
+    "postID": 4,
+    "categoryID": 4
+  },
+  {
+    "id": 11,
+    "postID": 4,
+    "categoryID": 5
+  },
+  {
+    "id": 12,
+    "postID": 0,
+    "categoryID": 0
+  },
+  {
+    "id": 13,
+    "postID": 5,
+    "categoryID": 1
+  },
+  {
+    "id": 14,
+    "postID": 6,
+    "categoryID": 2
+  },
+  {
+    "id": 15,
+    "postID": 6,
+    "categoryID": 3
+  },
+  {
+    "id": 16,
+    "postID": 7,
+    "categoryID": 4
+  },
+  {
+    "id": 17,
+    "postID": 8,
+    "categoryID": 5
+  }
+]
