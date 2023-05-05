@@ -6,6 +6,7 @@
 // import { useState } from "react";
 // import PostView from "../components/PostView";
 import ScrollDisplay from "../components/scrollDisplay";
+//import { Events } from "pg";
 //import data from "../../data/seedPost.json";
 // import LoginWidget from "../components/LoginWidget.js";
 import PropTypes from "prop-types";
@@ -28,7 +29,9 @@ export default function MainPage({
           currentPost={currentPost}
         />
       )}
+
     </div>
+    
   );
 }
 
