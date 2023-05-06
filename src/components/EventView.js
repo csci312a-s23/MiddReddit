@@ -44,7 +44,7 @@ export default function EventView({ events }) {
             onClick={() => HandlerFunc(event, showMore)}
             key={event.id}
         >
-            {event.title}
+            {event.title + " (" + event.date.toString() + ")"}
             
         </li>
     ))
