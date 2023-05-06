@@ -29,9 +29,7 @@ export default function MainPage({
           currentPost={currentPost}
         />
       )}
-
     </div>
-    
   );
 }
 

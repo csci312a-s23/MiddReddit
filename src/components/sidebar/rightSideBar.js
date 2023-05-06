@@ -12,7 +12,7 @@ import events from "../../../data/seedEvent.json";
 export default function RightSidebar({}) {
   return (
     <div>
-      <EventView events = {events}></EventView>
+      <EventView events={events} />
     </div>
   );
 }
