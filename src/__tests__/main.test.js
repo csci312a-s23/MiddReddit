@@ -1,111 +1,59 @@
-import { render } from "@testing-library/react";
-//import { testApiHandler } from "next-test-api-route-handler";
-//import { knex } from "../../knex/knex.js";
-//pages
-import MainApp from "../pages/_app.js";
+import { render, screen } from "@testing-library/react";
+import App from "../pages/_app";
+//nimport Secure from "../pages/secure";
+//import { useRouter } from "next/router";
+import { useSession, SessionProvider } from "next-auth/react";
 import MainPage from "../pages/index.js";
-//endpoints
-//import specific_post_endpoint from "../pages/api/posts/[id]/index.js";
-//data
-import { useSession } from "next-auth/react";
+// Mock the NextAuth package
 jest.mock("next-auth/react");
-import { withMockAuth } from "@tomfreudenberg/next-auth-mock/jest";
 
-//import client, { Session } from "next-auth/next";
-//jest.mock("next-auth/client");
-
-//import tag_data from "../../data/test-data/test-seedTag.json";
-
-//models
-// import Post from "../../models/Post.js";
-// import Category from "../../models/Category.js";
-
-//import mockRouter from "next-router-mock";
-//import { createDynamicRouteParser } from "next-router-mock/dynamic-routes";
-
-// Replace the router with the mock
-//jest.mock("next/router", () => require("next-router-mock"));
-
-/*
-// Tell the mock router about the pages we will use (so we can use dynamic routes)
-mockRouter.useParser(
-  createDynamicRouteParser([
-    // These paths should match those found in the `/pages` folder:
-    "/category/[catName]",
-    "/posts/[postID]",
-    "/posts/create",
-    "/index",
-  ])
-);
-
-// We wrap the actual fetch implementation during testing so that we can introduce
-// the absolute URL (needed on the server but not on the browser)
-const originalFetch = global.fetch;
-global.fetch = (url, ...params) => {
-  if (typeof url === "string" && url.startsWith("/")) {
-    return originalFetch(`http://0.0.0.0:3000${url}`, ...params);
-  }
-  return originalFetch(url, ...params);
-};
-*/
-describe("MiddReddit API", () => {
-  beforeAll(() => {
-    // Ensure test database is initialized before an tests
-    //return knex.migrate.rollback().then(() => knex.migrate.latest());
+describe("Client-side testing of secure pages", () => {
+  afterEach(() => {
+    // Clear all mocks between tests
+    jest.resetAllMocks();
   });
 
-  beforeEach(() => {
-    /*jest.spyOn(useSession).mockResolvedValue({
-      data: [
-        {
-          user: "jeff",
-          id: 1,
-          email: "email"
-        }
-      ]
-    }); */
-    //const { data : session, status } = useSession();
-    useSession.mockResolvedValue({
+  /* test("Renders secure portions of page when logged in", async () => {
+    // When rendering an individual page we can just mock useSession (in this case to
+    // simulate an authenticated user)
+    useSession.mockReturnValue({
       data: {
-        user: {
-          id: 1,
-          name: "Jeff",
-          email: "jeff@gmail.com",
-        },
-        expires: 1,
+        user: { id: 1 },
+        expires: new Date(Date.now() + 2 * 86400).toISOString(),
+      },
+      status: "authenticated",
+    });
+    render(<Secure />);
+    expect(useSession).toBeCalledWith({ required: true });
+    expect(screen.getByText(/\{ "user": \{ "id": 1 \}/i)).toBeInTheDocument();
+  });
+
+  test("Doesn't render secure portions when not logged in", async () => {
+    useSession.mockReturnValue({ data: null, status: "unauthenticated" });
+    render(<Secure />);
+    expect(
+      screen.queryByText(/\{ "user": \{ "id": 1 \}/i)
+    ).not.toBeInTheDocument();
+  });
+*/
+  test("Render app with session provider", () => {
+    // When rendering _app, (or any component containing the SessionProvider component)
+    // we need to mock the provider to prevent NextAuth from attempting to make API requests
+    // for the session.
+    SessionProvider.mockImplementation(({ children }) => (
+      <mock-provider>{children}</mock-provider>
+    ));
+
+    useSession.mockReturnValue({
+      data: {
+        user: { id: 1 },
+        expires: new Date(Date.now() + 2 * 86400).toISOString(),
       },
       status: "authenticated",
     });
 
-    //mockRouter.setCurrentUrl("/");
-    // Reset contents of the test database
-    //return knex.seed.run();
-  });
-
-  //return knex.seed.run();
-
-  afterEach(() => {});
-  jest.mock("next/router", () => require("next-router-mock"));
-/*
-  describe.skip("Testing MiddReddit end-to-end behavior", () => {
-    test("Render index.js component", () => {
-      const mockSession = {
-        expires: "1",
-        user: { email: "a", name: "Delta", image: "c" },
-      };
-      const mockUseSession = jest.fn();
-
-      mockUseSession.mockReturnValueOnce([mockSession, false]);
-
-      const pageProps = { mockSession };
-
-      render(<MainApp Component={MainPage} pageProps={pageProps} />);
-    });
-  });
-  */
-  describe("End-to-end testing", () => {
-    test("Render index.js component", () => {
-      render(withMockAuth(<MainApp Component={MainPage} />, "userAuthed"));
-    });
+    // Set the session prop expected by our _app component
+    render(<App Component={MainPage} pageProps={{ session: undefined }} />);
+    expect(screen.getByText(/\{ "user": \{ "id": 1 \}/i)).toBeInTheDocument();
   });
 });
