@@ -1,5 +1,8 @@
 //import PostView from "./PostView";
 //import styles from "../styles/ScrollPosts.module.css";
+import { styled } from "@mui/material/styles";
+import EventShape from "./EventShape";
+
 //import { Button } from "@mui/material";
 import { useState } from "react";
 //import { Typography } from "@mui/material";
@@ -57,7 +60,6 @@ export default function EventView({ events }) {
         <h5 key={eventtitles[i]}>{eventtitles[i]}</h5>,
         showMore ? eventdetails[i] : null,
       ];
-
     }
     return FinalReturnArray;
   };
