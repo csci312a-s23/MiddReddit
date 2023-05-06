@@ -57,6 +57,7 @@ export default function EventView({ events }) {
         <h5 key={eventtitles[i]}>{eventtitles[i]}</h5>,
         showMore ? eventdetails[i] : null,
       ];
+
     }
     return FinalReturnArray;
   };
