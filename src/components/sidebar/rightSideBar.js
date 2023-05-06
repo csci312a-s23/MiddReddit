@@ -6,11 +6,13 @@
   Profile: takes user to their profile
   etc: (WIP)
 */
+import EventView from "../EventView";
+import events from "../../../data/seedEvent.json";
 
 export default function RightSidebar({}) {
   return (
     <div>
-      <h2>I am a sidebar.</h2>
+      <EventView events={events} />
     </div>
   );
 }
