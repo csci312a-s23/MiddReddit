@@ -34,10 +34,9 @@ export default function EventView({ events }) {
 
     setShowMore(!showMore);
 
-    console.log("Hello")
+    console.log("Hello");
     //return {...showMore ? console.log(currentEvent.details) : console.log("GOODBYE")}
   };
-
 
   const eventdetails = sortedEvents.map((event) => (
     <li
@@ -54,7 +53,7 @@ export default function EventView({ events }) {
       event //Need to be rendering the title and render the conditional in the same loop that is generating the titles.
     ) => (
       <li data-testid="title" onClick={() => HandlerFunc(event)} key={event.id}>
-        {event.title + " (" + event.date.toString() + ")"}
+        {`${event.title} (${event.date.toString()})`}
       </li>
     )
   );
@@ -62,38 +61,29 @@ export default function EventView({ events }) {
 
   const FinalReturnArray = [];
 
+  const PrintEvents = (eventTitles, showmore) => {
+    for (let i = 0; i < eventTitles.length; i++) {
+      if (currentEvent) {
+        console.log("There is a current Event");
+        const eventNum = events.indexOf(currentEvent);
 
-  const PrintEvents = (eventtitles, showMore) => {
-    for (let i = 0; i < eventtitles.length; i++) {
-
-      if (currentEvent)
-      {
-        console.log("There is a current Event")
-        let eventNum = events.indexOf(currentEvent)
-
-        if (i === eventNum)
-        {
+        if (i === eventNum) {
           FinalReturnArray[i] = [
             <h5 key={eventtitles[i]}>{eventtitles[i]}</h5>,
             showMore ? eventdetails[i] : null,
           ];
-        }
-        else
-        {
+        } else {
           FinalReturnArray[i] = [
-            <h5 key={eventtitles[i]}>{eventtitles[i]}</h5>
+            <h5 key={eventtitles[i]}>{eventtitles[i]}</h5>,
           ];
         }
-      }
-      else
-      {
-        console.log("there is no current event")
+      } else {
+        console.log("there is no current event");
         FinalReturnArray[i] = [
           <h5 key={eventtitles[i]}>{eventtitles[i]}</h5>,
-          showMore ? eventdetails[i] : null,
+          showmore ? eventdetails[i] : null,
         ];
       }
-
     }
     return FinalReturnArray;
   };
