@@ -26,44 +26,74 @@ export default function EventView({ events }) {
 
     const [showMore, setShowMore] = useState(false);
 
-    const sortedEvents = [...events].sort((a, b) =>
-        a.posted.localeCompare(b.posted)
-    );
-    const HandlerFunc = (event) => {
-      setCurrentEvent(event);
-  
-      setShowMore(!showMore);
-      //return {...showMore ? console.log(currentEvent.details) : console.log("GOODBYE")}
-    };
+  const sortedEvents = [...events].sort((a, b) =>
+    a.posted.localeCompare(b.posted)
+  );
+  const HandlerFunc = (event) => {
+    setCurrentEvent(event);
 
-    const eventdetails = sortedEvents.map((event) => (
-        <li
-            data-testid="details"
-            onClick={() => HandlerFunc(event, showMore)}
-            key={event.id}
-        >
-            {event.details}
-        </li>
-    ))
+    setShowMore(!showMore);
 
-    const eventtitles = sortedEvents.map(
-      (
-        event //Need to be rendering the title and render the conditional in the same loop that is generating the titles.
-      ) => (
-        <li data-testid="title" onClick={() => HandlerFunc(event)} key={event.id}>
-          {event.title}
-        </li>
-    ))
+    console.log("Hello")
+    //return {...showMore ? console.log(currentEvent.details) : console.log("GOODBYE")}
+  };
 
+
+  const eventdetails = sortedEvents.map((event) => (
+    <li
+      data-testid="details"
+      onClick={() => HandlerFunc(event, showMore)}
+      key={event.id}
+    >
+      {event.details}
+    </li>
+  ));
+
+  const eventtitles = sortedEvents.map(
+    (
+      event //Need to be rendering the title and render the conditional in the same loop that is generating the titles.
+    ) => (
+      <li data-testid="title" onClick={() => HandlerFunc(event)} key={event.id}>
+        {event.title + " (" + event.date.toString() + ")"}
+      </li>
+    )
+  );
 
 
   const FinalReturnArray = [];
-  const PrintEvents = () => {
+
+
+  const PrintEvents = (eventtitles, showMore) => {
     for (let i = 0; i < eventtitles.length; i++) {
-      FinalReturnArray[i] = [
-        <h5 key={eventtitles[i]}>{eventtitles[i]}</h5>,
-        showMore ? eventdetails[i] : null,
-      ];
+
+      if (currentEvent)
+      {
+        console.log("There is a current Event")
+        let eventNum = events.indexOf(currentEvent)
+
+        if (i === eventNum)
+        {
+          FinalReturnArray[i] = [
+            <h5 key={eventtitles[i]}>{eventtitles[i]}</h5>,
+            showMore ? eventdetails[i] : null,
+          ];
+        }
+        else
+        {
+          FinalReturnArray[i] = [
+            <h5 key={eventtitles[i]}>{eventtitles[i]}</h5>
+          ];
+        }
+      }
+      else
+      {
+        console.log("there is no current event")
+        FinalReturnArray[i] = [
+          <h5 key={eventtitles[i]}>{eventtitles[i]}</h5>,
+          showMore ? eventdetails[i] : null,
+        ];
+      }
+
     }
     return FinalReturnArray;
   };
@@ -72,7 +102,7 @@ export default function EventView({ events }) {
     <>
       <Box>
         <h1>Upcoming Events: </h1>
-        <NoBulletList>{PrintEvents()}</NoBulletList>
+        <NoBulletList>{PrintEvents(eventtitles, showMore)}</NoBulletList>
       </Box>
     </>
 
