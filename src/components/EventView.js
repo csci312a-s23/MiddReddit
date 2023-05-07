@@ -61,7 +61,6 @@ export default function EventView({ events }) {
   const PrintEvents = (eventTitles, showmore) => {
     for (let i = 0; i < eventTitles.length; i++) {
       if (currentEvent) {
-        console.log("There is a current Event");
         const eventNum = events.indexOf(currentEvent);
 
         if (i === eventNum) {

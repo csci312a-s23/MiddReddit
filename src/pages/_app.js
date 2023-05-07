@@ -25,6 +25,7 @@ import * as React from "react";
 import { CacheProvider } from "@emotion/react";
 import createEmotionCache from "../material/createEmotionCache";
 import AddIcon from "@mui/icons-material/Add";
+//import { server } from '../../config';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -65,7 +66,7 @@ function MainApp({
   }, [currentPost, categoryQuery]);
 
   useEffect(() => {
-    fetch("/api/categories")
+    fetch(`/api/categories`)
       .then((resp) => resp.json())
       .then((data) => {
         setCategories(data);
@@ -125,7 +126,7 @@ function MainApp({
       <CacheProvider value={emotionCache}>
         <Head>
           <title>MiddReddit</title>
-          <link rel="icon" href="/favicon.ico" />
+          <link rel="icon" href="%PUBLIC_URL%/favicon.ico?v=2" />
           <meta name="viewport" content="initial-scale=1, width=device-width" />
         </Head>
         <CssBaseline />

@@ -4,7 +4,8 @@ import { Model } from "objection";
 import BaseModel from "./BaseModel";
 import User from "./User";
 import Post from "./Post";
-
+//import { Mode } from "@mui/icons-material";
+import CommentUpvote from "./CommentUpvote";
 export default class Comment extends BaseModel {
   // Table name is the only required property.
   static get tableName() {
@@ -67,6 +68,14 @@ export default class Comment extends BaseModel {
         join: {
           from: "Comment.authorId",
           to: "User.id",
+        },
+      },
+      votes: {
+        relation: Model.HasManyRelation,
+        modelClass: CommentUpvote,
+        join: {
+          from: "Comment.id",
+          to: "CommentUpvote.commentId",
         },
       },
     };

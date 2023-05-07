@@ -12,7 +12,10 @@ export default function Comment({ comment, submitComment, indent }) {
   const handleClick = () => {
     setEditorVisible(true);
   };
-
+  const submitUpvote = () => {
+    console.log(comment);
+    //need conditional put or post to get unique behavior for upvotes
+  };
   const childrenComments = comment.children.map((child) => (
     <Comment
       key={child.id}
@@ -26,7 +29,8 @@ export default function Comment({ comment, submitComment, indent }) {
       <p>
         {comment.author.name} &emsp; <em>{dayjs(comment.posted).fromNow()}</em>{" "}
       </p>
-      <p>{comment.contents}</p>
+      <p onClick={() => console.log(comment)}>{comment.contents}</p>
+      <p onClick={submitUpvote}>Upvote</p>
       <p
         style={{ color: replyColor, fontSize: 15 }}
         onMouseEnter={() => setEnterReplyColor(!enterReplyColor)}

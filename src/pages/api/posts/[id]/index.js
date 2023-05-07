@@ -18,7 +18,10 @@ const handler = nc({ onError })
       const post = await Post.query()
         .findById(req.query.id)
         .withGraphJoined(
-          `[category, comments.${r("[children?, author, post,parent]", 4)}]`
+          `[category, comments.${r(
+            "[children?, author, post,parent,votes]",
+            4
+          )}]`
         )
 
         .modifyGraph("comments", (builder) => {

@@ -9,6 +9,7 @@ import { testApiHandler } from "next-test-api-route-handler";
 //endpoints
 import categories_endpoint from "../pages/api/categories.js";
 import posts_endpoint from "../pages/api/posts/index.js";
+import specificPostEndpoint from "../pages/api/posts/[id]/index.js";
 //import specific_post_endpoint from "../pages/api/posts/[id]/index.js";
 //data
 import category_data from "../../data/test-data/test-seedCategory.json";
@@ -48,7 +49,7 @@ describe("MiddReddit API", () => {
   });
   //jest.mock("next/router", () => require("next-router-mock"));
 
-  describe("Endpoint testing", () => {
+  describe("Category Endpoint Testing", () => {
     /*tests to complete:
         POST a post
         POST a comment
@@ -111,7 +112,8 @@ describe("MiddReddit API", () => {
         },
       });
     });
-
+  });
+  describe("Post Endpoint Testing", () => {
     test("GET /api/posts should return all posts", async () => {
       await testApiHandler({
         rejectOnHandler: true,
@@ -143,9 +145,56 @@ describe("MiddReddit API", () => {
         },
       });
     });
+    test("GET /api/posts/[id] should return a specific post, with relations", async () => {
+      await testApiHandler({
+        rejectOnHandler: true,
+        handler: specificPostEndpoint,
+        url: "/api/posts/3",
+        test: async ({ fetch }) => {
+          const postTitle = "2/6 Ross Meal";
+          //const postCategories = ["courses","confessionals"];
+          const res = await fetch();
+          const res_object = await res.json();
+          //const res_categories = res_object.category.map((category) => category.title);
+          expect(res_object).toMatchObject(3);
+          expect(res_object.title).toMatchObject(postTitle);
+          //expect(res_categories).toMatchObject(postCategories);
+        },
+      });
+    });
+    describe("Unauthenticated edits are rejected", () => {
+      beforeEach(() => {
+        getServerSession.mockResolvedValue(undefined);
+      });
+      test("Unauthenticated POST", async () => {
+        const newPost = {
+          id: 0,
+          title: "Green Eggs and Ham",
+          author: "Dr Suess",
+          contents: "I don't like green eggs and ham",
+          posted: "",
+          upvotes: 0,
+        };
+        await testApiHandler({
+          rejectOnHandlerError: false, // We want to assert on the error
+          handler: posts_endpoint,
+          test: async ({ fetch }) => {
+            const res = await fetch({
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(newPost),
+            });
+            expect(res.ok).toBe(false);
+            expect(res.status).toBe(403);
+          },
+        });
+      });
+    });
   });
+});
 
-  /* describe("Tag testing", () => {
+/* describe("Tag testing", () => {
     
   }); */
-});
