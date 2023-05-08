@@ -30,7 +30,6 @@ export default function EventView({ events }) {
 
     setShowMore(!showMore);
 
-    console.log("Hello");
     //return {...showMore ? console.log(currentEvent.details) : console.log("GOODBYE")}
   };
 
@@ -61,7 +60,6 @@ export default function EventView({ events }) {
   const PrintEvents = (eventTitles, showmore) => {
     for (let i = 0; i < eventTitles.length; i++) {
       if (currentEvent) {
-        console.log("There is a current Event");
         const eventNum = events.indexOf(currentEvent);
 
         if (i === eventNum) {
@@ -75,7 +73,6 @@ export default function EventView({ events }) {
           ];
         }
       } else {
-        console.log("there is no current event");
         FinalReturnArray[i] = [
           <h5 key={eventtitles[i]}>{eventtitles[i]}</h5>,
           showmore ? eventdetails[i] : null,
