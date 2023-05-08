@@ -15,10 +15,16 @@ jest.mock("next-auth/react");
 // approach seems to be required: https://github.com/wheresrhys/fetch-mock-jest#node-fetch
 jest.mock("node-fetch", () => require("fetch-mock-jest").sandbox());
 const fetchMock = require("node-fetch");
-
+//eslint-disable-next-line  react/display-name
+jest.mock("../components/TopPosts.js", () => () => {
+  return <mock-TopPosts data-testid="topposts" />;
+});
 describe("Client-side testing of secure pages", () => {
   beforeEach(() => {
     fetchMock.get("/api/posts", () => {
+      return [];
+    });
+    fetchMock.get("/api/posts?top=10", () => {
       return [];
     });
     fetchMock.get("/api/categories", () => {

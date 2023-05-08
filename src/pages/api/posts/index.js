@@ -18,7 +18,8 @@ const handler = nc({ onError })
     if (req.query.top) {
       posts = await query
         .withGraphJoined("category.[parent.^2]")
-        .orderBy("upvotes", "desc");
+        .orderBy("upvotes", "desc")
+        .limit(3);
     } else if (req.query.category) {
       posts = await query
         .withGraphJoined("category.[parent.^2]")
