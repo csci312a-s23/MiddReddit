@@ -140,5 +140,5 @@ export default function EventView({ events }) {
 }
 
 EventView.propTypes = {
-  event: EventShape.isRequired,
+  event: EventShape,
 };
