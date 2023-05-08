@@ -9,7 +9,7 @@ import { testApiHandler } from "next-test-api-route-handler";
 //endpoints
 import categories_endpoint from "../pages/api/categories.js";
 import posts_endpoint from "../pages/api/posts/index.js";
-//import specific_post_endpoint from "../pages/api/posts/[id]/index.js";
+import specific_post_endpoint from "../pages/api/posts/[id]/index.js";
 //data
 import category_data from "../../data/test-data/test-seedCategory.json";
 import { knex } from "../../knex/knex.js";
@@ -141,6 +141,48 @@ describe("MiddReddit API", () => {
 
           expect(res_posts_names).toMatchObject(courses_posts_titles);
         },
+      });
+    });
+
+    test("GET /api/posts/[id] should return a single post", async () => {
+      await testApiHandler({
+        rejectOnHandler: true,
+        handler: specific_post_endpoint,
+        paramsPatcher: (params) => (params.id = 1), // Testing dynamic routes requires patcher
+        test: async ({ fetch }) => {
+          const res = await fetch();
+          await expect(res.json()).resolves.toMatchObject(post_data[1]);
+        },
+      });
+    });
+    describe("Unauthenticated edits are rejected", () => {
+      beforeEach(() => {
+        getServerSession.mockResolvedValue(undefined);
+      });
+      test("Unauthenticated POST", async () => {
+        const newPost = {
+          id: 0,
+          title: "Green Eggs and Ham",
+          author: "Dr Suess",
+          contents: "I don't like green eggs and ham",
+          posted: "",
+          upvotes: 0,
+        };
+        await testApiHandler({
+          rejectOnHandlerError: false, // We want to assert on the error
+          handler: posts_endpoint,
+          test: async ({ fetch }) => {
+            const res = await fetch({
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(newPost),
+            });
+            expect(res.ok).toBe(false);
+            expect(res.status).toBe(403);
+          },
+        });
       });
     });
   });
