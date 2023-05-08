@@ -155,6 +155,36 @@ describe("MiddReddit API", () => {
         },
       });
     });
+    describe("Unauthenticated edits are rejected", () => {
+      beforeEach(() => {
+        getServerSession.mockResolvedValue(undefined);
+      });
+      test("Unauthenticated POST", async () => {
+        const newPost = {
+          id: 0,
+          title: "Green Eggs and Ham",
+          author: "Dr Suess",
+          contents: "I don't like green eggs and ham",
+          posted: "",
+          upvotes: 0,
+        };
+        await testApiHandler({
+          rejectOnHandlerError: false, // We want to assert on the error
+          handler: posts_endpoint,
+          test: async ({ fetch }) => {
+            const res = await fetch({
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(newPost),
+            });
+            expect(res.ok).toBe(false);
+            expect(res.status).toBe(403);
+          },
+        });
+      });
+    });
   });
 
   /* describe("Tag testing", () => {
