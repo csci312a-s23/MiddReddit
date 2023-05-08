@@ -9,7 +9,7 @@ import { testApiHandler } from "next-test-api-route-handler";
 //endpoints
 import categories_endpoint from "../pages/api/categories.js";
 import posts_endpoint from "../pages/api/posts/index.js";
-//import specific_post_endpoint from "../pages/api/posts/[id]/index.js";
+import specific_post_endpoint from "../pages/api/posts/[id]/index.js";
 //data
 import category_data from "../../data/test-data/test-seedCategory.json";
 import { knex } from "../../knex/knex.js";
@@ -140,6 +140,18 @@ describe("MiddReddit API", () => {
           const res_posts_names = res_object.map((post) => post.title);
 
           expect(res_posts_names).toMatchObject(courses_posts_titles);
+        },
+      });
+    });
+
+    test("GET /api/posts/[id] should return a single post", async () => {
+      await testApiHandler({
+        rejectOnHandler: true,
+        handler: specific_post_endpoint,
+        paramsPatcher: (params) => (params.id = 1), // Testing dynamic routes requires patcher
+        test: async ({ fetch }) => {
+          const res = await fetch();
+          await expect(res.json()).resolves.toMatchObject(post_data[1]);
         },
       });
     });
