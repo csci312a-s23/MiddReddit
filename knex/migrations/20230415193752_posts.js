@@ -7,7 +7,8 @@ exports.up = function (knex) {
     table.increments("id").primary();
     table.string("title");
     table.text("contents");
-    table.specificType("comments", "INT[]");
+    //table.string("author");
+    //table.specificType("comments", "INT[]");
     table.string("posted").notNullable();
     //table.specificType("tag", "INT[]"); //tags to a specific category
     table.integer("upvotes").notNullable();
