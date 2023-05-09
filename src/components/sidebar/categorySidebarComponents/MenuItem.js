@@ -20,7 +20,13 @@ function hasChildren(item) {
   return true;
 }
 
-export default function MenuItem({ item, goToCategory }) {
+export default function MenuItem({ item, goToCategory, setSearchBarQuery }) {
   const Component = hasChildren(item) ? MultiLevel : SingleLevel;
-  return <Component item={item} goToCategory={goToCategory} />;
+  return (
+    <Component
+      item={item}
+      goToCategory={goToCategory}
+      setSearchBarQuery={setSearchBarQuery}
+    />
+  );
 }

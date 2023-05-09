@@ -8,11 +8,16 @@
 
   Need to work on:
   - The chip stays in search bar until separate category is hit or the chip is exited
-    out of using the x button
-  - Dropdown contains the right search values
-  - Limit height of Dropdown
-  - onClick of dropdown we go to category (this will be tricky, deal with managing autocomplete)
-  - If category is hit in leftsidebar create a chip is search bar
+    out of using the x button (has to do with "default value" for autocomplete)
+
+  - Dropdown contains the right search values (talk with teammates)
+
+  - Limit height of Dropdown (already limited by can change for style)
+
+  - onClick of dropdown we go to category (Look at "Controlled states" section of mui) 
+
+  - If category is hit in leftsidebar create a chip is search bar (has to do with 
+    "default value" for autocomplete)
 
 */
 
@@ -39,7 +44,10 @@ import Autocomplete from "@mui/material/Autocomplete";
 
 //Other imports
 import PropTypes from "prop-types";
-import { Chip } from "@mui/material";
+//import { Chip } from "@mui/material";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -87,6 +95,7 @@ export default function MenuBar({
   setOpenLeftSideBar,
   setOpenRightSideBar,
   setSearchBarQuery,
+  goToCategory,
 }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [searchOpen, setSearchOpen] = React.useState(false);
@@ -96,12 +105,19 @@ export default function MenuBar({
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const { data: session } = useSession();
 
   const handleMenuClose = () => {
     setAnchorEl(null);
     //handleMobileMenuClose();
   };
+
+  const { data: session } = useSession();
+
+  const router = useRouter();
+  const { catName } = router.query;
+
+  const [value, setValue] = useState([]);
+  const [inputValue, setInputValue] = useState("");
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -135,15 +151,49 @@ export default function MenuBar({
     </Menu>
   );
 
-  const top100Films = [
-    { title: "The Shawshank Redemption", year: 1994 },
-    { title: "The Godfather", year: 1972 },
-    { title: "The Godfather: Part II", year: 1974 },
-    { title: "The Dark Knight", year: 2008 },
-    { title: "12 Angry Men", year: 1957 },
-    { title: "Schindler's List", year: 1993 },
-    { title: "Pulp Fiction", year: 1994 },
+  const categories = [
+    { id: 0, name: "courses" },
+    { id: 1, name: "confessionals" },
+    { id: 2, name: "meals" },
+    { id: 3, name: "sports" },
+    { id: 4, name: "dorms" },
+    { id: 5, name: "Events" },
+    { id: 6, name: "cs" },
+    { id: 7, name: "bio" },
+    { id: 8, name: "theatre" },
+    { id: 9, name: "cs312" },
+    { id: 10, name: "ross" },
+    { id: 11, name: "anthro" },
+    { id: 12, name: "music" },
+    { id: 13, name: "math" },
+    { id: 14, name: "econ" },
+    { id: 15, name: "russian" },
+    { id: 16, name: "anth 103" },
+    { id: 17, name: "anth 306" },
+    { id: 18, name: "musc 101" },
+    { id: 19, name: "musc 260" },
+    { id: 20, name: "musc 500" },
+    { id: 21, name: "math 118" },
+    { id: 22, name: "math 323" },
   ];
+
+  const defaultChip = categories.find((ind) => ind.name === catName);
+  let message;
+
+  useEffect(() => {
+    if (defaultChip === undefined) {
+      setValue([]);
+    } else {
+      setValue([categories[defaultChip.id]]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [catName]);
+
+  if (defaultChip === undefined) {
+    message = "";
+  } else {
+    message = { name: `You are searching in ${catName}` };
+  }
 
   return (
     <Box
@@ -204,19 +254,23 @@ export default function MenuBar({
               multiple
               limitTags={1}
               id="tag-outlined"
-              options={top100Films}
-              getOptionLabel={(option) => option.title}
-              //defaultValue={[top100Films[1]]}
-              //filterSelectedOptions
-
-              //Need to work to make the tags stay after search
-              renderTags={(tagValue, getTagProps) => (
-                <Chip
-                  key={tagValue[0].title}
-                  label={tagValue[0].title}
-                  {...getTagProps(0)}
-                />
-              )}
+              options={!value[0] ? categories : [message]}
+              getOptionLabel={(option) => option.name}
+              noOptionsText={`Search for "${inputValue}" in ${catName} category`}
+              value={value}
+              onChange={(e, newValue) => {
+                //console.log(newValue);
+                setValue(newValue);
+                if (newValue[0] !== undefined) {
+                  goToCategory(newValue[0].name);
+                  setSearchBarQuery("");
+                }
+              }}
+              inputValue={inputValue}
+              onInputChange={(event, newInputValue) => {
+                //console.log(newInputValue);
+                setInputValue(newInputValue);
+              }}
               renderInput={(params) => {
                 const { InputLabelProps, InputProps, ...rest } = params;
                 return (

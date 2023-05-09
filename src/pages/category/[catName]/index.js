@@ -23,6 +23,7 @@ export default function MainPageCategory({
 }) {
   const router = useRouter();
   const { catName } = router.query;
+  //console.log(catName);
   setCategoryQuery(catName);
   //what props and callbacks should we use?
   return (

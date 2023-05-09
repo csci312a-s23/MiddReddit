@@ -2,9 +2,10 @@
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 
-export default function SingleLevel({ item, goToCategory }) {
+export default function SingleLevel({ item, goToCategory, setSearchBarQuery }) {
   const handleClick = () => {
     goToCategory(item.name);
+    setSearchBarQuery("");
   };
   return (
     <ListItem sx={{ pl: 4 }} button onClick={handleClick}>

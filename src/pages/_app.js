@@ -101,6 +101,8 @@ function MainApp({
     }
   }
 
+  //console.log(categories);
+
   const props = {
     ...pageProps,
     goToPost,
@@ -114,6 +116,8 @@ function MainApp({
     setCreatePost,
     setCategoryQuery,
   };
+
+  //console.log(categories);
 
   //This is not going to work right now obviously but this is the idea we should go for so they can only edit their own posts
   //const MyPosts = collection.filter(post => post.owner === user.name);
@@ -136,6 +140,7 @@ function MainApp({
             setOpenLeftSideBar={setOpenLeftSideBar}
             setOpenRightSideBar={setOpenRightSideBar}
             setSearchBarQuery={setSearchBarQuery}
+            goToCategory={goToCategory}
           />
 
           <div className={styles.body}>
@@ -145,6 +150,7 @@ function MainApp({
                   <LeftSidebar
                     categories={categories}
                     goToCategory={goToCategory}
+                    setSearchBarQuery={setSearchBarQuery}
                   />
                 }
               </div>

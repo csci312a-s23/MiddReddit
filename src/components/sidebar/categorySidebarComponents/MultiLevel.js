@@ -8,7 +8,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MenuItem from "./MenuItem";
 
-export default function MultiLevel({ item, goToCategory }) {
+export default function MultiLevel({ item, goToCategory, setSearchBarQuery }) {
   const { children } = item;
   const [open, setOpen] = useState(false);
 
@@ -16,6 +16,7 @@ export default function MultiLevel({ item, goToCategory }) {
     //goToCategory(item.name);
     if (clickBool) {
       goToCategory(item.name);
+      setSearchBarQuery("");
     } else {
       setOpen((prev) => !prev);
     }
