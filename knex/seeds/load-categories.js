@@ -5,7 +5,7 @@
 /* eslint-disable func-names */
 /* eslint no-unused-vars: ["error", { "args": "none" }] */
 //const fs = require("fs");
-const Category = require("../../models/Category");
+import Category from "../../models/Category";
 
 exports.seed = async function (knex) {
   // const contents = fs.readFileSync("./data/seedCategory.json");

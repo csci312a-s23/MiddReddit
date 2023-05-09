@@ -20,9 +20,9 @@ export default class Category extends BaseModel {
       properties: {
         id: { type: "integer" },
         name: { type: "string" },
-        description: { type: "text" },
+        description: { type: "string" },
         parent_: { type: "string" },
-        posts2: { type: "INT[]" },
+        //posts2: { type: "INT[]" },
       },
     };
   }
