@@ -8,17 +8,16 @@
 
   Need to work on:
   - The chip stays in search bar until separate category is hit or the chip is exited
-    out of using the x button (has to do with "default value" for autocomplete)
+    out of using the x button 
 
   - Dropdown contains the right search values (talk with teammates)
 
-  - Limit height of Dropdown (already limited by can change for style)
+  - Limit height of Dropdown 
 
-  - onClick of dropdown we go to category (Look at "Controlled states" section of mui) 
+  - onClick of dropdown we go to category 
 
-  - If category is hit in leftsidebar create a chip is search bar (has to do with 
-    "default value" for autocomplete)
-
+  - If category is hit in leftsidebar create a chip is search bar 
+  
 */
 
 //MUI Imports
@@ -178,7 +177,7 @@ export default function MenuBar({
   ];
 
   const defaultChip = categories.find((ind) => ind.name === catName);
-  let message;
+  //let message;
 
   useEffect(() => {
     if (defaultChip === undefined) {
@@ -188,13 +187,13 @@ export default function MenuBar({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [catName]);
-
+  /*
   if (defaultChip === undefined) {
     message = "";
   } else {
     message = { name: `You are searching in ${catName}` };
   }
-
+  */
   return (
     <Box
       sx={{ flexGrow: 1, width: 1, position: "relative", maxHeight: "65px" }}
@@ -254,15 +253,23 @@ export default function MenuBar({
               multiple
               limitTags={1}
               id="tag-outlined"
-              options={!value[0] ? categories : [message]}
+              options={!value[0] ? categories : []}
               getOptionLabel={(option) => option.name}
-              noOptionsText={`Search for "${inputValue}" in ${catName} category`}
+              noOptionsText={
+                !value[0]
+                  ? `Search for "${inputValue}"`
+                  : `Search for "${inputValue}" within the ${catName} Category`
+              }
               value={value}
               onChange={(e, newValue) => {
-                //console.log(newValue);
+                console.log(newValue);
                 setValue(newValue);
                 if (newValue[0] !== undefined) {
+                  console.log("here1");
                   goToCategory(newValue[0].name);
+                  setSearchBarQuery("");
+                } else {
+                  handleClick("mainPage");
                   setSearchBarQuery("");
                 }
               }}
