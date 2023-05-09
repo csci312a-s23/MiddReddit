@@ -2,116 +2,116 @@
   {
     "name": "courses",
     "description": "Courses at Middlebury",
-    "parent": null
+    "parent_": null
   },
   {
     "name": "confessionals",
     "description": "Confessionals at Middlebury",
-    "parent": null
+    "parent_": null
   },
   {
     "name": "meals",
     "description": "Meals at Middlebury",
-    "parent": null
+    "parent_": null
   },
   {
     "name": "sports",
     "description": "Sports at Middlebury",
-    "parent": null
+    "parent_": null
   },
   {
     "name": "dorms",
     "description": "All dorms at Middlebury",
-    "parent": null
+    "parent_": null
   },
   {
     "name": "events",
     "description": "All events at Middlebury",
-    "parent": null
+    "parent_": null
   },
   {
     "name": "cs",
     "description": "CS at Middlebury",
-    "parent": "courses"
+    "parent_": "courses"
   },
   {
     "name": "bio",
     "description": "Bio at Middlebury",
-    "parent": "courses"
+    "parent_": "courses"
   },
   {
     "name": "theatre",
     "description": "Theatre at Middlebury",
-    "parent": "courses"
+    "parent_": "courses"
   },
   {
     "name": "cs312",
     "description": "CS312 at Middlebury",
-    "parent": "cs"
+    "parent_": "cs"
   },
   {
     "name": "ross",
     "description": "ross dining hall",
-    "parent": "meals"
+    "parent_": "meals"
   },
   {
     "name": "anthro",
     "description": "Anthropology at middlebury",
-    "parent": "courses"
+    "parent_": "courses"
   },
   {
     "name": "music",
     "description": "music at middlebury",
-    "parent": "courses"
+    "parent_": "courses"
   },
   {
     "name": "math",
     "description": "math at middlebury",
-    "parent": "courses"
+    "parent_": "courses"
   },
   {
     "name": "econ",
     "description": "econ at middlebury",
-    "parent": "courses"
+    "parent_": "courses"
   },
   {
     "name": "russian",
     "description": "russian at Middlebury",
-    "parent": "courses"
+    "parent_": "courses"
   },
   {
     "name": "anth 103",
     "description": "Anthropology 103 at Middlebury",
-    "parent": "anthro"
+    "parent_": "anthro"
   },
   {
     "name": "anth 306",
     "description": "Anthropology 306 at Middlebury",
-    "parent": "anthro"
+    "parent_": "anthro"
   },
   {
     "name": "musc 101",
     "description": "Music 101 at Middlebury",
-    "parent": "music"
+    "parent_": "music"
   },
   {
     "name": "musc 260",
     "description": "Music 260 at Middlebury",
-    "parent": "music"
+    "parent_": "music"
   },
   {
     "name": "musc 500",
     "description": "Music 500 at Middlebury",
-    "parent": 12
+    "parent_": 12
   },
   {
     "name": "math 118",
     "description": "Math 118 at Middlebury",
-    "parent": "math"
+    "parent_": "math"
   },
   {
     "name": "math 323",
     "description": "Math 323 at Middlebury",
-    "parent": "math"
+    "parent_": "math"
   }
 ]
