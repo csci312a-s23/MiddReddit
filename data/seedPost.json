@@ -1,6 +1,5 @@
 [
   {
-    "id": 0,
     "title": "Midd Snow Ball",
     "author": "Peter Hansen",
     "contents": "What a wonderful night I had watching DJ Earworm!",
@@ -8,7 +7,6 @@
     "upvotes": 6
   },
   {
-    "id": 1,
     "title": "Taylor Swift Concert",
     "author": "Peter Hansen",
     "contents": "For all the Swifties out there this is an event you cannot miss",
@@ -16,7 +14,6 @@
     "upvotes": 12
   },
   {
-    "id": 2,
     "title": "Graduation",
     "author": "Peter Hansen",
     "contents": "I am so sad to see all my friends leaving",
@@ -24,7 +21,6 @@
     "upvotes": 2
   },
   {
-    "id": 3,
     "title": "2/6 Ross Meal",
     "author": "Peter Hansen",
     "contents": "Hot Dogs \n Cheeseburgers \n Crinkle Fries \n Baked Beans",
@@ -32,7 +28,6 @@
     "upvotes": -3
   },
   {
-    "id": 4,
     "title": "1/12 Ross Meal",
     "author": "Peter Hansen",
     "contents": "Halal Cart Style Chicken \n Haitian Pork Griot \n Jasmine Rice",
@@ -40,7 +35,6 @@
     "upvotes": 30
   },
   {
-    "id": 5,
     "title": "3/17 Indoor Meet",
     "author": "Peter Hansen",
     "contents": "https://www.shutterstock.com/image-photo/athlete-track-running-nice-scenic-260nw-316386770.jpg",
@@ -48,7 +42,6 @@
     "upvotes": 24
   },
   {
-    "id": 6,
     "title": "Throwers Potluck",
     "author": "Peter Hansen",
     "contents": "Come one come all. We will provide food for everyone that comes",
@@ -56,7 +49,6 @@
     "upvotes": 8
   },
   {
-    "id": 7,
     "title": "Mold in the Bathtub",
     "author": "Peter Hansen",
     "contents": "https://cdn-prod.medicalnewstoday.com/content/images/articles/288/288651/mold-in-the-home.jpg",
@@ -64,7 +56,6 @@
     "upvotes": 13
   },
   {
-    "id": 8,
     "title": "Rager in ABQ",
     "author": "Peter Hansen",
     "contents": "Yo Broskis, I am totally hosting the most epic bestest party ever in ABQ this Saturday. It start at 9 and fashionably late is totally not in fashion any more.",
@@ -72,7 +63,6 @@
     "upvotes": -1
   },
   {
-    "id": 9,
     "title": "What Classes are Easy?",
     "author": "Peter Hansen",
     "contents": "What are the easiest classes so I can get my degree?",

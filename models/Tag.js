@@ -13,8 +13,8 @@ export default class Tag extends BaseModel {
 
       properties: {
         id: { type: "integer" },
-        postId: { type: "integer" },
-        categoryId: { type: "integer" },
+        post: { type: "string" },
+        category: { type: "string" },
       },
     };
   }

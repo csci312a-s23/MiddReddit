@@ -5,8 +5,8 @@
 exports.up = function (knex) {
   return knex.schema.createTable("Tag", (table) => {
     table.increments("id").primary();
-    table.integer("postId");
-    table.integer("categoryId");
+    table.string("post");
+    table.string("category");
   });
 };
 

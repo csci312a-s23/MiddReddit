@@ -1,97 +1,78 @@
 [
   {
-    "id": 0,
-    "postId": 5,
-    "categoryId": 0
+    "post": "3/17 Indoor Meet",
+    "category": "courses"
   },
   {
-    "id": 1,
-    "postId": 0,
-    "categoryId": 1
+    "post": "Midd Snow Ball",
+    "category": "confessionals"
   },
   {
-    "id": 2,
-    "postId": 1,
-    "categoryId": 2
+    "post": "Taylor Swift Concert",
+    "category": "meals"
   },
   {
-    "id": 3,
-    "postId": 1,
-    "categoryId": 3
+    "post": "Taylor Swift Concert",
+    "category": "sports"
   },
   {
-    "id": 5,
-    "postId": 2,
-    "categoryId": 4
+    "post": "Graduation",
+    "category": "dorms"
   },
   {
-    "id": 4,
-    "postId": 2,
-    "categoryId": 5
+    "post": "Graduation",
+    "category": "events"
   },
   {
-    "id": 6,
-    "postId": 3,
-    "categoryId": 0
+    "post": "2/6 Ross Meal",
+    "category": "courses"
   },
   {
-    "id": 7,
-    "postId": 3,
-    "categoryId": 1
+    "post": "2/6 Ross Meal",
+    "category": "confessionals"
   },
   {
-    "id": 8,
-    "postId": 4,
-    "categoryId": 2
+    "post": "1/12 Ross Meal",
+    "category": "meals"
   },
   {
-    "id": 9,
-    "postId": 4,
-    "categoryId": 3
+    "post": "1/12 Ross Meal",
+    "category": "sports"
   },
   {
-    "id": 10,
-    "postId": 4,
-    "categoryId": 4
+    "post": "1/12 Ross Meal",
+    "category": "dorms"
   },
   {
-    "id": 11,
-    "postId": 4,
-    "categoryId": 5
+    "post": "1/12 Ross Meal",
+    "category": "events"
   },
   {
-    "id": 12,
-    "postId": 0,
-    "categoryId": 0
+    "post": "Midd Snow Ball",
+    "category": "courses"
   },
   {
-    "id": 13,
-    "postId": 5,
-    "categoryId": 1
+    "post": "3/17 Indoor Meet",
+    "category": "confessionals"
   },
   {
-    "id": 14,
-    "postId": 6,
-    "categoryId": 2
+    "post": "Throwers Potluck",
+    "category": "meals"
   },
   {
-    "id": 15,
-    "postId": 6,
-    "categoryId": 3
+    "post": "Throwers Potluck",
+    "category": "sports"
   },
   {
-    "id": 16,
-    "postId": 7,
-    "categoryId": 4
+    "post": "Mold in the Bathtub",
+    "category": "dorms"
   },
   {
-    "id": 17,
-    "postId": 8,
-    "categoryId": 5
+    "post": "Rager in ABQ",
+    "category": "events"
   },
   {
-    "id": 18,
-    "postId": 9,
-    "categoryId": 11
+    "post": "What Classes are Easy?",
+    "category": "confessionals"
   }
 ]

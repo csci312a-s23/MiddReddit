@@ -36,8 +36,8 @@ export default class Post extends BaseModel {
           from: "Post.id",
           through: {
             // Tag is the join table.
-            from: "Tag.postId",
-            to: "Tag.categoryId",
+            from: "Tag.post",
+            to: "Tag.category",
           },
           to: "Category.id",
         },
