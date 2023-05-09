@@ -9,7 +9,7 @@
 // import PostView from "../components/PostView";
 import ScrollDisplay from "../../../components/scrollDisplay";
 //import data from "../../data/seedPost.json";
-import { useRouter } from "next/router";
+//import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import PostShape from "../../../components/PostShape";
 
@@ -18,13 +18,13 @@ export default function MainPageCategory({
   setCurrentPost,
   currentPost,
   searchQuery,
-  setCategoryQuery,
+  //setCategoryQuery,
   searchBarQuery,
 }) {
-  const router = useRouter();
-  const { catName } = router.query;
-  //console.log(catName);
-  setCategoryQuery(catName);
+  //const router = useRouter();
+  //const { catName } = router.query;
+  console.log("here");
+  //setCategoryQuery(catName);
   //what props and callbacks should we use?
   return (
     <div>

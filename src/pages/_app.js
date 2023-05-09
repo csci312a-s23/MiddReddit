@@ -56,6 +56,7 @@ function MainApp({
       .then((resp) => resp.json())
       .then((data) => {
         setSearchQuery(data);
+        console.log(categoryQuery);
       })
       .catch((error) => console.log(error));
   }, [currentPost, categoryQuery]);
@@ -97,6 +98,7 @@ function MainApp({
   function goToCategory(category) {
     if (category) {
       router.push(`/category/${category}`);
+      console.log("here2");
       setCategoryQuery(category); //so i don't have to figure out how to access id from name yet
     }
   }
