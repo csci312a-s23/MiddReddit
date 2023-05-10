@@ -168,8 +168,6 @@ function MainApp({
         </Head>
         <CssBaseline />
         <main className={styles.main}>
-          {/*<Menubar handleClick={handleClickMenubar} />*/}
-
           <MenuBar
             handleClick={handleClickMenubar}
             // signedIn={signedIn}
