@@ -3,6 +3,7 @@ import BaseModel from "./BaseModel";
 import { Model } from "objection";
 import Category from "./Category";
 import User from "./User";
+import Comment from "./Comment";
 export default class Post extends BaseModel {
   // Table name is the only required property.
   static get tableName() {
@@ -48,6 +49,14 @@ export default class Post extends BaseModel {
         join: {
           from: "Post.madeBy",
           to: "User.id",
+        },
+      },
+      comments: {
+        relation: Model.HasManyRelation,
+        modelClass: Comment,
+        join: {
+          from: "Post.id",
+          to: "Comment.postId",
         },
       },
     };

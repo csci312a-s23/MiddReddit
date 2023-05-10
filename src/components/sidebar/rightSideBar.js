@@ -6,11 +6,16 @@
   Profile: takes user to their profile
   etc: (WIP)
 */
+import EventView from "../EventView";
+import TopPosts from "../TopPosts";
+import events from "../../../data/seedEvent.json";
+import { Stack } from "@mui/material";
 
 export default function RightSidebar({}) {
   return (
-    <div>
-      <h2>I am a sidebar.</h2>
-    </div>
+    <Stack spacing={2}>
+      <TopPosts />
+      <EventView events={events} />
+    </Stack>
   );
 }

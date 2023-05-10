@@ -18,7 +18,7 @@ import styles from "../styles/MiddReddit.module.css";
 import { styled } from "@mui/material/styles";
 import MenuBar from "@/components/menubar";
 import { ButtonGroup, CssBaseline, Fab } from "@mui/material";
-import { useScrollTrigger } from "@mui/material";
+//import { useScrollTrigger } from "@mui/material";
 import * as React from "react";
 import { CacheProvider } from "@emotion/react";
 import createEmotionCache from "../material/createEmotionCache";

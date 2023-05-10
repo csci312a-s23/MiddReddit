@@ -1,61 +1,92 @@
-import { render } from "@testing-library/react";
-import { knex } from "../../knex/knex.js";
-import mockRouter from "next-router-mock";
-import { createDynamicRouteParser } from "next-router-mock/dynamic-routes";
-
-// components
-import MainApp from "../pages/_app.js";
+import { render, act } from "@testing-library/react";
+import App from "../pages/_app";
+//nimport Secure from "../pages/secure";
+//import { useRouter } from "next/router";
+import { useSession, SessionProvider } from "next-auth/react";
 import MainPage from "../pages/index.js";
+//import mockRouter from "next-router-mock";
 
-// Replace the router with the mock
 jest.mock("next/router", () => require("next-router-mock"));
 
-// Tell the mock router about the pages we will use (so we can use dynamic routes)
-mockRouter.useParser(
-  createDynamicRouteParser([
-    // These paths should match those found in the `/pages` folder:
-    "/category/[catName]",
-    "/posts/[postID]",
-    "/posts/create",
-    "/index",
-  ])
-);
+// Mock the NextAuth package
+jest.mock("next-auth/react");
 
-// We wrap the actual fetch implementation during testing so that we can introduce
-// the absolute URL (needed on the server but not on the browser)
-const originalFetch = global.fetch;
-global.fetch = (url, ...params) => {
-  if (typeof url === "string" && url.startsWith("/")) {
-    return originalFetch(`http://0.0.0.0:3000${url}`, ...params);
-  }
-  return originalFetch(url, ...params);
-};
-
-describe("End-to-end testing", () => {
-  beforeAll(() => {
-    // Ensure test database is initialized before an tests
-    return knex.migrate.rollback().then(() => knex.migrate.latest());
-  });
-
+// For some reason "fetch" is no longer global and this alternate import
+// approach seems to be required: https://github.com/wheresrhys/fetch-mock-jest#node-fetch
+jest.mock("node-fetch", () => require("fetch-mock-jest").sandbox());
+const fetchMock = require("node-fetch");
+//eslint-disable-next-line  react/display-name
+jest.mock("../components/TopPosts.js", () => () => {
+  return <mock-TopPosts data-testid="topposts" />;
+});
+describe("Client-side testing of secure pages", () => {
   beforeEach(() => {
-    mockRouter.setCurrentUrl("/");
-    // Reset contents of the test database
-    return knex.seed.run();
+    fetchMock.get("/api/posts", () => {
+      return [];
+    });
+    fetchMock.get("/api/posts?top=10", () => {
+      return [];
+    });
+    fetchMock.get("/api/categories", () => {
+      return [];
+    });
   });
 
-  describe.skip("Testing MiddReddit end-to-end behavior", () => {
-    test("Render index.js component", () => {
-      const mockSession = {
-        expires: "1",
-        user: { email: "a", name: "Delta", image: "c" },
-      };
-      const mockUseSession = jest.fn();
+  afterEach(() => {
+    // Clear all mocks between tests
+    jest.resetAllMocks();
+  });
 
-      mockUseSession.mockReturnValueOnce([mockSession, false]);
+  /* test("Renders secure portions of page when logged in", async () => {
+    // When rendering an individual page we can just mock useSession (in this case to
+    // simulate an authenticated user)
+    useSession.mockReturnValue({
+      data: {
+        user: { id: 1 },
+        expires: new Date(Date.now() + 2 * 86400).toISOString(),
+      },
+      status: "authenticated",
+    });
+    render(<Secure />);
+    expect(useSession).toBeCalledWith({ required: true });
+    expect(screen.getByText(/\{ "user": \{ "id": 1 \}/i)).toBeInTheDocument();
+  });
 
-      const pageProps = { mockSession };
+  test("Doesn't render secure portions when not logged in", async () => {
+    useSession.mockReturnValue({ data: null, status: "unauthenticated" });
+    render(<Secure />);
+    expect(
+      screen.queryByText(/\{ "user": \{ "id": 1 \}/i)
+    ).not.toBeInTheDocument();
+  });
+*/
+  test("Render app with session provider", async () => {
+    // When rendering _app, (or any component containing the SessionProvider component)
+    // we need to mock the provider to prevent NextAuth from attempting to make API requests
+    // for the session.
+    SessionProvider.mockImplementation(({ children }) => (
+      <mock-provider>{children}</mock-provider>
+    ));
 
-      render(<MainApp Component={MainPage} pageProps={pageProps} />);
+    useSession.mockReturnValue({
+      data: {
+        user: { id: 1 },
+        expires: new Date(Date.now() + 2 * 86400).toISOString(),
+      },
+      status: "authenticated",
+    });
+
+    // Set the session prop expected by our _app component
+    render(<App Component={MainPage} pageProps={{ session: undefined }} />);
+    //expect(screen.getByText(/\{ "user": \{ "id": 1 \}/i)).toBeInTheDocument();
+
+    // You were getting errors about actions not wrapped in `act`. That is result of asynchronous actions
+    // making change to your component after all asserts have completed. The "right" fix is to use
+    // the testing libraries asynchronous helpers to wait for the expected changes to take place. Alternately
+    // you could manually wait for outstanding promises to complete (wrapping the wait in an act call)
+    // with the following code. See https://kentcdodds.com/blog/fix-the-not-wrapped-in-act-warning.
+    await act(async () => {
+      await new Promise(process.nextTick);
     });
   });
 });

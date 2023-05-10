@@ -1,0 +1,23 @@
+[
+  {
+    "id": 0,
+    "title": "MiddChella",
+    "details": "Concert in Wilson Hall April 28 at 9pm in Wilson Hall!",
+    "date": "2023-04-28",
+    "posted": "2023-04-28T04:10:08.250Z"
+  },
+  {
+    "id": 1,
+    "title": "UMOJA Cruise",
+    "details": "UMOJA Cruise 4/29. Take the Bus at McCullough. RSVP with UMOJA.",
+    "date": "2023-04-28",
+    "posted": "2023-04-28T04:10:48.250Z"
+  },
+  {
+    "id": 2,
+    "title": "Nocturne",
+    "details": "Campus-wide art show 5/6 starting at 7pm!",
+    "date": "2023-05-06",
+    "posted": "2023-04-28T04:12:38.250Z"
+  }
+]
