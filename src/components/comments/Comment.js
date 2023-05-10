@@ -12,10 +12,33 @@ export default function Comment({ comment, submitComment, indent }) {
   const handleClick = () => {
     setEditorVisible(true);
   };
-  const submitUpvote = () => {
+  const submitUpvote = async (upvoteOrDownVote) => {
     console.log(comment);
-    //need conditional put or post to get unique behavior for upvotes
+    const newCommentUpvote = {
+      commentId: comment.id,
+      upvote: upvoteOrDownVote,
+    };
+    const params = {
+      method: "POST",
+      body: JSON.stringify(newCommentUpvote),
+      headers: new Headers({
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      }),
+    };
+    const response = await fetch(
+      `/api/posts/${comment.post.id}/commentUpvotes`,
+      params
+    );
+    const submittedCommentUpvote = await response.json();
+
+    console.log(submittedCommentUpvote);
   };
+  const upvotes = comment.votes.reduce(
+    (accumulator, vote) => (vote.upvote ? accumulator + 1 : accumulator - 1),
+    0
+  );
+
   const childrenComments = comment.children.map((child) => (
     <Comment
       key={child.id}
@@ -30,7 +53,8 @@ export default function Comment({ comment, submitComment, indent }) {
         {comment.author.name} &emsp; <em>{dayjs(comment.posted).fromNow()}</em>{" "}
       </p>
       <p onClick={() => console.log(comment)}>{comment.contents}</p>
-      <p onClick={submitUpvote}>Upvote</p>
+      <p onClick={() => submitUpvote(true)}>Upvote {upvotes}</p>
+      <p onClick={() => submitUpvote(false)}>Downvote </p>
       <p
         style={{ color: replyColor, fontSize: 15 }}
         onMouseEnter={() => setEnterReplyColor(!enterReplyColor)}

@@ -19,12 +19,14 @@ const handler = nc({ onError })
         .findById(req.query.id)
         .withGraphJoined(
           `[category, comments.${r(
+            //recurisve algorithm here to fetch nested comments
             "[children?, author, post,parent,votes]",
             4
           )}]`
         )
 
         .modifyGraph("comments", (builder) => {
+          //only fetching parent comments, similar to categories
           builder.where("parentId", null);
         })
         .throwIfNotFound();
