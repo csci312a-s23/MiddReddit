@@ -28,6 +28,36 @@ import AddButton from "@/components/AddButton";
 
 const clientSideEmotionCache = createEmotionCache();
 
+//Used to get a flat list of categories
+const fetchAllCategoryOptions = (categories) => {
+  const categoryFlat = [];
+  const bfs = (nodes) => {
+    let count = 0;
+    let queue = [...nodes];
+    while (true) {
+      if (queue.length === 0) {
+        break;
+      }
+      let nextQueue = [];
+      const len = queue.length;
+      for (let i = 0; i < len; i++) {
+        const cat = queue.shift();
+        categoryFlat.push({
+          name: cat.name,
+          id: count,
+        });
+        count++;
+        if (cat.children) {
+          nextQueue = nextQueue.concat(cat.children);
+        }
+      }
+      queue = nextQueue;
+    }
+  };
+  bfs(categories);
+  return categoryFlat;
+};
+
 function MainApp({
   Component,
   pageProps: { session, ...pageProps },
@@ -36,7 +66,10 @@ function MainApp({
   const router = useRouter();
   const [currentPost, setCurrentPost] = useState();
   const [searchQuery, setSearchQuery] = useState();
+  //Nested list of categories
   const [categories, setCategories] = useState();
+  //Regular flat list of all categories
+  const [categoriesList, setCategoriesList] = useState([]);
   //These two states are used to enable buttons in the menubar and create posts
   const [createPost, setCreatePost] = useState(true);
   //To test signed in functionality change false -> true
@@ -66,6 +99,7 @@ function MainApp({
       .then((resp) => resp.json())
       .then((data) => {
         setCategories(data);
+        setCategoriesList(fetchAllCategoryOptions(data));
       })
       .catch((error) => console.log(error));
   }, []);
@@ -98,7 +132,7 @@ function MainApp({
   function goToCategory(category) {
     if (category) {
       router.push(`/category/${category}`);
-      console.log("here2");
+      console.log("goToCategory");
       setCategoryQuery(category); //so i don't have to figure out how to access id from name yet
     }
   }
@@ -112,6 +146,7 @@ function MainApp({
     currentPost,
     searchQuery,
     categories,
+    categoriesList,
     searchBarQuery,
     goToCategory,
     setOpenRightSideBar,
@@ -119,7 +154,7 @@ function MainApp({
     setCategoryQuery,
   };
 
-  //console.log(categories);
+  //console.log(categoriesList);
 
   //This is not going to work right now obviously but this is the idea we should go for so they can only edit their own posts
   //const MyPosts = collection.filter(post => post.owner === user.name);
@@ -143,6 +178,7 @@ function MainApp({
             setOpenRightSideBar={setOpenRightSideBar}
             setSearchBarQuery={setSearchBarQuery}
             goToCategory={goToCategory}
+            categoriesList={categoriesList}
           />
 
           <div className={styles.body}>

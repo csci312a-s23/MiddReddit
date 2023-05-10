@@ -38,7 +38,7 @@ export default function SearchComponent({
   goToCategory,
   setSearchBarQuery,
   handleClick,
-  categories,
+  categoriesList,
 }) {
   //All the props are controlled in menubar to give a data hierarchy
   return (
@@ -56,7 +56,7 @@ export default function SearchComponent({
         goToCategory={goToCategory}
         setSearchBarQuery={setSearchBarQuery}
         handleClick={handleClick}
-        categories={categories}
+        categoriesList={categoriesList}
       />
     </Search>
   );

@@ -12,37 +12,10 @@ import PropTypes from "prop-types";
 import PostShape from "./PostShape";
 import { TextField, Stack, Autocomplete, Button } from "@mui/material";
 
-const fetchAllCategoryOptions = (categories) => {
-  const categoryFlat = [];
-  const bfs = (nodes) => {
-    let queue = [...nodes];
-    while (true) {
-      if (queue.length === 0) {
-        break;
-      }
-      let nextQueue = [];
-      const len = queue.length;
-      for (let i = 0; i < len; i++) {
-        const cat = queue.shift();
-        categoryFlat.push({
-          label: cat.name,
-          id: cat.id,
-        });
-        if (cat.children) {
-          nextQueue = nextQueue.concat(cat.children);
-        }
-      }
-      queue = nextQueue;
-    }
-  };
-  if (categories) {
-    bfs(categories);
-  }
-  return categoryFlat;
-};
 export default function Editor({
   post,
   categories,
+  categoriesList,
   submitPost,
   setCreatePost,
   setOpenRightSideBar,
@@ -51,14 +24,16 @@ export default function Editor({
   const [contents, setContents] = useState(post ? post.contents : "");
   const [postCategory, setPostCategory] = useState(null);
 
-  // if (!categories) {
-  //   fetch categories here if solve the refresh -> error
-  //   fetch("/api/categories")
-  //     .then((resp) => resp.json())
-  //     .then((data) => {
-  //       categories = data;
-  //     })
-  // }
+  if (!categories) {
+    // fetch categories here if solve the refresh -> error
+    // fetch("/api/categories")
+    //   .then((resp) => resp.json())
+    //   .then((data) => {
+    //     categories = data;
+    //   })
+  }
+
+  //console.log(categoriesList);
 
   const complete = (submit) => {
     if (!submit) {
@@ -106,7 +81,8 @@ export default function Editor({
           disablePortal
           value={postCategory}
           id="category-search-bar"
-          options={fetchAllCategoryOptions(categories)}
+          options={categoriesList}
+          getOptionLabel={(option) => option.name}
           onChange={(event, newValue) => {
             setPostCategory(newValue);
           }}
@@ -148,6 +124,7 @@ Editor.propTypes = {
   post: PostShape,
   submitPost: PropTypes.func.isRequired,
   categories: PropTypes.array.isRequired,
+  categoriesList: PropTypes.array.isRequired,
   setCreatePost: PropTypes.func,
   setOpenRightSideBar: PropTypes.func,
 };

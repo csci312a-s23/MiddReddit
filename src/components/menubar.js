@@ -34,6 +34,7 @@ export default function MenuBar({
   setOpenRightSideBar,
   setSearchBarQuery,
   goToCategory,
+  categoriesList,
 }) {
   //Sets an anchor point on the page for buttons when IconButton is hit
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -75,40 +76,13 @@ export default function MenuBar({
     />
   );
 
-  //Temporary list for searchbar dropdown
-  const categories = [
-    { id: 0, name: "courses" },
-    { id: 1, name: "confessionals" },
-    { id: 2, name: "meals" },
-    { id: 3, name: "sports" },
-    { id: 4, name: "dorms" },
-    { id: 5, name: "Events" },
-    { id: 6, name: "cs" },
-    { id: 7, name: "bio" },
-    { id: 8, name: "theatre" },
-    { id: 9, name: "cs312" },
-    { id: 10, name: "ross" },
-    { id: 11, name: "anthro" },
-    { id: 12, name: "music" },
-    { id: 13, name: "math" },
-    { id: 14, name: "econ" },
-    { id: 15, name: "russian" },
-    { id: 16, name: "anth 103" },
-    { id: 17, name: "anth 306" },
-    { id: 18, name: "musc 101" },
-    { id: 19, name: "musc 260" },
-    { id: 20, name: "musc 500" },
-    { id: 21, name: "math 118" },
-    { id: 22, name: "math 323" },
-  ];
-
   //Create the chip in autocomplete when we enter or exit a category
-  const defaultChip = categories.find((ind) => ind.name === catName);
+  const defaultChip = categoriesList.find((ind) => ind.name === catName);
   useEffect(() => {
     if (defaultChip === undefined) {
       setValue([]);
     } else {
-      setValue([categories[defaultChip.id]]);
+      setValue([categoriesList[defaultChip.id]]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [catName]);
@@ -160,7 +134,7 @@ export default function MenuBar({
             goToCategory={goToCategory}
             setSearchBarQuery={setSearchBarQuery}
             handleClick={handleClick}
-            categories={categories}
+            categoriesList={categoriesList}
           />
 
           {/*Change location of name*/}

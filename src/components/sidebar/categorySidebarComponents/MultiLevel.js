@@ -41,7 +41,12 @@ export default function MultiLevel({ item, goToCategory, setSearchBarQuery }) {
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List sx={{ pl: 1 }} component="div" disablePadding>
           {children.map((child) => (
-            <MenuItem key={child.id} item={child} goToCategory={goToCategory} />
+            <MenuItem
+              key={child.id}
+              item={child}
+              goToCategory={goToCategory}
+              setSearchBarQuery={setSearchBarQuery}
+            />
           ))}
         </List>
       </Collapse>
