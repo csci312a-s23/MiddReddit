@@ -105,7 +105,7 @@ function MainApp({
       setCategoryQuery(category); //so i don't have to figure out how to access id from name yet
     }
   }
-
+  console.log(session);
   const props = {
     ...pageProps,
     goToPost,

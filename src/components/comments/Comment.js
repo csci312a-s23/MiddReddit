@@ -1,6 +1,12 @@
 import * as dayjs from "dayjs";
 import CommentEditor from "./CommentEditor";
 import { useState } from "react";
+import Stack from "@mui/material/Stack";
+import ArrowUpwardRoundedIcon from "@mui/icons-material/ArrowUpwardRounded";
+import ArrowDownwardRoundedIcon from "@mui/icons-material/ArrowDownwardRounded";
+import { Paper } from "@mui/material";
+import { useSession } from "next-auth/react";
+
 export default function Comment({
   comment,
   submitComment,
@@ -46,6 +52,21 @@ export default function Comment({
     (accumulator, vote) => (vote.upvote ? accumulator + 1 : accumulator - 1),
     0
   );
+  const { data: session } = useSession();
+  const userId = session ? session.user.id : 0;
+
+  let upvoteColor,
+    downvoteColor = "black";
+
+  const userVote = comment.votes.filter(
+    (vote) => parseInt(vote.ownerId) === userId
+  );
+  const userUpvoteOrDownvote = userVote[0] ? userVote[0].upvote : undefined; //extra step so not indexing empty array
+
+  if (userUpvoteOrDownvote !== undefined) {
+    //weird ternary condition here
+    userUpvoteOrDownvote ? (upvoteColor = "blue") : (downvoteColor = "orange");
+  }
 
   const childrenComments = comment.children.map((child) => (
     <Comment
@@ -59,21 +80,46 @@ export default function Comment({
 
   return (
     <div style={{ paddingLeft: 20 * indent }}>
-      <p>
-        {comment.author.name} &emsp; <em>{dayjs(comment.posted).fromNow()}</em>{" "}
-      </p>
-      <p onClick={() => console.log(comment)}>{comment.contents}</p>
-      <p onClick={() => submitUpvote(true)}>Upvote {upvotes}</p>
-      <p onClick={() => submitUpvote(false)}>Downvote </p>
-      <p
-        style={{ color: replyColor, fontSize: 15 }}
-        onMouseEnter={() => setEnterReplyColor(!enterReplyColor)}
-        onMouseLeave={() => setEnterReplyColor(!enterReplyColor)}
-        onClick={handleClick}
-      >
-        Reply
-      </p>
+      <Paper sx={{ my: 2, pl: 1, ml: 1 }} elevation={4}>
+        <Stack direction="row">
+          <Stack
+            direction="column"
+            alignItems="center"
+            justifyContent="center"
+            sx={{ mr: 2 }}
+            spacing={0}
+          >
+            <ArrowUpwardRoundedIcon
+              style={{ marginTop: "0px", color: upvoteColor }}
+              onClick={() => submitUpvote(true)}
+            />
+            <p style={{ margin: "1px", marginLeft: "2px" }}>{upvotes}</p>
 
+            <ArrowDownwardRoundedIcon
+              style={{ color: downvoteColor }}
+              onClick={() => submitUpvote(false)}
+            />
+          </Stack>
+          <div>
+            <p style={{ marginBottom: "6px" }}>
+              {comment.author.name} &emsp;{" "}
+              <em>{dayjs(comment.posted).fromNow()}</em>{" "}
+            </p>
+            <p onClick={() => console.log(comment)} style={{ margin: "0px" }}>
+              {comment.contents}
+            </p>
+
+            <p
+              style={{ color: replyColor, fontSize: 15, marginTop: "6px" }}
+              onMouseEnter={() => setEnterReplyColor(!enterReplyColor)}
+              onMouseLeave={() => setEnterReplyColor(!enterReplyColor)}
+              onClick={handleClick}
+            >
+              Reply
+            </p>
+          </div>
+        </Stack>
+      </Paper>
       {editorVisible && (
         <CommentEditor
           parentComment={comment}
