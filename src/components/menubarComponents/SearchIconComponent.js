@@ -20,8 +20,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 export default function SearchIconComponent({}) {
   return (
     <SearchIconWrapper>
-      {" "}
-      <SearchIcon />{" "}
+      <SearchIcon />
     </SearchIconWrapper>
   );
 }
