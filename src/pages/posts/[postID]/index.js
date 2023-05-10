@@ -6,6 +6,7 @@ export default function Post({}) {
   const [postToDisplay, setPostToDisplay] = useState();
   const router = useRouter();
   const [latestComment, setLatestComment] = useState(); //using to trigger rerender upon comment
+  const [latestCommentUpvote, setLatestCommentUpvote] = useState(); //same as above
   const { postID } = router.query;
 
   async function getPostFromId(id) {
@@ -19,7 +20,7 @@ export default function Post({}) {
 
   useEffect(() => {
     getPostFromId(postID);
-  }, [postID, latestComment]);
+  }, [postID, latestComment, latestCommentUpvote]);
 
   const submitComment = async (comment) => {
     //had categoryId as a parameter, not sure if that needs to stay
@@ -60,6 +61,7 @@ export default function Post({}) {
         <CommentView
           comments={postToDisplay.comments}
           submitComment={submitComment}
+          setLatestCommentUpvote={setLatestCommentUpvote}
         />
       )}
     </>

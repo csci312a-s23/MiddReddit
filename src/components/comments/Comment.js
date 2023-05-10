@@ -1,22 +1,22 @@
 import * as dayjs from "dayjs";
 import CommentEditor from "./CommentEditor";
 import { useState } from "react";
-export default function Comment({ comment, submitComment, indent }) {
+export default function Comment({
+  comment,
+  submitComment,
+  indent,
+  setLatestCommentUpvote,
+}) {
   const [enterReplyColor, setEnterReplyColor] = useState(true);
   const [editorVisible, setEditorVisible] = useState(false); //don't need authz to show editor, but to submit comment
   const relativeTime = require("dayjs/plugin/relativeTime");
   dayjs.extend(relativeTime);
 
-  const replyColor = enterReplyColor ? "black" : "blue"; //might change this to an actual link
-  //to get the pointer thinger on the curser to change
-  const handleClick = () => {
-    setEditorVisible(true);
-  };
   const submitUpvote = async (upvoteOrDownVote) => {
-    console.log(comment);
     const newCommentUpvote = {
       commentId: comment.id,
       upvote: upvoteOrDownVote,
+      posted: new Date().toISOString(),
     };
     const params = {
       method: "POST",
@@ -31,9 +31,17 @@ export default function Comment({ comment, submitComment, indent }) {
       params
     );
     const submittedCommentUpvote = await response.json();
-
     console.log(submittedCommentUpvote);
+    setLatestCommentUpvote(submittedCommentUpvote);
   };
+
+  const replyColor = enterReplyColor ? "black" : "blue"; //might change this to an actual link
+  //to get the pointer thinger on the curser to change
+
+  const handleClick = () => {
+    setEditorVisible(true);
+  };
+
   const upvotes = comment.votes.reduce(
     (accumulator, vote) => (vote.upvote ? accumulator + 1 : accumulator - 1),
     0
@@ -45,8 +53,10 @@ export default function Comment({ comment, submitComment, indent }) {
       comment={child}
       indent={indent + 1}
       submitComment={submitComment}
+      setLatestCommentUpvote={setLatestCommentUpvote}
     />
   )); //
+
   return (
     <div style={{ paddingLeft: 20 * indent }}>
       <p>

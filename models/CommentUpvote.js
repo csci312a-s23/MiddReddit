@@ -26,6 +26,7 @@ export default class CommentUpvote extends BaseModel {
         ownerId: { type: "integer" },
         commentId: { type: "integer" },
         upvote: { type: "boolean" },
+        posted: { type: "string" },
       },
     };
   }

@@ -23,14 +23,15 @@ const handler = nc({ onError }).post(authenticated, async (req, res) => {
   const booleanUpvote = booleanUpvoteObject[0]
     ? booleanUpvoteObject[0].upvote
     : undefined;
-  console.log(booleanUpvote);
   if (booleanUpvote === Number(req.body.upvote)) {
-    const deleteUpvoteQuery = await CommentUpvote.query()
+    //reclicking the button, undo previous
+    await CommentUpvote.query()
       .delete()
       .where("commentId", newCommentUpvote.commentId)
       .where("ownerId", newCommentUpvote.ownerId);
-    res.status(200).json(deleteUpvoteQuery);
+    res.status(200).json("deleted"); //returning deleted so it is different from the object being deleted -> want to trigger rerender
   } else if (booleanUpvote === undefined) {
+    //nothing there yet: going to add upvote or downvote
     //insert new vote
     const newCommentUpvoteQuery = await CommentUpvote.query().insertAndFetch(
       newCommentUpvote
