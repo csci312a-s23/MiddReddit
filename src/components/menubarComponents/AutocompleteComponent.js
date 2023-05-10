@@ -35,7 +35,7 @@ export default function AutocompleteComponent({
   goToCategory,
   setSearchBarQuery,
   handleClick,
-  categories,
+  categoriesList,
 }) {
   return (
     <Autocomplete
@@ -50,7 +50,7 @@ export default function AutocompleteComponent({
       limitTags={1}
       id="tag-outlined"
       //Dropdown items
-      options={!value[0] ? categories : []}
+      options={!value[0] ? categoriesList : []}
       getOptionLabel={(option) => option.name}
       //Text displayed when there is no match
       noOptionsText={
