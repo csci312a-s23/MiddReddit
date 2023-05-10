@@ -20,7 +20,7 @@ export default class Event extends BaseModel {
         id: { type: "integer" },
         title: { type: "string" },
         details: { type: "string" },
-        date: { type: "string"},
+        date: { type: "string" },
         posted: { type: "string" },
       },
     };

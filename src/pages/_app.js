@@ -13,7 +13,6 @@ import RightSidebar from "../components/sidebar/rightSideBar";
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { SessionProvider } from "next-auth/react";
 import fetch from "node-fetch";
 import styles from "../styles/MiddReddit.module.css";
 import { styled } from "@mui/material/styles";
@@ -21,17 +20,42 @@ import MenuBar from "@/components/menubar";
 import { ButtonGroup, CssBaseline, Fab } from "@mui/material";
 //import { useScrollTrigger } from "@mui/material";
 import * as React from "react";
-//import { Toolbar } from "@mui/material";
 import { CacheProvider } from "@emotion/react";
 import createEmotionCache from "../material/createEmotionCache";
 import AddIcon from "@mui/icons-material/Add";
+import { SessionProvider, useSession } from "next-auth/react";
+import AddButton from "@/components/AddButton";
 
 const clientSideEmotionCache = createEmotionCache();
 
-const fabStyle = {
-  position: "absolute",
-  bottom: "5%",
-  right: "5%",
+//Used to get a flat list of categories
+const fetchAllCategoryOptions = (categories) => {
+  const categoryFlat = [];
+  const bfs = (nodes) => {
+    let count = 0;
+    let queue = [...nodes];
+    while (true) {
+      if (queue.length === 0) {
+        break;
+      }
+      let nextQueue = [];
+      const len = queue.length;
+      for (let i = 0; i < len; i++) {
+        const cat = queue.shift();
+        categoryFlat.push({
+          name: cat.name,
+          id: count,
+        });
+        count++;
+        if (cat.children) {
+          nextQueue = nextQueue.concat(cat.children);
+        }
+      }
+      queue = nextQueue;
+    }
+  };
+  bfs(categories);
+  return categoryFlat;
 };
 
 function MainApp({
@@ -42,7 +66,10 @@ function MainApp({
   const router = useRouter();
   const [currentPost, setCurrentPost] = useState();
   const [searchQuery, setSearchQuery] = useState();
+  //Nested list of categories
   const [categories, setCategories] = useState();
+  //Regular flat list of all categories
+  const [categoriesList, setCategoriesList] = useState([]);
   //These two states are used to enable buttons in the menubar and create posts
   const [createPost, setCreatePost] = useState(true);
   //To test signed in functionality change false -> true
@@ -53,6 +80,8 @@ function MainApp({
 
   const [categoryQuery, setCategoryQuery] = useState(); //will use for searching by category
 
+  const [searchBarQuery, setSearchBarQuery] = useState("");
+
   useEffect(() => {
     //handles if we are within a category or not, gets rid of if statement
     const searchQuery = categoryQuery ? `?category=${categoryQuery}` : "";
@@ -60,6 +89,7 @@ function MainApp({
       .then((resp) => resp.json())
       .then((data) => {
         setSearchQuery(data);
+        console.log(categoryQuery);
       })
       .catch((error) => console.log(error));
   }, [currentPost, categoryQuery]);
@@ -69,6 +99,7 @@ function MainApp({
       .then((resp) => resp.json())
       .then((data) => {
         setCategories(data);
+        setCategoriesList(fetchAllCategoryOptions(data));
       })
       .catch((error) => console.log(error));
   }, []);
@@ -101,9 +132,12 @@ function MainApp({
   function goToCategory(category) {
     if (category) {
       router.push(`/category/${category}`);
+      console.log("goToCategory");
       setCategoryQuery(category); //so i don't have to figure out how to access id from name yet
     }
   }
+
+  //console.log(categories);
 
   const props = {
     ...pageProps,
@@ -112,11 +146,15 @@ function MainApp({
     currentPost,
     searchQuery,
     categories,
+    categoriesList,
+    searchBarQuery,
     goToCategory,
     setOpenRightSideBar,
     setCreatePost,
     setCategoryQuery,
   };
+
+  //console.log(categoriesList);
 
   //This is not going to work right now obviously but this is the idea we should go for so they can only edit their own posts
   //const MyPosts = collection.filter(post => post.owner === user.name);
@@ -130,14 +168,15 @@ function MainApp({
         </Head>
         <CssBaseline />
         <main className={styles.main}>
-          {/*<Menubar handleClick={handleClickMenubar} />*/}
-
           <MenuBar
             handleClick={handleClickMenubar}
             // signedIn={signedIn}
             openLeftSideBar={openLeftSideBar}
             setOpenLeftSideBar={setOpenLeftSideBar}
             setOpenRightSideBar={setOpenRightSideBar}
+            setSearchBarQuery={setSearchBarQuery}
+            goToCategory={goToCategory}
+            categoriesList={categoriesList}
           />
 
           <div className={styles.body}>
@@ -147,6 +186,7 @@ function MainApp({
                   <LeftSidebar
                     categories={categories}
                     goToCategory={goToCategory}
+                    setSearchBarQuery={setSearchBarQuery}
                   />
                 }
               </div>
@@ -155,21 +195,14 @@ function MainApp({
             <div className={styles.mainContentOut}>
               <div className={styles.mainContent}>
                 <Component {...props} />
+
                 {createPost && (
-                  <Fab
-                    sx={fabStyle}
-                    color="primary"
-                    name="Create"
-                    onClick={() => {
-                      handleClickMenubar("create");
-                      setCreatePost(false);
-                      setOpenLeftSideBar(false);
-                      setOpenRightSideBar(false);
-                    }}
-                    // disabled={!!session}
-                  >
-                    <AddIcon />
-                  </Fab>
+                  <AddButton
+                    handleClick={handleClickMenubar}
+                    setCreatePost={setCreatePost}
+                    setOpenLeftSideBar={setOpenLeftSideBar}
+                    setOpenRightSideBar={setOpenRightSideBar}
+                  />
                 )}
               </div>
             </div>

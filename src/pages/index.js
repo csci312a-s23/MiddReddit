@@ -17,6 +17,7 @@ export default function MainPage({
   setCurrentPost,
   currentPost,
   searchQuery,
+  searchBarQuery,
 }) {
   //what props and callbacks should we use?
   return (
@@ -27,6 +28,7 @@ export default function MainPage({
           goToPost={goToPost}
           setCurrentPost={setCurrentPost}
           currentPost={currentPost}
+          searchBarQuery={searchBarQuery}
         />
       )}
     </div>

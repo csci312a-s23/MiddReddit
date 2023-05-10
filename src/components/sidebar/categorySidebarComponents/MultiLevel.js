@@ -8,7 +8,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MenuItem from "./MenuItem";
 
-export default function MultiLevel({ item, goToCategory }) {
+export default function MultiLevel({ item, goToCategory, setSearchBarQuery }) {
   const { children } = item;
   const [open, setOpen] = useState(false);
 
@@ -16,6 +16,7 @@ export default function MultiLevel({ item, goToCategory }) {
     //goToCategory(item.name);
     if (clickBool) {
       goToCategory(item.name);
+      setSearchBarQuery("");
     } else {
       setOpen((prev) => !prev);
     }
@@ -40,7 +41,12 @@ export default function MultiLevel({ item, goToCategory }) {
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List sx={{ pl: 1 }} component="div" disablePadding>
           {children.map((child) => (
-            <MenuItem key={child.id} item={child} goToCategory={goToCategory} />
+            <MenuItem
+              key={child.id}
+              item={child}
+              goToCategory={goToCategory}
+              setSearchBarQuery={setSearchBarQuery}
+            />
           ))}
         </List>
       </Collapse>

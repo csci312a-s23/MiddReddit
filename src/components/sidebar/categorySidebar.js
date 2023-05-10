@@ -5,11 +5,16 @@ import CurrentCategorySidebar from "./categorySidebarComponents/currentCategory"
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 
-export default function CategorySidebar({ categories, goToCategory }) {
+export default function CategorySidebar({
+  categories,
+  goToCategory,
+  setSearchBarQuery,
+}) {
   //eslint-disable-next-line
   const [currentCategory, setCurrentCategory] = useState();
   const router = useRouter();
   const { catName } = router.query;
+
   useEffect(() => {
     const currentCategoryFiltered = categories.filter(
       (category) => category.name === catName
@@ -18,7 +23,12 @@ export default function CategorySidebar({ categories, goToCategory }) {
   }, [catName, categories]);
 
   const newMenu = categories.map((item) => (
-    <MenuItem key={item.id} item={item} goToCategory={goToCategory} />
+    <MenuItem
+      key={item.id}
+      item={item}
+      goToCategory={goToCategory}
+      setSearchBarQuery={setSearchBarQuery}
+    />
   ));
 
   //    {currentCategory && <CurrentCategorySidebar currentCategory={currentCategory}/>}

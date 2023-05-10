@@ -17,22 +17,81 @@ export default function ScrollDisplay({
   goToPost,
   setCurrentPost,
   currentPost,
+  searchBarQuery,
 }) {
-  const postComponents = Posts.map((post) => (
-    <ScrollPost
-      post={post}
-      key={post.id}
-      goToPost={goToPost}
-      setCurrentPost={setCurrentPost}
-      currentPost={currentPost}
-    />
-  ));
+  let looking;
+  let topempty = true;
+  let bottomempty = true;
+  if (searchBarQuery === "" || searchBarQuery === undefined) {
+    looking = false;
+  } else {
+    looking = true;
+  }
+
+  //console.log(searchBarQuery);
+
+  const postComponentsTop = Posts.map((post) => {
+    if (searchBarQuery === "" || searchBarQuery === undefined) {
+      topempty = false;
+      return (
+        <ScrollPost
+          post={post}
+          key={post.id}
+          goToPost={goToPost}
+          setCurrentPost={setCurrentPost}
+          currentPost={currentPost}
+        />
+      );
+    } else {
+      if (post.title.includes(searchBarQuery)) {
+        topempty = false;
+        return (
+          <ScrollPost
+            post={post}
+            key={post.id}
+            goToPost={goToPost}
+            setCurrentPost={setCurrentPost}
+            currentPost={currentPost}
+          />
+        );
+      }
+    }
+  });
+
+  const postComponentsBottom = Posts.map((post) => {
+    if (searchBarQuery === "") {
+      return;
+    } else {
+      if (post.author.includes(searchBarQuery)) {
+        bottomempty = false;
+        return (
+          <ScrollPost
+            post={post}
+            key={post.id}
+            goToPost={goToPost}
+            setCurrentPost={setCurrentPost}
+            currentPost={currentPost}
+          />
+        );
+      }
+    }
+  });
+
+  //console.log(topempty);
+  //console.log(bottomempty);
+
+  //Style for when top or bottom component might be empty
+
   return (
     <div className={styles.body}>
       <div>
         {/*<ul>{postComponents}</ul>*/}
-
-        {postComponents}
+        {looking && <h2> Titles </h2>}
+        {topempty && <p>No titles match your search query</p>}
+        {postComponentsTop}
+        {looking && <h2> Authors </h2>}
+        {bottomempty && looking && <p>No authors match your search query</p>}
+        {postComponentsBottom}
       </div>
     </div>
   );
