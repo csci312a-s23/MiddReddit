@@ -9,8 +9,7 @@ import { testApiHandler } from "next-test-api-route-handler";
 //endpoints
 import categories_endpoint from "../pages/api/categories.js";
 import posts_endpoint from "../pages/api/posts/index.js";
-import specificPostEndpoint from "../pages/api/posts/[id]/index.js";
-//import specific_post_endpoint from "../pages/api/posts/[id]/index.js";
+import specific_post_endpoint from "../pages/api/posts/[id]/index.js";
 //data
 import category_data from "../../data/test-data/test-seedCategory.json";
 import { knex } from "../../knex/knex.js";
@@ -145,20 +144,15 @@ describe("MiddReddit API", () => {
         },
       });
     });
-    test("GET /api/posts/[id] should return a specific post, with relations", async () => {
+
+    test("GET /api/posts/[id] should return a single post", async () => {
       await testApiHandler({
         rejectOnHandler: true,
-        handler: specificPostEndpoint,
-        url: "/api/posts/3",
+        handler: specific_post_endpoint,
+        paramsPatcher: (params) => (params.id = 1), // Testing dynamic routes requires patcher
         test: async ({ fetch }) => {
-          const postTitle = "2/6 Ross Meal";
-          //const postCategories = ["courses","confessionals"];
           const res = await fetch();
-          const res_object = await res.json();
-          //const res_categories = res_object.category.map((category) => category.title);
-          expect(res_object).toMatchObject(3);
-          expect(res_object.title).toMatchObject(postTitle);
-          //expect(res_categories).toMatchObject(postCategories);
+          await expect(res.json()).resolves.toMatchObject(post_data[1]);
         },
       });
     });
@@ -194,7 +188,6 @@ describe("MiddReddit API", () => {
     });
   });
 });
-
 /* describe("Tag testing", () => {
     
   }); */

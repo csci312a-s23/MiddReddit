@@ -30,7 +30,6 @@ export default function EventView({ events }) {
 
     setShowMore(!showMore);
 
-    console.log("Hello");
     //return {...showMore ? console.log(currentEvent.details) : console.log("GOODBYE")}
   };
 
@@ -74,7 +73,6 @@ export default function EventView({ events }) {
           ];
         }
       } else {
-        console.log("there is no current event");
         FinalReturnArray[i] = [
           <h5 key={eventtitles[i]}>{eventtitles[i]}</h5>,
           showmore ? eventdetails[i] : null,
@@ -135,5 +133,5 @@ export default function EventView({ events }) {
 }
 
 EventView.propTypes = {
-  event: EventShape.isRequired,
+  event: EventShape,
 };
