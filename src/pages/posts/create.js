@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 export default function PostCreator({
   goToPost,
   categories,
-  categoriesList,
+  categoriesListUO,
   setOpenRightSideBar,
 }) {
   const router = useRouter();
@@ -46,7 +46,9 @@ export default function PostCreator({
       const response = await fetch("/api/posts", params);
       if (response.ok) {
         const newPost = await response.json();
+
         if (categoryId) {
+          //Problem Here, separate ids
           await submitTag(newPost.id, categoryId);
         }
         goToPost(newPost);
@@ -61,7 +63,7 @@ export default function PostCreator({
       <Editor
         submitPost={submitPost}
         categories={categories}
-        categoriesList={categoriesList}
+        categoriesListUO={categoriesListUO}
         setOpenRightSideBar={setOpenRightSideBar}
       />
     </main>
@@ -71,6 +73,6 @@ export default function PostCreator({
 PostCreator.propTypes = {
   goToPost: PropTypes.func.isRequired,
   categories: PropTypes.array.isRequired,
-  categoriesList: PropTypes.array.isRequired,
+  categoriesListUO: PropTypes.array.isRequired,
   setOpenRightSideBar: PropTypes.func.isRequired,
 };
