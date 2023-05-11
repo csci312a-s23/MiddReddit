@@ -70,10 +70,6 @@ function MainApp({
   const [categories, setCategories] = useState();
   //Regular flat list of all categories
   const [categoriesList, setCategoriesList] = useState([]);
-  //These two states are used to enable buttons in the menubar and create posts
-  const [createPost, setCreatePost] = useState(true);
-  //To test signed in functionality change false -> true
-  //const [signedIn, setSignedIn] = useState(true);
 
   const [openLeftSideBar, setOpenLeftSideBar] = useState(false);
   const [openRightSideBar, setOpenRightSideBar] = useState(true);
@@ -107,24 +103,18 @@ function MainApp({
   const handleClickMenubar = (menubarCase) => {
     switch (menubarCase) {
       case "create":
-        //Removes Button
-        setCreatePost(false);
         router.push("/posts/create");
       case "mainPage":
-        //Adds Button
-        setCreatePost(true);
         setCategoryQuery();
         router.push("/");
       /*case "signIn":
-        setCreatePost(false);
         router.push("signIn"); */
     }
   };
 
   function goToPost(post) {
     if (post) {
-      setCreatePost(false);
-      setCurrentPost(post.id);
+      setCurrentPost(post);
       router.push(`/posts/${post.id}`);
     }
   }
@@ -150,8 +140,9 @@ function MainApp({
     searchBarQuery,
     goToCategory,
     setOpenRightSideBar,
-    setCreatePost,
+    setOpenLeftSideBar,
     setCategoryQuery,
+    handleClickMenubar,
   };
 
   //console.log(categoriesList);
@@ -170,7 +161,6 @@ function MainApp({
         <main className={styles.main}>
           <MenuBar
             handleClick={handleClickMenubar}
-            // signedIn={signedIn}
             openLeftSideBar={openLeftSideBar}
             setOpenLeftSideBar={setOpenLeftSideBar}
             setOpenRightSideBar={setOpenRightSideBar}
@@ -195,15 +185,6 @@ function MainApp({
             <div className={styles.mainContentOut}>
               <div className={styles.mainContent}>
                 <Component {...props} />
-
-                {createPost && (
-                  <AddButton
-                    handleClick={handleClickMenubar}
-                    setCreatePost={setCreatePost}
-                    setOpenLeftSideBar={setOpenLeftSideBar}
-                    setOpenRightSideBar={setOpenRightSideBar}
-                  />
-                )}
               </div>
             </div>
 

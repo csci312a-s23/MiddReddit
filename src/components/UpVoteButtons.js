@@ -21,6 +21,7 @@ import { useState } from "react";
 import { blue } from "@mui/material/colors";
 
 const updateVotes = async (post) => {
+  /*
   const params = {
     method: "PUT",
     body: JSON.stringify(post),
@@ -29,12 +30,29 @@ const updateVotes = async (post) => {
       "Content-Type": "application/json",
     }),
   };
-  const response = await fetch(`/api/posts/${post.id}`, params);
-  if (response.ok) {
+  console.log(post);
+  console.log(params);
+  console.log("2");
+  // Problem here
+  const response2 = await fetch(`/api/posts/${post.id}`, params);
+  console.log("3");
+  if (response2.ok) {
     // success update
-    const updatedPost = await response.json();
+    const updatedPost = await response2.json();
     console.log(updatedPost);
   }
+  */
+  fetch(`/api/posts/${post.id}`, {
+    method: "PATCH",
+    body: JSON.stringify({
+      upvotes: post.upvotes,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((json) => console.log(json));
 };
 
 export default function UpVoteButtons({ post, allowVote }) {
@@ -65,6 +83,7 @@ export default function UpVoteButtons({ post, allowVote }) {
               update(setUpButton, false);
             }
             // fetch the database
+            //console.log("1");
             updateVotes(post);
           }}
         >

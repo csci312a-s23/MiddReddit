@@ -17,7 +17,6 @@ const fabStyle = {
 
 export default function AddButton({
   handleClick,
-  setCreatePost,
   setOpenLeftSideBar,
   setOpenRightSideBar,
 }) {
@@ -29,7 +28,6 @@ export default function AddButton({
       name="Create"
       onClick={() => {
         handleClick("create");
-        setCreatePost(false);
         setOpenLeftSideBar(false);
         setOpenRightSideBar(false);
       }}
