@@ -24,7 +24,7 @@ const handler = nc({ onError })
       } else {
         query = Post.query().withGraphJoined("category.[parent.^2]");
       }
-      const posts = await query;
+      const posts = await query.withGraphFetched("userMadeBy");
       res.status(200).json(posts);
     } else {
       // Endpoint to fetch all posts, possible filtering by category
