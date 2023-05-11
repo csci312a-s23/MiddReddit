@@ -17,7 +17,6 @@ export default function Editor({
   categories,
   categoriesList,
   submitPost,
-  setCreatePost,
   setOpenRightSideBar,
 }) {
   const [title, setTitle] = useState(post ? post.title : "");
@@ -109,7 +108,6 @@ export default function Editor({
             onClick={() => {
               complete(false);
               setOpenRightSideBar(true);
-              setCreatePost(true);
             }}
           >
             Cancel
@@ -125,6 +123,5 @@ Editor.propTypes = {
   submitPost: PropTypes.func.isRequired,
   categories: PropTypes.array.isRequired,
   categoriesList: PropTypes.array.isRequired,
-  setCreatePost: PropTypes.func,
   setOpenRightSideBar: PropTypes.func,
 };

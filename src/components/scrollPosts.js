@@ -38,7 +38,7 @@ export default function ScrollPost({ post, goToPost, setCurrentPost }) {
         <div
           className={styles.body}
           onClick={() => {
-            setCurrentPost(post.id);
+            setCurrentPost(post);
             goToPost(post);
           }}
         >

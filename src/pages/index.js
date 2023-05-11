@@ -11,6 +11,7 @@ import ScrollDisplay from "../components/scrollDisplay";
 // import LoginWidget from "../components/LoginWidget.js";
 import PropTypes from "prop-types";
 import PostShape from "../components/PostShape";
+import AddButton from "@/components/AddButton";
 
 export default function MainPage({
   goToPost,
@@ -18,6 +19,9 @@ export default function MainPage({
   currentPost,
   searchQuery,
   searchBarQuery,
+  handleClickMenubar,
+  setOpenLeftSideBar,
+  setOpenRightSideBar,
 }) {
   //what props and callbacks should we use?
   return (
@@ -31,6 +35,12 @@ export default function MainPage({
           searchBarQuery={searchBarQuery}
         />
       )}
+
+      <AddButton
+        handleClick={handleClickMenubar}
+        setOpenLeftSideBar={setOpenLeftSideBar}
+        setOpenRightSideBar={setOpenRightSideBar}
+      />
     </div>
   );
 }

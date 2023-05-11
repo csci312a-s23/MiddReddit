@@ -16,7 +16,7 @@ export default function TopPosts({}) {
       .then((data) => {
         setTopPosts(data);
       });
-  });
+  }, []);
 
   let postDisp;
   if (topPosts) {
