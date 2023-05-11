@@ -58,6 +58,8 @@
   position: static;
   width: 250px;
   align-self: stretch;
+  margin-right: 0;
+  margin-left: auto;
   max-height: 100%;
   overflow-y: auto;
   background-color: #1976d2;
