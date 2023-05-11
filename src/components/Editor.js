@@ -15,7 +15,7 @@ import { TextField, Stack, Autocomplete, Button } from "@mui/material";
 export default function Editor({
   post,
   categories,
-  categoriesList,
+  categoriesListUO,
   submitPost,
   setOpenRightSideBar,
 }) {
@@ -80,10 +80,11 @@ export default function Editor({
           disablePortal
           value={postCategory}
           id="category-search-bar"
-          options={categoriesList}
+          options={categoriesListUO}
           getOptionLabel={(option) => option.name}
           onChange={(event, newValue) => {
             setPostCategory(newValue);
+            console.log(postCategory);
           }}
           renderInput={(params) => (
             <TextField
@@ -122,6 +123,6 @@ Editor.propTypes = {
   post: PostShape,
   submitPost: PropTypes.func.isRequired,
   categories: PropTypes.array.isRequired,
-  categoriesList: PropTypes.array.isRequired,
+  categoriesListUO: PropTypes.array.isRequired,
   setOpenRightSideBar: PropTypes.func,
 };

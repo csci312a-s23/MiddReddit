@@ -31,6 +31,7 @@ const clientSideEmotionCache = createEmotionCache();
 //Used to get a flat list of categories
 const fetchAllCategoryOptions = (categories) => {
   const categoryFlat = [];
+  const categoryFlatNotOrdered = [];
   const bfs = (nodes) => {
     let count = 0;
     let queue = [...nodes];
@@ -46,6 +47,10 @@ const fetchAllCategoryOptions = (categories) => {
           name: cat.name,
           id: count,
         });
+        categoryFlatNotOrdered.push({
+          name: cat.name,
+          id: cat.id,
+        });
         count++;
         if (cat.children) {
           nextQueue = nextQueue.concat(cat.children);
@@ -55,7 +60,7 @@ const fetchAllCategoryOptions = (categories) => {
     }
   };
   bfs(categories);
-  return categoryFlat;
+  return [categoryFlat, categoryFlatNotOrdered];
 };
 
 function MainApp({
@@ -68,8 +73,10 @@ function MainApp({
   const [searchQuery, setSearchQuery] = useState();
   //Nested list of categories
   const [categories, setCategories] = useState();
-  //Regular flat list of all categories
+  //Regular ordered flat list of all categories
   const [categoriesList, setCategoriesList] = useState([]);
+  //unordered flatlist
+  const [categoriesListUO, setCategoriesListUO] = useState([]);
 
   const [openLeftSideBar, setOpenLeftSideBar] = useState(false);
   const [openRightSideBar, setOpenRightSideBar] = useState(true);
@@ -95,7 +102,9 @@ function MainApp({
       .then((resp) => resp.json())
       .then((data) => {
         setCategories(data);
-        setCategoriesList(fetchAllCategoryOptions(data));
+        const tricks = fetchAllCategoryOptions(data);
+        setCategoriesList(tricks[0]);
+        setCategoriesListUO(tricks[1]);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -137,6 +146,7 @@ function MainApp({
     searchQuery,
     categories,
     categoriesList,
+    categoriesListUO,
     searchBarQuery,
     goToCategory,
     setOpenRightSideBar,
@@ -145,7 +155,7 @@ function MainApp({
     handleClickMenubar,
   };
 
-  //console.log(categoriesList);
+  //console.log(categoriesListUO);
 
   //This is not going to work right now obviously but this is the idea we should go for so they can only edit their own posts
   //const MyPosts = collection.filter(post => post.owner === user.name);
