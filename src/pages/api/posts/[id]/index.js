@@ -60,7 +60,7 @@ const handler = nc({ onError })
   .put(async (req, res) => {
     // endpoint to update a new post
     const { id, ...updatePost } = req.body;
-    //console.log(id);
+    console.log(id);
     if (id !== parseInt(req.query.id, 10)) {
       res.status(400).end(`URL and object does not match`);
       return;
@@ -69,6 +69,15 @@ const handler = nc({ onError })
     const post = await Post.query()
       .updateAndFetchById(id, updatePost)
       .throwIfNotFound();
+    res.status(200).json(post);
+  })
+
+  .patch(async (req, res) => {
+    //console.log(req.body);
+    const post = await Post.query()
+      .patchAndFetchById(req.query.id, req.body)
+      .throwIfNotFound();
+    //console.log(post);
     res.status(200).json(post);
   });
 

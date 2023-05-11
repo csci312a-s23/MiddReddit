@@ -12,6 +12,7 @@ import ScrollDisplay from "../../../components/scrollDisplay";
 //import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import PostShape from "../../../components/PostShape";
+import AddButton from "@/components/AddButton";
 
 export default function MainPageCategory({
   goToPost,
@@ -20,6 +21,9 @@ export default function MainPageCategory({
   searchQuery,
   //setCategoryQuery,
   searchBarQuery,
+  handleClickMenubar,
+  setOpenLeftSideBar,
+  setOpenRightSideBar,
 }) {
   //const router = useRouter();
   //const { catName } = router.query;
@@ -37,6 +41,12 @@ export default function MainPageCategory({
           searchBarQuery={searchBarQuery}
         />
       )}
+
+      <AddButton
+        handleClick={handleClickMenubar}
+        setOpenLeftSideBar={setOpenLeftSideBar}
+        setOpenRightSideBar={setOpenRightSideBar}
+      />
     </div>
   );
 }

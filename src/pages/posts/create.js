@@ -7,7 +7,6 @@ export default function PostCreator({
   categories,
   categoriesList,
   setOpenRightSideBar,
-  setCreatePost,
 }) {
   const router = useRouter();
 
@@ -63,7 +62,6 @@ export default function PostCreator({
         submitPost={submitPost}
         categories={categories}
         categoriesList={categoriesList}
-        setCreatePost={setCreatePost}
         setOpenRightSideBar={setOpenRightSideBar}
       />
     </main>
@@ -75,5 +73,4 @@ PostCreator.propTypes = {
   categories: PropTypes.array.isRequired,
   categoriesList: PropTypes.array.isRequired,
   setOpenRightSideBar: PropTypes.func.isRequired,
-  setCreatePost: PropTypes.func.isRequired,
 };
