@@ -8,6 +8,7 @@
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export default function RenderMenuComponent({
   anchorEl,
@@ -15,6 +16,12 @@ export default function RenderMenuComponent({
   handleMenuClose,
 }) {
   const { data: session } = useSession();
+  const router = useRouter();
+
+  const handleProfile = () => {
+    handleMenuClose();
+    router.push(`/users/${session.user.id}`);
+  };
 
   return (
     <Menu
@@ -33,8 +40,8 @@ export default function RenderMenuComponent({
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      {!!session && <MenuItem onClick={handleMenuClose}>Profile</MenuItem>}
-      {!!session && <MenuItem onClick={handleMenuClose}>My account</MenuItem>}
+      {!!session && <MenuItem onClick={handleProfile}>Profile</MenuItem>}
+      {!!session && <MenuItem onClick={handleProfile}>My account</MenuItem>}
       {!!session && <MenuItem onClick={signOut}>Sign out</MenuItem>}
       {!session && (
         <MenuItem onClick={() => signIn("google")}>Sign in</MenuItem>

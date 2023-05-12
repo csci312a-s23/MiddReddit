@@ -20,7 +20,7 @@ export default class Post extends BaseModel {
       properties: {
         id: { type: "integer" },
         title: { type: "string" },
-        author: { type: "string" },
+        author: { type: "integer" },
         contents: { type: "string" },
         //comments: { type: "INT[]" },
         posted: { type: "string" },
@@ -47,7 +47,7 @@ export default class Post extends BaseModel {
         relation: Model.BelongsToOneRelation,
         modelClass: User,
         join: {
-          from: "Post.madeBy",
+          from: "Post.author",
           to: "User.id",
         },
       },
