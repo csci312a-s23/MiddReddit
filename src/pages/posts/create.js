@@ -15,8 +15,8 @@ export default function PostCreator({
       return;
     }
     const newTag = {
-      postId: postId,
-      categoryId: categoryId,
+      post: postId,
+      category: categoryId,
     };
     const params = {
       method: "POST",
