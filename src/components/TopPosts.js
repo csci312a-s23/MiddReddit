@@ -30,7 +30,7 @@ export default function TopPosts({}) {
 
   return (
     <div>
-      <h1>Trending Posts</h1>
+      <h1>Trending Posts!</h1>
       {postDisp}
     </div>
   );
