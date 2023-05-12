@@ -7,35 +7,29 @@ import EventShape from "./EventShape";
 import { useState } from "react";
 //import { Typography } from "@mui/material";
 import { Box } from "@mui/material";
-import EventDetailsView from "./EventDetailsView";
 /* eslint-disable quotes */
 
 //https://stackoverflow.com/questions/75354703/show-specific-item-when-button-clicked-from-list-of-items-in-react
 
-const NoBulletList = styled("ul")(() => ({
-  listStyle: "square",
-  paddingLeft: 10,
-}));
 
-export default function EventView({ events }) {
-  // eslint-disable-next-line no-unused-vars
-  const sortedEvents = [...events].sort((a, b) =>
-    a.posted.localeCompare(b.posted)
-  );
+export default function EventDetailsView({ event }) {
 
-  const event_list = sortedEvents.map((event) => <EventDetailsView event={event} />);
+  const [showMore, setShowMore] = useState(false);
+
+  const Handler = () => {
+    setShowMore(!showMore);
+  };
 
   return (
-    <>
       <Box>
-        <h1>Upcoming Events: </h1>
-        <NoBulletList>{event_list}</NoBulletList>
+        <li key={event.title} data-testid="title" onClick={() => Handler()}>
+            <h5>{event.title}</h5>
+            {showMore && event.details}
+        </li>
       </Box>
-    </>
-
   );
 }
 
-EventView.propTypes = {
+EventDetailsView.propTypes = {
   event: EventShape,
 };
