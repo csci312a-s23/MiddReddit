@@ -41,6 +41,7 @@ describe("MiddReddit API", () => {
         id: 1,
       },
     });
+
     return knex.seed.run();
   });
   afterEach(() => {
@@ -48,7 +49,7 @@ describe("MiddReddit API", () => {
   });
   //jest.mock("next/router", () => require("next-router-mock"));
 
-  describe("Endpoint testing", () => {
+  describe("Category Endpoint Testing", () => {
     /*tests to complete:
         POST a post
         POST a comment
@@ -69,7 +70,7 @@ describe("MiddReddit API", () => {
             "meals",
             "sports",
             "dorms",
-            "Events",
+            "events",
           ];
           const res_names = await res.json();
           const fetchNames = res_names.map((category) => category.name);
@@ -92,7 +93,8 @@ describe("MiddReddit API", () => {
             (category) => category.name === "ross"
           )[0];
           child_object["children"] = []; //have to include the children object, not specified in seed data
-          expect(parent_object).toContainEqual(child_object);
+          child_object["id"] = 19;
+          expect(parent_object[0]).toMatchObject(child_object);
         },
       });
     });
@@ -111,7 +113,8 @@ describe("MiddReddit API", () => {
         },
       });
     });
-
+  });
+  describe("Post Endpoint Testing", () => {
     test("GET /api/posts should return all posts", async () => {
       await testApiHandler({
         rejectOnHandler: true,
@@ -151,7 +154,7 @@ describe("MiddReddit API", () => {
         paramsPatcher: (params) => (params.id = 1), // Testing dynamic routes requires patcher
         test: async ({ fetch }) => {
           const res = await fetch();
-          await expect(res.json()).resolves.toMatchObject(post_data[1]);
+          await expect(res.json()).resolves.toMatchObject(post_data[0]);
         },
       });
     });

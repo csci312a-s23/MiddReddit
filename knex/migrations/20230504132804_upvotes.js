@@ -7,6 +7,8 @@ exports.up = function (knex) {
     table.increments("id").primary();
     table.integer("ownerId");
     table.integer("commentId"); //how to know if belongs to a comment or a post?
+    table.boolean("upvote"); //true is upvote, down is downvote
+    table.string("posted").notNullable();
   });
 };
 
