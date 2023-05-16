@@ -1,140 +1,117 @@
 [
   {
-    "id": 0,
     "name": "courses",
     "description": "Courses at Middlebury",
-    "parentId": null
+    "parent_": null
   },
   {
-    "id": 1,
     "name": "confessionals",
     "description": "Confessionals at Middlebury",
-    "parentId": null
+    "parent_": null
   },
   {
-    "id": 2,
     "name": "meals",
     "description": "Meals at Middlebury",
-    "parentId": null
+    "parent_": null
   },
   {
-    "id": 3,
     "name": "sports",
     "description": "Sports at Middlebury",
-    "parentId": null
+    "parent_": null
   },
   {
-    "id": 4,
     "name": "dorms",
     "description": "All dorms at Middlebury",
-    "parentId": null
+    "parent_": null
   },
   {
-    "id": 5,
-    "name": "Events",
+    "name": "events",
     "description": "All events at Middlebury",
-    "parentId": null
+    "parent_": null
   },
   {
-    "id": 6,
     "name": "cs",
     "description": "CS at Middlebury",
-    "parentId": 0
+    "parent_": "courses"
   },
   {
-    "id": 7,
     "name": "bio",
     "description": "Bio at Middlebury",
-    "parentId": 0
+    "parent_": "courses"
   },
   {
-    "id": 8,
     "name": "theatre",
     "description": "Theatre at Middlebury",
-    "parentId": 0
+    "parent_": "courses"
   },
   {
-    "id": 9,
     "name": "cs312",
     "description": "CS312 at Middlebury",
-    "parentId": 6
+    "parent_": "cs"
   },
   {
-    "id": 10,
     "name": "ross",
     "description": "ross dining hall",
-    "parentId": 2
+    "parent_": "meals"
   },
   {
-    "id": 11,
     "name": "anthro",
     "description": "Anthropology at middlebury",
-    "parentId": 0
+    "parent_": "courses"
   },
   {
-    "id": 12,
     "name": "music",
     "description": "music at middlebury",
-    "parentId": 0
+    "parent_": "courses"
   },
   {
-    "id": 13,
     "name": "math",
     "description": "math at middlebury",
-    "parentId": 0
+    "parent_": "courses"
   },
   {
-    "id": 14,
     "name": "econ",
     "description": "econ at middlebury",
-    "parentId": 0
+    "parent_": "courses"
   },
   {
-    "id": 15,
     "name": "russian",
     "description": "russian at Middlebury",
-    "parentId": 0
+    "parent_": "courses"
   },
   {
-    "id": 16,
     "name": "anth 103",
     "description": "Anthropology 103 at Middlebury",
-    "parentId": 11
+    "parent_": "anthro"
   },
   {
-    "id": 17,
     "name": "anth 306",
     "description": "Anthropology 306 at Middlebury",
-    "parentId": 11
+    "parent_": "anthro"
   },
   {
-    "id": 18,
     "name": "musc 101",
     "description": "Music 101 at Middlebury",
-    "parentId": 12
+    "parent_": "music"
   },
   {
-    "id": 19,
     "name": "musc 260",
     "description": "Music 260 at Middlebury",
-    "parentId": 12
+    "parent_": "music"
   },
   {
-    "id": 20,
     "name": "musc 500",
     "description": "Music 500 at Middlebury",
-    "parentId": 12
+    "parent_": 12
   },
   {
-    "id": 21,
     "name": "math 118",
     "description": "Math 118 at Middlebury",
-    "parentId": 13
+    "parent_": "math"
   },
   {
-    "id": 22,
     "name": "math 323",
     "description": "Math 323 at Middlebury",
-    "parentId": 13
+    "parent_": "math"
   }
 ]

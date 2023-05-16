@@ -2,7 +2,7 @@
 // import { Model } from "objection";
 import BaseModel from "./BaseModel";
 import { Model } from "objection";
-import User from "./User";
+import User from "./User"
 export default class Event extends BaseModel {
   // Table name is the only required property.
   static get tableName() {
@@ -20,7 +20,7 @@ export default class Event extends BaseModel {
         id: { type: "integer" },
         title: { type: "string" },
         details: { type: "string" },
-        date: { type: "string" },
+        date: { type: "string"},
         posted: { type: "string" },
       },
     };
@@ -32,9 +32,9 @@ export default class Event extends BaseModel {
         modelClass: User,
         join: {
           from: "Event.madeBy",
-          to: "User.id",
-        },
-      },
+          to: "User.id"
+        }
+      }
     };
   }
 }

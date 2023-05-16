@@ -24,6 +24,8 @@ const NoBulletList = styled("ul")(() => ({
 export default function ScrollPost({ post, goToPost, setCurrentPost }) {
   const allowVote = false;
 
+  //console.log(post);
+
   return (
     <NoBulletList>
       <div className={styles.post}>
@@ -48,7 +50,7 @@ export default function ScrollPost({ post, goToPost, setCurrentPost }) {
               suppressHydrationWarning /*have to suppress hydration with dates*/
             >
               {/*eslint-disable-line */}
-              {post.author} - {new Date(post.posted).toLocaleString()}
+              {post.userMadeBy.name} - {new Date(post.posted).toLocaleString()}
             </em>
 
             <p>{post.contents} </p>

@@ -62,7 +62,7 @@ export default function ScrollDisplay({
     if (searchBarQuery === "") {
       return;
     } else {
-      if (post.author.includes(searchBarQuery)) {
+      if (post.userMadeBy.name.includes(searchBarQuery)) {
         bottomempty = false;
         return (
           <ScrollPost
@@ -86,6 +86,12 @@ export default function ScrollDisplay({
     <div className={styles.body}>
       <div>
         {/*<ul>{postComponents}</ul>*/}
+        {looking && <h2> Titles </h2>}
+        {topempty && <p>No titles match your search query</p>}
+        {postComponentsTop}
+        {looking && <h2> Authors </h2>}
+        {bottomempty && looking && <p>No authors match your search query</p>}
+        {postComponentsBottom}
         {looking && <h2> Titles </h2>}
         {topempty && <p>No titles match your search query</p>}
         {postComponentsTop}

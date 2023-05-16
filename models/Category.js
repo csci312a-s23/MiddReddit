@@ -20,7 +20,9 @@ export default class Category extends BaseModel {
       properties: {
         id: { type: "integer" },
         name: { type: "string" },
-        description: { type: "text" },
+        description: { type: "string" },
+        parent_: { type: "integer" },
+        //posts2: { type: "INT[]" },
       },
     };
   }
@@ -32,7 +34,7 @@ export default class Category extends BaseModel {
         relation: Model.BelongsToOneRelation,
         modelClass: Category,
         join: {
-          from: "Category.parentId",
+          from: "Category.parent_",
           to: "Category.id",
         },
       },
@@ -41,7 +43,7 @@ export default class Category extends BaseModel {
         modelClass: Category,
         join: {
           from: "Category.id",
-          to: "Category.parentId",
+          to: "Category.parent_",
         },
       },
       posts: {
@@ -51,8 +53,8 @@ export default class Category extends BaseModel {
           from: "Category.id",
           through: {
             // Tag is the join table.
-            from: "Tag.categoryId",
-            to: "Tag.postId",
+            from: "Tag.category",
+            to: "Tag.post",
           },
           to: "Post.id",
         },

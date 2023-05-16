@@ -7,7 +7,7 @@ exports.up = function (knex) {
     table.increments("id").primary();
     table.string("name");
     table.text("description");
-    table.integer("parentId");
+    table.integer("parent_");
     table.specificType("relatedPosts", "INT[]");
   });
 };

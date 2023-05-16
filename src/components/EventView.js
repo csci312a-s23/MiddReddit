@@ -1,12 +1,16 @@
 //import PostView from "./PostView";
 //import styles from "../styles/ScrollPosts.module.css";
+//import PostShape from "./PostShape";
+///import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
-import EventShape from "./EventShape";
 
 //import { Button } from "@mui/material";
+//import UpVoteButtons from "./UpVoteButtons";
+import EventShape from "./EventShape";
 import { useState } from "react";
 //import { Typography } from "@mui/material";
 import { Box } from "@mui/material";
+//import styles from "../styles/Events.module.css";
 /* eslint-disable quotes */
 
 //https://stackoverflow.com/questions/75354703/show-specific-item-when-button-clicked-from-list-of-items-in-react
@@ -18,9 +22,9 @@ const NoBulletList = styled("ul")(() => ({
 
 export default function EventView({ events }) {
   // eslint-disable-next-line no-unused-vars
-  const [currentEvent, setCurrentEvent] = useState();
+    const [currentEvent, setCurrentEvent] = useState();
 
-  const [showMore, setShowMore] = useState(false);
+    const [showMore, setShowMore] = useState(false);
 
   const sortedEvents = [...events].sort((a, b) =>
     a.posted.localeCompare(b.posted)
@@ -53,7 +57,6 @@ export default function EventView({ events }) {
     )
   );
 
-  //console.log(showMore)
 
   const FinalReturnArray = [];
 
@@ -90,29 +93,33 @@ export default function EventView({ events }) {
       </Box>
     </>
 
-    //{/* <div>
-    //<h2>{!currentEvent ? events: currentEvent.title}</h2>
-    //<p>{!currentEvent ? events: currentEvent.details}</p>
-    //{/* {new Date(!currentEvent ? events: currentEvent.posted).toLocaleString()} */}
+     //{/* <div>
+        //<h2>{!currentEvent ? events: currentEvent.title}</h2>
+        //<p>{!currentEvent ? events: currentEvent.details}</p>
+        //{/* {new Date(!currentEvent ? events: currentEvent.posted).toLocaleString()} */}
     //</div> */}
 
-    // import EventShape from "./EventShape";
 
-    // export default function Event({ event, showMore }) {
+// import EventShape from "./EventShape";
 
-    //     return (
-    //     <div>
-    //       <h2>{event.title}</h2>
-    //       <p>{event.details}</p>
-    //       {new Date(event.posted).toLocaleString()}
-    //     </div>
-    //   );
-    // }
+// export default function Event({ event, showMore }) {
 
-    // Event.propTypes = {
-    //   event: EventShape.isRequired,
-    //   showMore: PropTypes.boolean.isRequired,
-    // };
+  
+//     return (
+//     <div>
+//       <h2>{event.title}</h2>
+//       <p>{event.details}</p>
+//       {new Date(event.posted).toLocaleString()}
+//     </div>
+//   );
+// }
+
+// Event.propTypes = {
+//   event: EventShape.isRequired,
+//   showMore: PropTypes.boolean.isRequired,
+// };
+
+
 
     // <NoBulletList>
     //   <div className={styles.post}>

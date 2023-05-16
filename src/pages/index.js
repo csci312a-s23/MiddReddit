@@ -42,6 +42,7 @@ export default function MainPage({
         setOpenRightSideBar={setOpenRightSideBar}
       />
     </div>
+    
   );
 }
 
