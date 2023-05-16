@@ -48,7 +48,7 @@ describe("MiddReddit API", () => {
   });
   //jest.mock("next/router", () => require("next-router-mock"));
 
-  describe("Endpoint testing", () => {
+  describe("Category Endpoint Testing", () => {
     /*tests to complete:
         POST a post
         POST a comment
@@ -111,7 +111,8 @@ describe("MiddReddit API", () => {
         },
       });
     });
-
+  });
+  describe("Post Endpoint Testing", () => {
     test("GET /api/posts should return all posts", async () => {
       await testApiHandler({
         rejectOnHandler: true,
