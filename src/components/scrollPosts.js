@@ -24,6 +24,8 @@ const NoBulletList = styled("ul")(() => ({
 export default function ScrollPost({ post, goToPost, setCurrentPost }) {
   const allowVote = false;
 
+  //console.log(post);
+
   return (
     <NoBulletList>
       <div className={styles.post}>

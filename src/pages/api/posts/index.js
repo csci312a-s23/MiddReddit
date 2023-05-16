@@ -17,22 +17,27 @@ const handler = nc({ onError })
     let posts;
     if (req.query.top) {
       posts = await query
+        .withGraphFetched("userMadeBy")
         .withGraphJoined("category.[parent.^2]")
         .orderBy("upvotes", "desc")
         .limit(3);
     } else if (req.query.category) {
       posts = await query
+        .withGraphFetched("userMadeBy")
         .withGraphJoined("category.[parent.^2]")
         .where("category.name", req.query.category) //only works for 1 level of nesting, have to refine how I deduplicate
         .orWhere("category:parent.name", req.query.category);
     } else {
-      posts = await query.withGraphJoined("category.[parent.^2]");
+      posts = await query
+        .withGraphFetched("userMadeBy")
+        .withGraphJoined("category.[parent.^2]");
     }
     res.status(200).json(posts);
   })
   .post(authenticated, async (req, res) => {
     // endpoint to create a new post
     const { ...newPost } = { ...req.body, author: req.user.id };
+    console.log(newPost);
     const post = await Post.query().insertAndFetch(newPost).throwIfNotFound();
     res.status(200).json(post);
   });

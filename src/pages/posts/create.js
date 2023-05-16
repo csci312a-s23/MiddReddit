@@ -35,6 +35,7 @@ export default function PostCreator({
 
   const submitPost = async (post, categoryId) => {
     if (post) {
+      console.log("wrong create");
       const params = {
         method: "POST",
         body: JSON.stringify(post),

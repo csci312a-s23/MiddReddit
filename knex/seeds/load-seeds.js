@@ -39,18 +39,14 @@ exports.seed = async function (knex) {
   const anthro_courses = await courses
     .$relatedQuery("children")
     .insert({ name: "anthro", description: "Anthropology at Middlebury" });
-  await anthro_courses
-    .$relatedQuery("children")
-    .insert({
-      name: "anthro 103",
-      description: "Anthropology 103 at Middlebury",
-    });
-  await anthro_courses
-    .$relatedQuery("children")
-    .insert({
-      name: "anthro 306",
-      description: "Anthropology 306 at Middlebury",
-    });
+  await anthro_courses.$relatedQuery("children").insert({
+    name: "anthro 103",
+    description: "Anthropology 103 at Middlebury",
+  });
+  await anthro_courses.$relatedQuery("children").insert({
+    name: "anthro 306",
+    description: "Anthropology 306 at Middlebury",
+  });
   const music_courses = await courses
     .$relatedQuery("children")
     .insert({ name: "music", description: "Music at Middlebury" });
@@ -158,4 +154,14 @@ exports.seed = async function (knex) {
   await knex("Tag")
     .del()
     .then(() => knex.batchInsert("Tag", tag_data_with_ids, 100));
+
+  // Comments
+  const comment_contents = fs.readFileSync("./data/seedComment.json");
+  const comment_data = JSON.parse(comment_contents);
+
+  // Deletes ALL existing entries
+  // Use batch insert because we have too many articles for simple insert
+  await knex("Comment")
+    .del()
+    .then(() => knex.batchInsert("Comment", comment_data, 100));
 };
