@@ -103,6 +103,7 @@ function MainApp({
       .then((resp) => resp.json())
       .then((data) => {
         setCategories(data);
+        console.log(data);
         const tricks = fetchAllCategoryOptions(data);
         setCategoriesList(tricks[0]);
         setCategoriesListUO(tricks[1]);

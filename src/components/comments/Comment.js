@@ -1,6 +1,6 @@
 import * as dayjs from "dayjs";
 import CommentEditor from "./CommentEditor";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Stack from "@mui/material/Stack";
 import ArrowUpwardRoundedIcon from "@mui/icons-material/ArrowUpwardRounded";
 import ArrowDownwardRoundedIcon from "@mui/icons-material/ArrowDownwardRounded";
@@ -13,6 +13,8 @@ export default function Comment({
   indent,
   setLatestCommentUpvote,
 }) {
+  const [test, setTest] = useState();
+
   const [enterReplyColor, setEnterReplyColor] = useState(true);
   const [editorVisible, setEditorVisible] = useState(false); //don't need authz to show editor, but to submit comment
   const relativeTime = require("dayjs/plugin/relativeTime");
@@ -38,6 +40,7 @@ export default function Comment({
     );
     const submittedCommentUpvote = await response.json();
     console.log(submittedCommentUpvote);
+    console.log("submit here");
     setLatestCommentUpvote(submittedCommentUpvote);
   };
 
@@ -47,10 +50,16 @@ export default function Comment({
     setEditorVisible(true);
   };
 
-  const upvotes = comment.votes.reduce(
-    (accumulator, vote) => (vote.upvote ? accumulator + 1 : accumulator - 1),
-    0
-  );
+  //This seems very unnecessary
+  useEffect(() => {
+    const upvotes = comment.votes.reduce(
+      (accumulator, vote) => (vote.upvote ? accumulator + 1 : accumulator - 1),
+      0
+    );
+    console.log("change upvotes");
+    setTest(upvotes);
+  }, [comment]);
+
   const { data: session } = useSession();
   const userId = session ? session.user.id : 0;
 
@@ -91,7 +100,7 @@ export default function Comment({
               style={{ marginTop: "0px", color: upvoteColor }}
               onClick={() => submitUpvote(true)}
             />
-            <p style={{ margin: "1px", marginLeft: "2px" }}>{upvotes}</p>
+            <p style={{ margin: "1px", marginLeft: "2px" }}>{test}</p>
 
             <ArrowDownwardRoundedIcon
               style={{ color: downvoteColor }}

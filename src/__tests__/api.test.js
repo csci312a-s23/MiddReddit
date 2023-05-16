@@ -41,6 +41,7 @@ describe("MiddReddit API", () => {
         id: 1,
       },
     });
+
     return knex.seed.run();
   });
   afterEach(() => {
@@ -72,6 +73,7 @@ describe("MiddReddit API", () => {
             "Events",
           ];
           const res_names = await res.json();
+          console.log(res_names);
           const fetchNames = res_names.map((category) => category.name);
           expect(fetchNames).toMatchObject(names);
         },

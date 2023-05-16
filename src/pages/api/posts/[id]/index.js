@@ -65,7 +65,7 @@ const handler = nc({ onError })
   .put(async (req, res) => {
     // endpoint to update a new post
     const { id, ...updatePost } = req.body;
-    console.log(id);
+    //console.log(id);
     if (id !== parseInt(req.query.id, 10)) {
       res.status(400).end(`URL and object does not match`);
       return;
