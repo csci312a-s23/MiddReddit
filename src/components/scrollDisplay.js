@@ -62,7 +62,7 @@ export default function ScrollDisplay({
     if (searchBarQuery === "") {
       return;
     } else {
-      if (post.author.includes(searchBarQuery)) {
+      if (post.userMadeBy.name.includes(searchBarQuery)) {
         bottomempty = false;
         return (
           <ScrollPost
