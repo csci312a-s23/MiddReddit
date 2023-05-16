@@ -38,12 +38,12 @@ const handler = nc({ onError }).post(authenticated, async (req, res) => {
     res.status(200).json(newCommentUpvoteQuery);
   } else {
     //change upvote to downvote or vice versa
-    const changeVoteBoolean = await CommentUpvote.query()
+    await CommentUpvote.query()
       .patch({ upvote: newCommentUpvote.upvote })
       .where("commentId", newCommentUpvote.commentId)
       .where("ownerId", newCommentUpvote.ownerId)
       .throwIfNotFound();
-    res.status(200).json(changeVoteBoolean);
+    res.status(200).json(`reverseTo${newCommentUpvote.upvote}`);
   }
 });
 

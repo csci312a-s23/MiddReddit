@@ -13,7 +13,7 @@ export default function Comment({
   indent,
   setLatestCommentUpvote,
 }) {
-  const [test, setTest] = useState();
+  const [currentUpvoteAmount, setCurrentUpvoteAmount] = useState();
 
   const [enterReplyColor, setEnterReplyColor] = useState(true);
   const [editorVisible, setEditorVisible] = useState(false); //don't need authz to show editor, but to submit comment
@@ -39,8 +39,6 @@ export default function Comment({
       params
     );
     const submittedCommentUpvote = await response.json();
-    console.log(submittedCommentUpvote);
-    console.log("submit here");
     setLatestCommentUpvote(submittedCommentUpvote);
   };
 
@@ -56,8 +54,7 @@ export default function Comment({
       (accumulator, vote) => (vote.upvote ? accumulator + 1 : accumulator - 1),
       0
     );
-    console.log("change upvotes");
-    setTest(upvotes);
+    setCurrentUpvoteAmount(upvotes);
   }, [comment]);
 
   const { data: session } = useSession();
@@ -100,7 +97,9 @@ export default function Comment({
               style={{ marginTop: "0px", color: upvoteColor }}
               onClick={() => submitUpvote(true)}
             />
-            <p style={{ margin: "1px", marginLeft: "2px" }}>{test}</p>
+            <p style={{ margin: "1px", marginLeft: "2px" }}>
+              {currentUpvoteAmount}
+            </p>
 
             <ArrowDownwardRoundedIcon
               style={{ color: downvoteColor }}
