@@ -33,6 +33,7 @@ const handler = nc({ onError })
         .withGraphJoined("category.[parent.^2]");
     }
     res.status(200).json(posts);
+    res.status(200).json(posts);
   })
   .post(authenticated, async (req, res) => {
     // endpoint to create a new post

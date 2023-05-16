@@ -92,6 +92,12 @@ export default function ScrollDisplay({
         {looking && <h2> Authors </h2>}
         {bottomempty && looking && <p>No authors match your search query</p>}
         {postComponentsBottom}
+        {looking && <h2> Titles </h2>}
+        {topempty && <p>No titles match your search query</p>}
+        {postComponentsTop}
+        {looking && <h2> Authors </h2>}
+        {bottomempty && looking && <p>No authors match your search query</p>}
+        {postComponentsBottom}
       </div>
     </div>
   );
