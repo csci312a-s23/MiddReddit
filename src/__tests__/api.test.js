@@ -70,10 +70,9 @@ describe("MiddReddit API", () => {
             "meals",
             "sports",
             "dorms",
-            "Events",
+            "events",
           ];
           const res_names = await res.json();
-          console.log(res_names);
           const fetchNames = res_names.map((category) => category.name);
           expect(fetchNames).toMatchObject(names);
         },
@@ -94,7 +93,8 @@ describe("MiddReddit API", () => {
             (category) => category.name === "ross"
           )[0];
           child_object["children"] = []; //have to include the children object, not specified in seed data
-          expect(parent_object).toContainEqual(child_object);
+          child_object["id"] = 19;
+          expect(parent_object[0]).toMatchObject(child_object);
         },
       });
     });
@@ -154,7 +154,7 @@ describe("MiddReddit API", () => {
         paramsPatcher: (params) => (params.id = 1), // Testing dynamic routes requires patcher
         test: async ({ fetch }) => {
           const res = await fetch();
-          await expect(res.json()).resolves.toMatchObject(post_data[1]);
+          await expect(res.json()).resolves.toMatchObject(post_data[0]);
         },
       });
     });

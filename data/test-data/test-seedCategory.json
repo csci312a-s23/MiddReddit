@@ -42,7 +42,7 @@
   {
     "name": "theatre",
     "description": "Theatre at Middlebury",
-    "parent_": "courses"
+    "parent_": 3
   },
   {
     "name": "cs312",
@@ -52,6 +52,6 @@
   {
     "name": "ross",
     "description": "ross dining hall",
-    "parent_": "meals"
+    "parent_": 18
   }
 ]
