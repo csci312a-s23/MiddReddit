@@ -93,7 +93,7 @@ function MainApp({
       .then((resp) => resp.json())
       .then((data) => {
         setSearchQuery(data);
-        console.log(categoryQuery);
+        console.log(data);
       })
       .catch((error) => console.log(error));
   }, [currentPost, categoryQuery]);
