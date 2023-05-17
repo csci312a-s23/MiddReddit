@@ -4,6 +4,7 @@ import { Model } from "objection";
 import Category from "./Category";
 import User from "./User";
 import Comment from "./Comment";
+import PostUpvote from "./PostUpvote";
 export default class Post extends BaseModel {
   // Table name is the only required property.
   static get tableName() {
@@ -57,6 +58,14 @@ export default class Post extends BaseModel {
         join: {
           from: "Post.id",
           to: "Comment.postId",
+        },
+      },
+      votes: {
+        relation: Model.HasManyRelation,
+        modelClass: PostUpvote,
+        join: {
+          from: "Post.id",
+          to: "PostUpvote.postId",
         },
       },
     };

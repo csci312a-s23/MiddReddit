@@ -3,23 +3,22 @@
 //import { Model } from "objection";
 import BaseModel from "./BaseModel";
 
-export default class CommentUpvote extends BaseModel {
+export default class PostUpvote extends BaseModel {
   // Table name is the only required property.
   static get tableName() {
-    return "CommentUpvote";
+    return "PostUpvote";
   }
 
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["commentId"],
+      required: ["postId"],
 
       properties: {
         id: { type: "integer" },
         ownerId: { type: "integer" },
-        commentId: { type: "integer" },
+        postId: { type: "integer" },
         upvote: { type: "boolean" },
-        posted: { type: "string" },
       },
     };
   }
