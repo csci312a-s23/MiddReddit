@@ -83,7 +83,7 @@ function MainApp({
   const [openRightSideBar, setOpenRightSideBar] = useState(true);
 
   const [categoryQuery, setCategoryQuery] = useState(); //will use for searching by category
-
+  const [latestUpvote, setLatestUpvote] = useState();
   const [searchBarQuery, setSearchBarQuery] = useState("");
 
   useEffect(() => {
@@ -95,7 +95,7 @@ function MainApp({
         setSearchQuery(data);
       })
       .catch((error) => console.log(error));
-  }, [currentPost, categoryQuery]);
+  }, [currentPost, categoryQuery, latestUpvote]);
 
   useEffect(() => {
     fetch(`/api/categories`)
@@ -154,6 +154,7 @@ function MainApp({
     setOpenLeftSideBar,
     setCategoryQuery,
     handleClickMenubar,
+    setLatestUpvote,
   };
 
   //console.log(categoriesListUO);

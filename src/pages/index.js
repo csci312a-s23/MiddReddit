@@ -21,6 +21,7 @@ export default function MainPage({
   searchBarQuery,
   handleClickMenubar,
   setOpenLeftSideBar,
+  setLatestUpvote,
   setOpenRightSideBar,
 }) {
   //what props and callbacks should we use?
@@ -29,6 +30,7 @@ export default function MainPage({
       {searchQuery && (
         <ScrollDisplay
           Posts={searchQuery}
+          setLatestUpvote={setLatestUpvote}
           goToPost={goToPost}
           setCurrentPost={setCurrentPost}
           currentPost={currentPost}
@@ -42,7 +44,6 @@ export default function MainPage({
         setOpenRightSideBar={setOpenRightSideBar}
       />
     </div>
-    
   );
 }
 
