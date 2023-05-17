@@ -1,9 +1,8 @@
 # MiddReddit
 ![workflow status](https://github.com/csci312a-s23/MiddReddit/actions/workflows/node.js.yml/badge.svg)
 
+[Link to Deployed Application](https://camelshump.csci312.dev/)
 
-_TODO: populate readme_
-[Link](https://camelshump.csci312.dev/)
 sprint3
 
 ### Why MiddReddit
@@ -18,12 +17,19 @@ Users can post, comment, and upvote to contribute to discussion. Viewing posts a
 
 ## Local Installation
 This application can be installed on a local environment by running the following commands:
+
 `git clone https://github.com/csci312a-s23/MiddReddit.git`
+
 `npm install`
+
 `npm run dev` starts a locally hosted version
+
 The testing suite can by examined by using
+
 `npm run test`
+
 `npm run lint`
+
 
 ## Stack
 
