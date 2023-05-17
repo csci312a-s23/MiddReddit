@@ -1,10 +1,10 @@
-![workflow status](https://github.com/csci312a-s23/practical06-devops-mlinderm/actions/workflows/node.js.yml/badge.svg)
-
 # MiddReddit
+![workflow status](https://github.com/csci312a-s23/MiddReddit/actions/workflows/node.js.yml/badge.svg)
+
 
 _TODO: populate readme_
-[Link](https://middreddit.fly.dev/)
-sprint1
+[Link](https://camelshump.csci312.dev/)
+sprint3
 
 ### Why MiddReddit
 
@@ -14,14 +14,18 @@ MiddReddit addresses the need for a online community to discuss Middlebury-centr
 2. Social Scene
 3. Athletics
 4. Extracurriculars
-   Currently few online communities exist to fill this role.
+Users can post, comment, and upvote to contribute to discussion. Viewing posts and comments is open to the public, but any actions require a middlebury.edu email.  
 
-# Project Skeleton
+## Local Installation
+This application can be installed on a local environment by running the following commands:
+`git clone https://github.com/csci312a-s23/MiddReddit.git`
+`npm install`
+`npm run dev` starts a locally hosted version
+The testing suite can by examined by using
+`npm run test`
+`npm run lint`
 
-TODO: Implement CI badges, provide a link to the deployed version of your application, and provide a brief description of the application functionality.
-![workflow status](https://github.com/csci312a-s23/MiddReddit/actions/workflows/node.js.yml/badge.svg)
-
-## Creation
+## Stack
 
 This project skeleton has been setup similar to our assignments and practicals. It is a Next.JS application, created with create-next-app `💻 npx create-next-app@latest`, which uses Jest and Testing Library for testing, ESLint for static analysis, Prettier for styling, and is configured to use GitHub actions for testing pull requests.
 
@@ -31,18 +35,4 @@ Development dependencies installed with:
 💻 npm install -D jest jest-environment-jsdom husky lint-staged prettier eslint-config-prettier @testing-library/react @testing-library/jest-dom
 ```
 
-### Additional tools you might need
 
-#### Mocking fetch
-
-Tools for mocking fetch can be installed with
-
-```
-💻 npm install -D fetch-mock-jest node-fetch@2.6.7
-```
-
-Note we need to pin the `node-fetch` version due to breaking changes when used with Jest in newer versions.
-
-MiddReddit is an application that highlights issues, advertises events, and acts as a campus-wide resource for the Middlebury College community.
-
-The link to our deployed application is: https://fly.io/apps/icy-paper-5700/monitoring
