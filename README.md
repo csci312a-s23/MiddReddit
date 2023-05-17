@@ -13,6 +13,7 @@ MiddReddit addresses the need for a online community to discuss Middlebury-centr
 2. Social Scene
 3. Athletics
 4. Extracurriculars
+
 Users can post, comment, and upvote to contribute to discussion. Viewing posts and comments is open to the public, but any actions require a middlebury.edu email.  
 
 ## Local Installation
