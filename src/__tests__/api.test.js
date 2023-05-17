@@ -47,7 +47,6 @@ describe("MiddReddit API", () => {
   afterEach(() => {
     getServerSession.mockReset();
   });
-  //jest.mock("next/router", () => require("next-router-mock"));
 
   describe("Category Endpoint Testing", () => {
     /*tests to complete:

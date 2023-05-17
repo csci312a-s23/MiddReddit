@@ -19,8 +19,7 @@ const handler = nc({ onError })
       posts = await query
         .withGraphFetched("userMadeBy")
         .withGraphJoined("category.[parent.^2]")
-        .orderBy("upvotes", "desc")
-        .limit(3);
+        .orderBy("upvotes", "desc");
     } else if (req.query.category) {
       posts = await query
         .withGraphFetched("userMadeBy")

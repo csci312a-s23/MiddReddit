@@ -3,7 +3,7 @@
 
     This define a component to display the trending posts
 */
-import { Card, CardContent } from "@mui/material";
+import { Card, CardActionArea, CardContent, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
 export default function TopPosts({}) {
@@ -20,13 +20,19 @@ export default function TopPosts({}) {
 
   let postDisp;
   if (topPosts) {
-    postDisp = topPosts.map((post) => (
-      <Card key={post.id} variant="outlined">
-        <CardContent>{post.title}</CardContent>
+    const topPostShow = topPosts.slice(0, 3); // take top 3
+    postDisp = topPostShow.map((post) => (
+      <Card id={post.id} key={post.id} variant="outlined">
+        <CardActionArea href={`/posts/${post.id}`}>
+          <CardContent>
+            <Typography variant="button" gutterBottom>
+              {post.title}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
       </Card>
     ));
   }
-  /* map trending posts to MUI cards */
 
   return (
     <div>

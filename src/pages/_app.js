@@ -118,8 +118,6 @@ function MainApp({
       case "mainPage":
         setCategoryQuery();
         router.push("/");
-      /*case "signIn":
-        router.push("signIn"); */
     }
   };
 
@@ -157,8 +155,6 @@ function MainApp({
     setCategoryQuery,
     handleClickMenubar,
   };
-
-  //console.log(categoriesListUO);
 
   //This is not going to work right now obviously but this is the idea we should go for so they can only edit their own posts
   //const MyPosts = collection.filter(post => post.owner === user.name);
