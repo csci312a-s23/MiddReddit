@@ -14,7 +14,9 @@ MiddReddit addresses the need for a online community to discuss Middlebury-centr
 2. Social Scene
 3. Athletics
 4. Extracurriculars
-   Currently few online communities exist to fill this role.
+   
+Currently, few online communities exist to fill this role. This will allow students to stay up to date on what is happening on campus, provide support during stressful times, and be a good platform to fall back on to stay in touch with the Middlebury community when on breaks.
+   
 
 # Project Skeleton
 
@@ -32,6 +34,7 @@ Development dependencies installed with:
 ```
 
 ### Additional tools you might need
+All that is needed is a Middlebury Username and password to create a MiddReddit account.
 
 #### Mocking fetch
 
@@ -42,6 +45,14 @@ Tools for mocking fetch can be installed with
 ```
 
 Note we need to pin the `node-fetch` version due to breaking changes when used with Jest in newer versions.
+
+### Features
+- Browse posts in the main page and filter them by picking the categories you are looking for in the left sidebar. Sports, classes, dorms, and many more categories are available to browse to get a fuller sense of what people are talking about on campus!
+- Filter posts through the search bar. Posts with a similar words as the search query in the content or title will show up for your browsing convenience.
+- See what people are most excited about through the Top Posts section in our right sidebar.
+- Use Google Authentication to sign in using your Middlebury account and create a post that can go in any category only if you are signed in! This is a Middlebury-student exclusive application.
+- Comment on posts and other comments to interact with your community.
+- Check your profile page to see what posts you've created, liked, etc., by clicking on your profile icon.
 
 MiddReddit is an application that highlights issues, advertises events, and acts as a campus-wide resource for the Middlebury College community.
 
