@@ -23,6 +23,17 @@ This application can be installed on a local environment by running the followin
 
 `npm install`
 
+`npx knex migrate:latest`
+
+`npx knex --esm seed:run --env development`
+
+For authentication, a `.env.local` file is required in the project's root directory.  This is populated with three things a Google Client ID, Google Client Secret, and a NextAuth Secret. Example:
+```javascript
+GOOGLE_CLIENT_ID= <Your Google Client ID goes here>
+GOOGLE_CLIENT_SECRET= <Your Google Client Secret goes here>
+NEXTAUTH_SECRET= <Your NextAuth Secret goes here>
+```
+
 `npm run dev` starts a locally hosted version
 
 The testing suite can by examined by using
