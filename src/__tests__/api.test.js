@@ -148,16 +148,17 @@ describe("MiddReddit API", () => {
     });
 
     test("GET /api/posts/[id] should return a single post", async () => {
+      const post = await knex("Post").where("title", "Midd Snow Ball").first();
       await testApiHandler({
         rejectOnHandler: true,
         handler: specific_post_endpoint,
-        paramsPatcher: (params) => (params.id = 1), // Testing dynamic routes requires patcher
+        paramsPatcher: (params) => (params.id = post.id), // Testing dynamic routes requires patcher
         test: async ({ fetch }) => {
           const res = await fetch();
           await expect(res.json()).resolves.toMatchObject(post_data[0]);
         },
       });
-    });
+    }, 6000);
     describe("Unauthenticated edits are rejected", () => {
       beforeEach(() => {
         getServerSession.mockResolvedValue(undefined);
