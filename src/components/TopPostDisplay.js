@@ -3,10 +3,11 @@
 
     This define a component to display the trending posts
 */
-import { Card, CardActionArea, CardContent, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import TopPostCard from "./TopPostCard";
+import PropTypes from "prop-types";
 
-export default function TopPosts({}) {
+export default function TopPostDisplay({ goToPost }) {
   const [topPosts, setTopPosts] = useState();
 
   /* onload fetch trending posts */
@@ -21,16 +22,9 @@ export default function TopPosts({}) {
   let postDisp;
   if (topPosts) {
     const topPostShow = topPosts.slice(0, 3); // take top 3
+
     postDisp = topPostShow.map((post) => (
-      <Card id={post.id} key={post.id} variant="outlined">
-        <CardActionArea href={`/posts/${post.id}`}>
-          <CardContent>
-            <Typography variant="button" gutterBottom>
-              {post.title}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
+      <TopPostCard key={post.id} post={post} goToPost={goToPost} />
     ));
   }
 
@@ -41,3 +35,7 @@ export default function TopPosts({}) {
     </div>
   );
 }
+
+TopPostDisplay.propTypes = {
+  goToPost: PropTypes.func.isRequired,
+};

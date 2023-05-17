@@ -131,13 +131,9 @@ function MainApp({
   function goToCategory(category) {
     if (category) {
       router.push(`/category/${category}`);
-      console.log("goToCategory");
       setCategoryQuery(category); //so i don't have to figure out how to access id from name yet
     }
   }
-
-  //console.log(categories);
-  //console.log(session);
 
   const props = {
     ...pageProps,
@@ -199,7 +195,7 @@ function MainApp({
 
             {openRightSideBar && (
               <div className={styles.sidebarright}>
-                <RightSidebar />
+                <RightSidebar goToPost={goToPost} />
               </div>
             )}
           </div>

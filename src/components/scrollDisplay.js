@@ -77,9 +77,6 @@ export default function ScrollDisplay({
     }
   });
 
-  //console.log(topempty);
-  //console.log(bottomempty);
-
   //Style for when top or bottom component might be empty
 
   return (

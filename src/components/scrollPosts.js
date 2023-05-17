@@ -10,10 +10,7 @@ import styles from "../styles/ScrollPosts.module.css";
 import PostShape from "./PostShape";
 import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
-//import { Button } from "@mui/material";
 import UpVoteButtons from "./UpVoteButtons";
-//import { Typography } from "@mui/material";
-//import { Box } from "@mui/material";
 /* eslint-disable quotes */
 
 const NoBulletList = styled("ul")(() => ({
@@ -23,8 +20,6 @@ const NoBulletList = styled("ul")(() => ({
 
 export default function ScrollPost({ post, goToPost, setCurrentPost }) {
   const allowVote = false;
-
-  //console.log(post);
 
   return (
     <NoBulletList>
