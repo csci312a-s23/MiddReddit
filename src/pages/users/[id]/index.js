@@ -5,7 +5,6 @@
 */
 
 import { Box } from "@mui/material";
-//import Image from "next/image";
 
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
