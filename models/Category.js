@@ -2,7 +2,6 @@
 
 import { Model } from "objection";
 import BaseModel from "./BaseModel";
-//import Post from "./Post";
 
 export default class Category extends BaseModel {
   // Table name is the only required property.
@@ -22,7 +21,6 @@ export default class Category extends BaseModel {
         name: { type: "string" },
         description: { type: "string" },
         parent_: { type: "integer" },
-        //posts2: { type: "INT[]" },
       },
     };
   }

@@ -35,37 +35,10 @@ const handler = nc({ onError })
       console.log(error);
     }
   })
-  /*
-    ...
-  .query()
-  .eager(`[children.${r('[children?, author,post,parent]', 3)}, pets]`)
-...
-*/
-
-  //implement this, so I can have nested comments have names also
-
-  // let query = Post.query();
-  // if (req.query.section) {
-  //   query = query.whereRaw("UPPER(SUBSTRING(title, 1, 1)) = req.query.section", [
-  //     req.query.section,
-  //   ]);
-  // }
-  // const posts = await query;
-  // res.status(200).json(posts);
-
-  // const { id, ...updatedPost } = req.body;
-  // // req.query.id is a string, and so needs to be converted to an integer before comparison
-  // if (id !== parseInt(updatedPost.id, 10)) {
-  //   // Verify id in the url, e.g, /api/posts/10, matches the id the request body
-  //   res.status(400).end(`URL and object does not match`);
-  //   return;
-  // }
-  // // Update the database ...
 
   .put(async (req, res) => {
     // endpoint to update a new post
     const { id, ...updatePost } = req.body;
-    //console.log(id);
     if (id !== parseInt(req.query.id, 10)) {
       res.status(400).end(`URL and object does not match`);
       return;
@@ -78,11 +51,9 @@ const handler = nc({ onError })
   })
 
   .patch(async (req, res) => {
-    //console.log(req.body);
     const post = await Post.query()
       .patchAndFetchById(req.query.id, req.body)
       .throwIfNotFound();
-    //console.log(post);
     res.status(200).json(post);
   });
 

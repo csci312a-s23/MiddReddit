@@ -18,14 +18,12 @@ import styles from "../styles/MiddReddit.module.css";
 import { styled } from "@mui/material/styles";
 import MenuBar from "@/components/menubar";
 import { ButtonGroup, CssBaseline, Fab } from "@mui/material";
-//import { useScrollTrigger } from "@mui/material";
 import * as React from "react";
 import { CacheProvider } from "@emotion/react";
 import createEmotionCache from "../material/createEmotionCache";
 import AddIcon from "@mui/icons-material/Add";
 import { SessionProvider, useSession } from "next-auth/react";
 import AddButton from "@/components/AddButton";
-//import { server } from '../../config';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -117,8 +115,6 @@ function MainApp({
       case "mainPage":
         setCategoryQuery();
         router.push("/");
-      /*case "signIn":
-        router.push("signIn"); */
     }
   };
 
@@ -136,9 +132,6 @@ function MainApp({
       setCategoryQuery(category); //so i don't have to figure out how to access id from name yet
     }
   }
-
-  //console.log(categories);
-  //console.log(session);
 
   const props = {
     ...pageProps,
@@ -158,10 +151,6 @@ function MainApp({
     setLatestUpvote,
   };
 
-  //console.log(categoriesListUO);
-
-  //This is not going to work right now obviously but this is the idea we should go for so they can only edit their own posts
-  //const MyPosts = collection.filter(post => post.owner === user.name);
   return (
     <SessionProvider session={session}>
       <CacheProvider value={emotionCache}>
@@ -212,8 +201,6 @@ function MainApp({
         <Footer>MiddReddit 2023</Footer>
       </CacheProvider>
     </SessionProvider>
-    //We also want to send goToPost to scrollDisplay and ScrollPosts
-    //Right now those props aren't being passed through
   );
 }
 

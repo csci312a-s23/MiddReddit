@@ -1,4 +1,3 @@
-//import styles from "../styles/ScrollPosts.module.css";
 import { styled } from "@mui/material/styles";
 import EventShape from "./EventShape";
 

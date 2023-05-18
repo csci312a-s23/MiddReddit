@@ -17,15 +17,7 @@ import { knex } from "../../knex/knex.js";
 import post_data from "../../data/test-data/test-seedPost.json";
 import { getServerSession } from "next-auth/next";
 jest.mock("next-auth/next");
-//import tag_data from "../../data/test-data/test-seedTag.json";
 
-//models
-// import Post from "../../models/Post.js";
-// import Category from "../../models/Category.js";
-/*
-import mockRouter from "next-router-mock";
-import { createDynamicRouteParser } from "next-router-mock/dynamic-routes";
-*/
 // Replace the router with the mock
 
 describe("MiddReddit API", () => {
@@ -47,17 +39,9 @@ describe("MiddReddit API", () => {
   afterEach(() => {
     getServerSession.mockReset();
   });
-  //jest.mock("next/router", () => require("next-router-mock"));
 
   describe("Category Endpoint Testing", () => {
-    /*tests to complete:
-        POST a post
-        POST a comment
-        GET a single post
-        PUT a single post
-        PUT like/dislike
-        *Remember to uncomment the imports
-    */
+
     test("GET /api/categories should return all parent categories", async () => {
       await testApiHandler({
         rejectOnHandler: true,
@@ -92,7 +76,7 @@ describe("MiddReddit API", () => {
           const child_object = category_data.filter(
             (category) => category.name === "ross"
           )[0];
-          child_object["children"] = []; //have to include the children object, not specified in seed data
+          child_object["children"] = [];
           child_object["id"] = 19;
           expect(parent_object[0]).toMatchObject(child_object);
         },
@@ -100,7 +84,6 @@ describe("MiddReddit API", () => {
     });
 
     test("GET /api/categories should not return child categories", async () => {
-      //doesn't test for nested subcategories yet
       await testApiHandler({
         rejectOnHandler: true,
         handler: categories_endpoint,
@@ -191,7 +174,4 @@ describe("MiddReddit API", () => {
     });
   });
 
-  /* describe("Tag testing", () => {
-    
-  }); */
 });

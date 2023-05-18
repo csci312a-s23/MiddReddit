@@ -4,7 +4,6 @@
  */
 exports.up = function (knex) {
   return knex.schema.table("Post", (table) => {
-    //table.increments("author");
     table
       .integer("author")
       .references("id")

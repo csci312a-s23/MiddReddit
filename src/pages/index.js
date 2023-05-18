@@ -2,12 +2,7 @@
     Our main page with its corresponding components.
 */
 
-//commented out to solve commit errors
-// import { useState } from "react";
 import ScrollDisplay from "../components/scrollDisplay";
-//import { Events } from "pg";
-//import data from "../../data/seedPost.json";
-// import LoginWidget from "../components/LoginWidget.js";
 import PropTypes from "prop-types";
 import PostShape from "../components/PostShape";
 import AddButton from "@/components/AddButton";
@@ -23,7 +18,6 @@ export default function MainPage({
   setLatestUpvote,
   setOpenRightSideBar,
 }) {
-  //what props and callbacks should we use?
   return (
     <div>
       {searchQuery && (

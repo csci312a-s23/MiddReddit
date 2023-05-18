@@ -42,13 +42,12 @@ export default function Comment({
     setLatestCommentUpvote(submittedCommentUpvote);
   };
 
-  const replyColor = enterReplyColor ? "black" : "blue"; //might change this to an actual link
-  //to get the pointer thinger on the curser to change
+  const replyColor = enterReplyColor ? "black" : "blue";
+  //to get the pointer thinger on the cursor to change
   const handleClick = () => {
     setEditorVisible(true);
   };
 
-  //This seems very unnecessary
   useEffect(() => {
     const upvotes = comment.votes.reduce(
       (accumulator, vote) => (vote.upvote ? accumulator + 1 : accumulator - 1),

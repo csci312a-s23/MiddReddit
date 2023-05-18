@@ -31,8 +31,5 @@ export default function CategorySidebar({
     />
   ));
 
-  //    {currentCategory && <CurrentCategorySidebar currentCategory={currentCategory}/>}
-  //    currently only works about half the time, will have to investigate
-
   return <div>{newMenu}</div>;
 }

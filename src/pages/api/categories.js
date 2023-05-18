@@ -16,14 +16,7 @@ const handler = nc({ onError }).get(async (req, res) => {
     .withGraphJoined("[parent, children.^3]")
     .where("parent.name", null); //only works for 1 level of nesting, have to refine how I deduplicate
 
-  //NEED TO WORK ON FILTERING BY...
-  // if (req.query.tag) {
-  //   query = query.where("UPPER(SUBSTRING(title, 1, 1)) = ?", [
-  //     req.query.tag,
-  //   ]);
-  // }
   const categories = await query;
-  //console.log(categories);
   res.status(200).json(categories);
 });
 export default handler;

@@ -13,13 +13,9 @@ exports.seed = async function (knex) {
 
   // Categories
 
-  // const contents = fs.readFileSync("./data/seedCategory.json");
-  // const data = JSON.parse(contents);
-
   // // Deletes ALL existing entries
   // // Use batch insert because we have too many articles for simple insert
   await knex("Category").del();
-  //   .then(() => knex.batchInsert("Category", data, 100));
   const courses = await Category.query().insertAndFetch({
     name: "courses",
     description: "Courses at Middlebury",

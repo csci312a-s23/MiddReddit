@@ -6,7 +6,7 @@ class BaseModel extends Model {
   static createValidator() {
     return new AjvValidator({
       onCreateAjv: (ajv) => {
-        // Make suse all ajv formats are available in validations
+        // Make sure all ajv formats are available in validations
         addFormats(ajv);
       },
     });

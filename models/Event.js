@@ -1,5 +1,4 @@
 /* eslint-disable camelcase */
-// import { Model } from "objection";
 import BaseModel from "./BaseModel";
 import { Model } from "objection";
 import User from "./User"

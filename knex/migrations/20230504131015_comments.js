@@ -11,7 +11,6 @@ exports.up = function (knex) {
     table.integer("parentId");
     table.integer("postId");
     table.string("posted").notNullable();
-    //table.specificType("tag", "INT[]"); //tags to a specific category
   });
 };
 
