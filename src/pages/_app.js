@@ -201,8 +201,6 @@ function MainApp({
         <Footer>MiddReddit 2023</Footer>
       </CacheProvider>
     </SessionProvider>
-    //We also want to send goToPost to scrollDisplay and ScrollPosts
-    //Right now those props aren't being passed through
   );
 }
 
