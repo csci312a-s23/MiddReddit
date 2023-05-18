@@ -36,7 +36,6 @@ const handler = nc({ onError })
   .post(authenticated, async (req, res) => {
     // endpoint to create a new post
     const { ...newPost } = { ...req.body, author: req.user.id };
-    console.log(newPost);
     const post = await Post.query().insertAndFetch(newPost).throwIfNotFound();
     res.status(200).json(post);
   });

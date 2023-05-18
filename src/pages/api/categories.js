@@ -23,7 +23,6 @@ const handler = nc({ onError }).get(async (req, res) => {
   //   ]);
   // }
   const categories = await query;
-  //console.log(categories);
   res.status(200).json(categories);
 });
 export default handler;

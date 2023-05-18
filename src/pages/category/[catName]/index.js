@@ -25,11 +25,6 @@ export default function MainPageCategory({
   setOpenRightSideBar,
   setLatestUpvote,
 }) {
-  //const router = useRouter();
-  //const { catName } = router.query;
-  console.log("here");
-  //setCategoryQuery(catName);
-  //what props and callbacks should we use?
   return (
     <div>
       {searchQuery && (

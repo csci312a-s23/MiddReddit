@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-import ScrollPost from "@/components/ScrollPosts";
+import ScrollPost from "../../../components/scrollPosts";
 
 export default function Profile({ setLatestUpvote }) {
   const [user, setUser] = useState();
@@ -27,9 +27,8 @@ export default function Profile({ setLatestUpvote }) {
         .then((resp) => resp.json())
         .then((data) => {
           setUser(data);
-          console.log(data);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.error(error));
     }
   }, [id]);
 
@@ -57,17 +56,11 @@ export default function Profile({ setLatestUpvote }) {
 
   return (
     <div>
-      {/*
-      <Box component="header" sx={{ p: 2 }}>
-        <button>My Account</button>
-        <button>My Comments</button>
-        <button>Following</button>
-      </Box>*/}
       {/* eslint-disable-next-line react/no-unescaped-entities*/}
       <h2>Your Posts</h2>
       {!exists && <p>You currently have no posts</p>}
       {exists && user_post}
-      <Box>{user && console.log(user)}</Box>
+      <Box>{user}</Box>
     </div>
   );
 }

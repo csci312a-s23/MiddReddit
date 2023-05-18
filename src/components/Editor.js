@@ -73,7 +73,6 @@ export default function Editor({
           getOptionLabel={(option) => option.name}
           onChange={(event, newValue) => {
             setPostCategory(newValue);
-            console.log(postCategory);
           }}
           renderInput={(params) => (
             <TextField
