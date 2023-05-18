@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-import ScrollPost from "@/components/ScrollPosts";
+import ScrollPost from "../../../components/scrollPosts";
 
 export default function Profile({ setLatestUpvote }) {
   const [user, setUser] = useState();
