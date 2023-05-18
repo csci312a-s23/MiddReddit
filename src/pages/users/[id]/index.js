@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 
 import ScrollPost from "@/components/ScrollPosts";
 
-export default function Profile({}) {
+export default function Profile({ setLatestUpvote }) {
   const [user, setUser] = useState();
   const router = useRouter();
 
@@ -47,6 +47,7 @@ export default function Profile({}) {
         key={post.id}
         goToPost={goToPost}
         setCurrentPost={setCurrentPost}
+        setLatestUpvote={setLatestUpvote}
       />
     );
   });

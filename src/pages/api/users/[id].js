@@ -9,7 +9,7 @@ import User from "../../../../models/User";
 
 const handler = nc({ onError }).get(async (req, res) => {
   const user = await User.query()
-    .withGraphFetched("posts.userMadeBy")
+    .withGraphFetched("posts.[userMadeBy, votes]")
     .findById(req.query.id)
     .throwIfNotFound();
   res.status(200).json(user);
