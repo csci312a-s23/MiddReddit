@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import ScrollPost from "../components/ScrollPosts";
+import ScrollPost from "../components/scrollPosts";
 
 //eslint-disable-next-line  react/display-name
 jest.mock("../components/UpVoteButtons.js", () => () => {
