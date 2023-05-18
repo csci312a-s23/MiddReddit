@@ -1,10 +1,7 @@
 import { render, act } from "@testing-library/react";
 import App from "../pages/_app";
-//nimport Secure from "../pages/secure";
-//import { useRouter } from "next/router";
 import { useSession, SessionProvider } from "next-auth/react";
 import MainPage from "../pages/index.js";
-//import mockRouter from "next-router-mock";
 
 jest.mock("next/router", () => require("next-router-mock"));
 

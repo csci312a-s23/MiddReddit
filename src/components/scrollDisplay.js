@@ -5,7 +5,6 @@
 
   QUESTION: How do we want it to be filtered?
 */
-
 import ScrollPost from "./scrollPosts";
 import styles from "../styles/ScrollDisplay.module.css";
 import PropTypes from "prop-types";

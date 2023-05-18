@@ -4,7 +4,6 @@
 
 //commented out to solve commit errors
 // import { useState } from "react";
-// import PostView from "../components/PostView";
 import ScrollDisplay from "../components/scrollDisplay";
 //import { Events } from "pg";
 //import data from "../../data/seedPost.json";

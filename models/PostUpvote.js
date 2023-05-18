@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 
-//import { Model } from "objection";
 import BaseModel from "./BaseModel";
 
 export default class PostUpvote extends BaseModel {
