@@ -7,107 +7,75 @@
 
   props:
     post - Post that gives up upvotes
-    allowEdit - a Boolean indicating if there is something that could be edited (required)
+    setLatestUpvote -> triggers rerender when upvote
 */
 
-import PropTypes from "prop-types";
 import PostShape from "./PostShape";
 //MUI Imports
 import { Box, Stack, Typography } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
-import { useState } from "react";
-import { blue } from "@mui/material/colors";
 
-const updateVotes = async (post) => {
-  /*
-  const params = {
-    method: "PUT",
-    body: JSON.stringify(post),
-    headers: new Headers({
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    }),
+import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
+
+export default function UpVoteButtons({ post, setLatestUpvote }) {
+  const [currentUpvoteAmount, setCurrentUpvoteAmount] = useState();
+
+  const submitUpvote = async (upvoteOrDownVote) => {
+    const newPostUpvote = {
+      postId: post.id,
+      upvote: upvoteOrDownVote,
+    };
+    const params = {
+      method: "POST",
+      body: JSON.stringify(newPostUpvote),
+      headers: new Headers({
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      }),
+    };
+    const response = await fetch(`/api/posts/${post.id}/postUpvotes`, params);
+    const submittedPostUpvote = await response.json();
+    setLatestUpvote(submittedPostUpvote);
   };
-  console.log(post);
-  console.log(params);
-  console.log("2");
-  // Problem here
-  const response2 = await fetch(`/api/posts/${post.id}`, params);
-  console.log("3");
-  if (response2.ok) {
-    // success update
-    const updatedPost = await response2.json();
-    console.log(updatedPost);
-  }
-  */
-  fetch(`/api/posts/${post.id}`, {
-    method: "PATCH",
-    body: JSON.stringify({
-      upvotes: post.upvotes,
-    }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => response.json())
-    .then((json) => console.log(json));
-};
 
-export default function UpVoteButtons({ post, allowVote }) {
-  const [upVotes, setUpVotes] = useState(post.upvotes);
-  const [buttonPressed, setButtonPressed] = useState(false);
-  const [upButton, setUpButton] = useState(false);
-  const [downButton, setDownButton] = useState(false);
-  const primary = blue[900];
-  const secondary = blue[500];
+  useEffect(() => {
+    const upvotes = post.votes.reduce(
+      (accumulator, vote) => (vote.upvote ? accumulator + 1 : accumulator - 1),
+      0
+    );
+    setCurrentUpvoteAmount(upvotes);
+  }, [post]);
 
-  function update(setButton, bool) {
-    setUpVotes(post.upvotes);
-    setButtonPressed(bool);
-    setButton(bool);
+  const { data: session } = useSession();
+  const userId = session ? session.user.id : 0;
+
+  let upvoteColor,
+    downvoteColor = "black";
+
+  const userVote = post.votes.filter(
+    (vote) => parseInt(vote.ownerId) === userId
+  );
+  const userUpvoteOrDownvote = userVote[0] ? userVote[0].upvote : undefined; //extra step so not indexing empty array
+
+  if (userUpvoteOrDownvote !== undefined) {
+    //weird ternary condition here
+    userUpvoteOrDownvote ? (upvoteColor = "blue") : (downvoteColor = "orange");
   }
 
   return (
     <Box position="static">
       <Stack alignItems="center">
-        <IconButton
-          disabled={allowVote || downButton}
-          onClick={() => {
-            if (buttonPressed === false) {
-              post.upvotes = post.upvotes + 1;
-              update(setUpButton, true);
-            } else {
-              post.upvotes = post.upvotes - 1;
-              update(setUpButton, false);
-            }
-            // fetch the database
-            //console.log("1");
-            updateVotes(post);
-          }}
-        >
-          <ThumbUpIcon
-            sx={{ color: upButton ? primary : secondary, position: "static" }}
-          />
+        <IconButton onClick={() => submitUpvote(true)}>
+          <ThumbUpIcon sx={{ color: upvoteColor, position: "static" }} />
         </IconButton>
 
-        <Typography color="blue"> {upVotes} </Typography>
+        <Typography color="blue"> {currentUpvoteAmount} </Typography>
 
-        <IconButton
-          disabled={allowVote || upButton}
-          onClick={() => {
-            if (buttonPressed === false) {
-              post.upvotes = post.upvotes - 1;
-              update(setDownButton, true);
-            } else {
-              post.upvotes = post.upvotes + 1;
-              update(setDownButton, false);
-            }
-            updateVotes(post);
-          }}
-        >
-          <ThumbDownIcon sx={{ color: downButton ? primary : secondary }} />
+        <IconButton onClick={() => submitUpvote(false)}>
+          <ThumbDownIcon sx={{ color: downvoteColor }} />
         </IconButton>
       </Stack>
     </Box>
@@ -116,5 +84,4 @@ export default function UpVoteButtons({ post, allowVote }) {
 
 UpVoteButtons.propTypes = {
   post: PostShape.isRequired,
-  allowVote: PropTypes.bool.isRequired,
 };

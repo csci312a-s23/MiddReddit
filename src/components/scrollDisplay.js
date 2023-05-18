@@ -17,6 +17,7 @@ export default function ScrollDisplay({
   goToPost,
   setCurrentPost,
   currentPost,
+  setLatestUpvote,
   searchBarQuery,
 }) {
   let looking;
@@ -40,6 +41,7 @@ export default function ScrollDisplay({
           goToPost={goToPost}
           setCurrentPost={setCurrentPost}
           currentPost={currentPost}
+          setLatestUpvote={setLatestUpvote}
         />
       );
     } else {
@@ -52,6 +54,7 @@ export default function ScrollDisplay({
             goToPost={goToPost}
             setCurrentPost={setCurrentPost}
             currentPost={currentPost}
+            setLatestUpvote={setLatestUpvote}
           />
         );
       }
@@ -71,6 +74,7 @@ export default function ScrollDisplay({
             goToPost={goToPost}
             setCurrentPost={setCurrentPost}
             currentPost={currentPost}
+            setLatestUpvote={setLatestUpvote}
           />
         );
       }

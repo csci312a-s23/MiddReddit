@@ -21,6 +21,7 @@ describe("Editor: Editor tests", () => {
       <Editor
         submitPost={completeHandler}
         categoriesList={categories}
+        categoriesListUO={[]}
         categories={categories}
       />
     );

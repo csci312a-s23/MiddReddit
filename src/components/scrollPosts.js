@@ -18,7 +18,12 @@ const NoBulletList = styled("ul")(() => ({
   paddingLeft: 0,
 }));
 
-export default function ScrollPost({ post, goToPost, setCurrentPost }) {
+export default function ScrollPost({
+  post,
+  goToPost,
+  setCurrentPost,
+  setLatestUpvote,
+}) {
   const allowVote = false;
 
   return (
@@ -29,6 +34,7 @@ export default function ScrollPost({ post, goToPost, setCurrentPost }) {
             post={post}
             upVotes={post.upvotes}
             allowVote={allowVote}
+            setLatestUpvote={setLatestUpvote}
           />
         </div>
 

@@ -83,7 +83,7 @@ function MainApp({
   const [openRightSideBar, setOpenRightSideBar] = useState(true);
 
   const [categoryQuery, setCategoryQuery] = useState(); //will use for searching by category
-
+  const [latestUpvote, setLatestUpvote] = useState();
   const [searchBarQuery, setSearchBarQuery] = useState("");
 
   useEffect(() => {
@@ -93,17 +93,15 @@ function MainApp({
       .then((resp) => resp.json())
       .then((data) => {
         setSearchQuery(data);
-        console.log(categoryQuery);
       })
       .catch((error) => console.log(error));
-  }, [currentPost, categoryQuery]);
+  }, [currentPost, categoryQuery, latestUpvote]);
 
   useEffect(() => {
     fetch(`/api/categories`)
       .then((resp) => resp.json())
       .then((data) => {
         setCategories(data);
-        console.log(data);
         const tricks = fetchAllCategoryOptions(data);
         setCategoriesList(tricks[0]);
         setCategoriesListUO(tricks[1]);
@@ -150,6 +148,7 @@ function MainApp({
     setOpenLeftSideBar,
     setCategoryQuery,
     handleClickMenubar,
+    setLatestUpvote,
   };
 
   //This is not going to work right now obviously but this is the idea we should go for so they can only edit their own posts
