@@ -30,7 +30,7 @@ export const authOptions = {
             email: user.email,
           });
         }
-        //console.log(localUser);
+
         // Add user id to the token
         token.id = localUser.id;
       }

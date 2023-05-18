@@ -8,7 +8,7 @@
   display: grid;
   grid: "votes float body";
 }
-/* I have to adjust this for bigger screens*/
+
 .body {
   grid-area: body;
   position: static;

@@ -6,8 +6,8 @@ exports.up = function (knex) {
   return knex.schema.createTable("PostUpvote", (table) => {
     table.increments("id").primary();
     table.integer("ownerId");
-    table.integer("postId"); //how to know if belongs to a comment or a post?
-    table.boolean("upvote"); //up is
+    table.integer("postId");
+    table.boolean("upvote");
   });
 };
 

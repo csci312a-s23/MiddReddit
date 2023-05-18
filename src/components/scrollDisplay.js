@@ -3,14 +3,12 @@
 
   Displays the posts by a specific category. 
 
-  QUESTION: How do we want it to be filtered?
 */
 import ScrollPost from "./scrollPosts";
 import styles from "../styles/ScrollDisplay.module.css";
 import PropTypes from "prop-types";
 import PostShape from "./PostShape";
 
-//have to get this to involve scrollPosts i just wanted to get something off the ground
 export default function ScrollDisplay({
   Posts,
   goToPost,
@@ -27,8 +25,6 @@ export default function ScrollDisplay({
   } else {
     looking = true;
   }
-
-  //console.log(searchBarQuery);
 
   const postComponentsTop = Posts.map((post) => {
     if (searchBarQuery === "" || searchBarQuery === undefined) {
@@ -80,15 +76,12 @@ export default function ScrollDisplay({
     }
   });
 
-  //console.log(topempty);
-  //console.log(bottomempty);
 
   //Style for when top or bottom component might be empty
 
   return (
     <div className={styles.body}>
       <div>
-        {/*<ul>{postComponents}</ul>*/}
         {looking && <h2> Titles </h2>}
         {topempty && <p>No titles match your search query</p>}
         {postComponentsTop}

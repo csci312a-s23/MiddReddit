@@ -21,7 +21,6 @@ export function onError(error, request, response, next) {
 export async function authenticated(request, response, next) {
   const session = await getServerSession(request, response, authOptions);
   if (session) {
-    //console.log(session.user);
     request.user = await User.query()
       .findById(session.user.id)
       .throwIfNotFound();

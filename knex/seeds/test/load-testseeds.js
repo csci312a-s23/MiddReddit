@@ -3,20 +3,8 @@
 const fs = require("fs");
 import Category from "../../../models/Category";
 exports.seed = async function (knex) {
-  /*onst contents = fs.readFileSync("./data/test-data/test-seedCategory.json");
-  const data = JSON.parse(contents);
-  // Deletes ALL existing entries and reset the id count. Then use
-  // batch insert because we have too many articles for simple insert.
-  return knex("sqlite_sequence")
-    .where("name", "=", "Category")
-    .update({ seq: 0 })
-    .then(() => knex("Category").del())
-    .then(() => knex.batchInsert("Category", data, 100));
-};
-*/
 
   await knex("Category").del();
-  //   .then(() => knex.batchInsert("Category", data, 100));
   const courses = await Category.query().insertAndFetch({
     name: "courses",
     description: "Courses at Middlebury",

@@ -1,9 +1,6 @@
-//import styles from "../styles/ScrollPosts.module.css";
 import EventShape from "./EventShape";
 
-//import { Button } from "@mui/material";
 import { useState } from "react";
-//import { Typography } from "@mui/material";
 import { Box } from "@mui/material";
 /* eslint-disable quotes */
 
@@ -13,10 +10,8 @@ export default function EventDetailsView({ event }) {
   // eslint-disable-next-line no-unused-vars
 
   const [showMore, setShowMore] = useState(false);
-  //const [currentEvent, setCurrentEvent] = useState();
-  const Handler = () => {
-    //setCurrentEvent(event);
 
+  const Handler = () => {
     setShowMore(!showMore);
   };
 

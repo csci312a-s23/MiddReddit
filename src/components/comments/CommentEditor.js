@@ -28,7 +28,6 @@ export default function CommentEditor({
         posted: new Date().toISOString(),
       };
       if (0 === 0) {
-        //if postCategory
         submitComment(newComment, 0);
         setContents("");
         collapseEditor();
@@ -61,8 +60,6 @@ export default function CommentEditor({
           onClick={() => {
             complete(false);
             collapseEditor();
-            //setOpenRightSideBar(true);
-            //setCreatePost(true);
           }}
         >
           Cancel

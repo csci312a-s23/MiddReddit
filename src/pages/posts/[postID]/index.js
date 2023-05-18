@@ -15,7 +15,6 @@ export default function Post({}) {
       .then((resp) => resp.json())
       .then((data) => {
         setPostToDisplay(data);
-        //console.log(data);
       })
       .catch((error) => console.log(error));
   }
@@ -25,7 +24,6 @@ export default function Post({}) {
   }, [postID, latestComment, latestCommentUpvote]);
 
   const submitComment = async (comment) => {
-    //had categoryId as a parameter, not sure if that needs to stay
     if (comment) {
       const params = {
         method: "POST",
@@ -40,13 +38,8 @@ export default function Post({}) {
         const newComment = await response.json();
         setLatestComment(newComment);
         console.log(newComment);
-        /* if (categoryId) {
-          await submitTag(newPost.id, categoryId);
-        } */
       }
-    } /*else {
-      router.back();
-    }*/
+    }
   };
 
   return (
