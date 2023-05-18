@@ -13,11 +13,13 @@ import { useRouter } from "next/router";
 
 import ScrollPost from "@/components/ScrollPosts";
 
-export default function Profile({}) {
+export default function Profile({ setLatestUpvote }) {
   const [user, setUser] = useState();
   const router = useRouter();
 
   const { id } = router.query;
+
+  let exists = false;
 
   useEffect(() => {
     if (id) {
@@ -41,24 +43,30 @@ export default function Profile({}) {
   function setCurrentPost() {}
 
   const user_post = user?.posts.map((post) => {
+    exists = true;
     return (
       <ScrollPost
         post={post}
         key={post.id}
         goToPost={goToPost}
         setCurrentPost={setCurrentPost}
+        setLatestUpvote={setLatestUpvote}
       />
     );
   });
 
   return (
     <div>
+      {/*
       <Box component="header" sx={{ p: 2 }}>
         <button>My Account</button>
         <button>My Comments</button>
         <button>Following</button>
-      </Box>
-      {user_post}
+      </Box>*/}
+      {/* eslint-disable-next-line react/no-unescaped-entities*/}
+      <h2>{user.name}'s Posts</h2>
+      {!exists && <p>You currently have no posts</p>}
+      {exists && user_post}
       <Box>{user && console.log(user)}</Box>
     </div>
   );

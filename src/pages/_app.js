@@ -93,6 +93,7 @@ function MainApp({
       .then((resp) => resp.json())
       .then((data) => {
         setSearchQuery(data);
+        console.log(data);
       })
       .catch((error) => console.log(error));
   }, [currentPost, categoryQuery, latestUpvote]);
@@ -202,7 +203,7 @@ function MainApp({
 
             {openRightSideBar && (
               <div className={styles.sidebarright}>
-                <RightSidebar />
+                <RightSidebar goToPost={goToPost} latestUpvote={latestUpvote} />
               </div>
             )}
           </div>
