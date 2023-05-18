@@ -25,11 +25,13 @@ const handler = nc({ onError })
         .withGraphFetched("[userMadeBy,votes]")
         .withGraphJoined("category.[parent.^2]")
         .where("category.name", req.query.category) //only works for 1 level of nesting, have to refine how I deduplicate
-        .orWhere("category:parent.name", req.query.category);
+        .orWhere("category:parent.name", req.query.category)
+        .orderBy("posted", "desc");
     } else {
       posts = await query
         .withGraphFetched("[userMadeBy,votes]")
-        .withGraphJoined("category.[parent.^2]");
+        .withGraphJoined("category.[parent.^2]")
+        .orderBy("posted", "desc");
     }
     res.status(200).json(posts);
   })
