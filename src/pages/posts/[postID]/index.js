@@ -49,16 +49,9 @@ export default function Post({}) {
     }*/
   };
 
-  const allowEdit = false;
-
-  /*if (currentPost.author === user.name)
-    {
-        allowEdit = true;
-    } */
-
   return (
     <>
-      {postToDisplay && <PostView allowEdit={allowEdit} post={postToDisplay} />}
+      {postToDisplay && <PostView post={postToDisplay} />}
       {postToDisplay && (
         <CommentView
           comments={postToDisplay.comments}

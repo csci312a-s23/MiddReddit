@@ -4,19 +4,9 @@
   Users can view and comment on a post, editing it if they are the author.
 */
 
-/* eslint-disable quotes */
-import PropTypes from "prop-types";
 import PostShape from "./PostShape";
 
-export default function PostView({ post, allowEdit }) {
-  if (allowEdit) {
-    return (
-      <div>
-        <button onClick={() => handleClick("add")}>Add</button>
-        {allowEdit && <button onClick={() => handleClick("edit")}>Edit</button>}
-      </div>
-    );
-  }
+export default function PostView({ post }) {
   let category;
   if (post.category.length > 0) {
     category = post.category[0].name;
@@ -33,6 +23,5 @@ export default function PostView({ post, allowEdit }) {
 }
 
 PostView.propTypes = {
-  post: PostShape,
-  allowEdit: PropTypes.bool.isRequired,
+  post: PostShape.isRequired,
 };

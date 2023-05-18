@@ -14,7 +14,6 @@ import { TextField, Stack, Autocomplete, Button } from "@mui/material";
 
 export default function Editor({
   post,
-  categories,
   categoriesListUO,
   submitPost,
   setOpenRightSideBar,
@@ -22,17 +21,6 @@ export default function Editor({
   const [title, setTitle] = useState(post ? post.title : "");
   const [contents, setContents] = useState(post ? post.contents : "");
   const [postCategory, setPostCategory] = useState(null);
-
-  if (!categories) {
-    // fetch categories here if solve the refresh -> error
-    // fetch("/api/categories")
-    //   .then((resp) => resp.json())
-    //   .then((data) => {
-    //     categories = data;
-    //   })
-  }
-
-  //console.log(categoriesList);
 
   const complete = (submit) => {
     if (!submit) {
@@ -51,6 +39,7 @@ export default function Editor({
       }
     }
   };
+
   return (
     <div>
       <Stack spacing={2} sx={{ width: 600 }}>

@@ -5,15 +5,12 @@
   corresponding page for the post (PostView component).
 */
 
-//import PostView from "./PostView";
 import styles from "../styles/ScrollPosts.module.css";
 import PostShape from "./PostShape";
 import PropTypes from "prop-types";
 import { styled } from "@mui/material/styles";
-//import { Button } from "@mui/material";
 import UpVoteButtons from "./UpVoteButtons";
-//import { Typography } from "@mui/material";
-//import { Box } from "@mui/material";
+
 /* eslint-disable quotes */
 
 const NoBulletList = styled("ul")(() => ({
@@ -21,32 +18,17 @@ const NoBulletList = styled("ul")(() => ({
   paddingLeft: 0,
 }));
 
-export default function ScrollPost({
-  post,
-  goToPost,
-  setCurrentPost,
-  setLatestUpvote,
-}) {
-  const allowVote = false;
-
-  //console.log(post);
-
+export default function ScrollPost({ post, goToPost, setLatestUpvote }) {
   return (
-    <NoBulletList>
+    <NoBulletList data-testid="post-display">
       <div className={styles.post}>
         <div className={styles.votes}>
-          <UpVoteButtons
-            post={post}
-            upVotes={post.upvotes}
-            allowVote={allowVote}
-            setLatestUpvote={setLatestUpvote}
-          />
+          <UpVoteButtons post={post} setLatestUpvote={setLatestUpvote} />
         </div>
 
         <div
           className={styles.body}
           onClick={() => {
-            setCurrentPost(post);
             goToPost(post);
           }}
         >
@@ -68,6 +50,7 @@ export default function ScrollPost({
 }
 
 ScrollPost.propTypes = {
-  post: PostShape,
-  goToPost: PropTypes.func,
+  post: PostShape.isRequired,
+  goToPost: PropTypes.func.isRequired,
+  setLatestUpvote: PropTypes.func.isRequired,
 };

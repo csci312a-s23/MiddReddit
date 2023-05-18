@@ -6,7 +6,7 @@
   QUESTION: How do we want it to be filtered?
 */
 
-import ScrollPost from "./scrollPosts";
+import ScrollPost from "./ScrollPosts";
 import styles from "../styles/ScrollDisplay.module.css";
 import PropTypes from "prop-types";
 import PostShape from "./PostShape";
