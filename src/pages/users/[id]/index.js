@@ -64,7 +64,7 @@ export default function Profile({ setLatestUpvote }) {
         <button>Following</button>
       </Box>*/}
       {/* eslint-disable-next-line react/no-unescaped-entities*/}
-      <h2>{user.name}'s Posts</h2>
+      <h2>Your Posts</h2>
       {!exists && <p>You currently have no posts</p>}
       {exists && user_post}
       <Box>{user && console.log(user)}</Box>
