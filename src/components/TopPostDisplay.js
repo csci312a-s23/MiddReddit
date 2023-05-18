@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import TopPostCard from "./TopPostCard";
 import PropTypes from "prop-types";
 
-export default function TopPostDisplay({ goToPost, latestUpvote }) {
+export default function TopPostDisplay({ goToPost }) {
   const [topPosts, setTopPosts] = useState();
 
   /* onload fetch trending posts */
@@ -19,8 +19,6 @@ export default function TopPostDisplay({ goToPost, latestUpvote }) {
       });
   }, []);
 
-  console.log(latestUpvote);
-
   let postDisp;
   if (topPosts) {
     const topPostShow = topPosts.slice(0, 3); // take top 3
@@ -28,7 +26,6 @@ export default function TopPostDisplay({ goToPost, latestUpvote }) {
       <TopPostCard key={post.id} post={post} goToPost={goToPost} />
     ));
   }
-  /* map trending posts to MUI cards */
 
   return (
     <div>

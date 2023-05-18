@@ -15,9 +15,8 @@ export default function Post({}) {
       .then((resp) => resp.json())
       .then((data) => {
         setPostToDisplay(data);
-        //console.log(data);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   }
 
   useEffect(() => {
@@ -39,14 +38,8 @@ export default function Post({}) {
       if (response.ok) {
         const newComment = await response.json();
         setLatestComment(newComment);
-        console.log(newComment);
-        /* if (categoryId) {
-          await submitTag(newPost.id, categoryId);
-        } */
       }
-    } /*else {
-      router.back();
-    }*/
+    }
   };
 
   return (

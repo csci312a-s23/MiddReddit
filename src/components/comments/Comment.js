@@ -111,9 +111,7 @@ export default function Comment({
               {comment.author.name} &emsp;{" "}
               <em>{dayjs(comment.posted).fromNow()}</em>{" "}
             </p>
-            <p onClick={() => console.log(comment)} style={{ margin: "0px" }}>
-              {comment.contents}
-            </p>
+            <p style={{ margin: "0px" }}>{comment.contents}</p>
 
             <p
               style={{ color: replyColor, fontSize: 15, marginTop: "6px" }}

@@ -51,9 +51,7 @@ export default function UpVoteButtons({ post, setLatestUpvote }) {
       headers: {
         "Content-Type": "application/json",
       },
-    })
-      .then((response) => response.json())
-      .then((json) => console.log(json));
+    });
   };
 
   useEffect(() => {

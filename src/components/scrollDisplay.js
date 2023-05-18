@@ -28,8 +28,6 @@ export default function ScrollDisplay({
     looking = true;
   }
 
-  //console.log(searchBarQuery);
-
   const postComponentsTop = Posts.map((post) => {
     if (searchBarQuery === "" || searchBarQuery === undefined) {
       topempty = false;
@@ -79,9 +77,6 @@ export default function ScrollDisplay({
       }
     }
   });
-
-  //console.log(topempty);
-  //console.log(bottomempty);
 
   //Style for when top or bottom component might be empty
 
