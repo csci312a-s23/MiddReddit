@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import Editor from "./Editor";
+import Editor from "../components/Editor";
 
 describe("Editor: Editor tests", () => {
   let post, categories;

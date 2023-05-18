@@ -19,6 +19,8 @@ export default function Profile({ setLatestUpvote }) {
 
   const { id } = router.query;
 
+  let exists = false;
+
   useEffect(() => {
     if (id) {
       fetch(`/api/users/${id}`)
@@ -41,6 +43,7 @@ export default function Profile({ setLatestUpvote }) {
   function setCurrentPost() {}
 
   const user_post = user?.posts.map((post) => {
+    exists = true;
     return (
       <ScrollPost
         post={post}
@@ -54,12 +57,16 @@ export default function Profile({ setLatestUpvote }) {
 
   return (
     <div>
+      {/*
       <Box component="header" sx={{ p: 2 }}>
         <button>My Account</button>
         <button>My Comments</button>
         <button>Following</button>
-      </Box>
-      {user_post}
+      </Box>*/}
+      {/* eslint-disable-next-line react/no-unescaped-entities*/}
+      <h2>{user.name}'s Posts</h2>
+      {!exists && <p>You currently have no posts</p>}
+      {exists && user_post}
       <Box>{user && console.log(user)}</Box>
     </div>
   );

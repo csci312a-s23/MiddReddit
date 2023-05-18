@@ -20,13 +20,13 @@ export default function EventView({ events }) {
   );
 
   const event_list = sortedEvents.map((event) => (
-    <EventDetailsView key={event.id} event={event} />
+    <EventDetailsView key={event.title} event={event} />
   ));
 
   return (
     <>
       <Box>
-        <h1>Upcoming Events: </h1>
+        <h2>Upcoming Events: </h2>
         <NoBulletList>{event_list}</NoBulletList>
       </Box>
     </>

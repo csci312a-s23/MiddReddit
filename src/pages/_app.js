@@ -203,7 +203,7 @@ function MainApp({
 
             {openRightSideBar && (
               <div className={styles.sidebarright}>
-                <RightSidebar />
+                <RightSidebar goToPost={goToPost} latestUpvote={latestUpvote} />
               </div>
             )}
           </div>

@@ -13,7 +13,7 @@ jest.mock("next-auth/react");
 jest.mock("node-fetch", () => require("fetch-mock-jest").sandbox());
 const fetchMock = require("node-fetch");
 //eslint-disable-next-line  react/display-name
-jest.mock("../components/TopPosts.js", () => () => {
+jest.mock("../components/TopPostDisplay.js", () => () => {
   return <mock-TopPosts data-testid="topposts" />;
 });
 describe("Client-side testing of secure pages", () => {

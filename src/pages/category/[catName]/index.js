@@ -23,6 +23,7 @@ export default function MainPageCategory({
   handleClickMenubar,
   setOpenLeftSideBar,
   setOpenRightSideBar,
+  setLatestUpvote,
 }) {
   //const router = useRouter();
   //const { catName } = router.query;
@@ -38,6 +39,7 @@ export default function MainPageCategory({
           setCurrentPost={setCurrentPost}
           currentPost={currentPost}
           searchBarQuery={searchBarQuery}
+          setLatestUpvote={setLatestUpvote}
         />
       )}
 
