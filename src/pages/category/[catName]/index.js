@@ -5,10 +5,7 @@
 */
 
 //commented out to solve commit errors
-// import { useState } from "react";
 import ScrollDisplay from "../../../components/scrollDisplay";
-//import data from "../../data/seedPost.json";
-//import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import PostShape from "../../../components/PostShape";
 import AddButton from "@/components/AddButton";
@@ -18,18 +15,12 @@ export default function MainPageCategory({
   setCurrentPost,
   currentPost,
   searchQuery,
-  //setCategoryQuery,
   searchBarQuery,
   handleClickMenubar,
   setOpenLeftSideBar,
   setOpenRightSideBar,
   setLatestUpvote,
 }) {
-  //const router = useRouter();
-  //const { catName } = router.query;
-  console.log("here");
-  //setCategoryQuery(catName);
-  //what props and callbacks should we use?
   return (
     <div>
       {searchQuery && (

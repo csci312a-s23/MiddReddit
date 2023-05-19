@@ -17,15 +17,7 @@ import { knex } from "../../knex/knex.js";
 import post_data from "../../data/test-data/test-seedPost.json";
 import { getServerSession } from "next-auth/next";
 jest.mock("next-auth/next");
-//import tag_data from "../../data/test-data/test-seedTag.json";
 
-//models
-// import Post from "../../models/Post.js";
-// import Category from "../../models/Category.js";
-/*
-import mockRouter from "next-router-mock";
-import { createDynamicRouteParser } from "next-router-mock/dynamic-routes";
-*/
 // Replace the router with the mock
 
 describe("MiddReddit API", () => {
@@ -47,17 +39,8 @@ describe("MiddReddit API", () => {
   afterEach(() => {
     getServerSession.mockReset();
   });
-  //jest.mock("next/router", () => require("next-router-mock"));
 
   describe("Category Endpoint Testing", () => {
-    /*tests to complete:
-        POST a post
-        POST a comment
-        GET a single post
-        PUT a single post
-        PUT like/dislike
-        *Remember to uncomment the imports
-    */
     test("GET /api/categories should return all parent categories", async () => {
       await testApiHandler({
         rejectOnHandler: true,
@@ -115,18 +98,6 @@ describe("MiddReddit API", () => {
     });
   });
   describe("Post Endpoint Testing", () => {
-    /*
-    test("GET /api/posts should return all posts", async () => {
-      await testApiHandler({
-        rejectOnHandler: true,
-        handler: posts_endpoint,
-        test: async ({ fetch }) => {
-          const res = await fetch();
-          await expect(res.json()).resolves.toMatchObject(post_data);
-        },
-      });
-    });
-*/
     test("GET /api/posts?category should return a subset of posts for a category", async () => {
       await testApiHandler({
         rejectOnHandler: true,
@@ -191,8 +162,4 @@ describe("MiddReddit API", () => {
       });
     });
   });
-
-  /* describe("Tag testing", () => {
-    
-  }); */
 });

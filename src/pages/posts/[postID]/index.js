@@ -39,14 +39,8 @@ export default function Post({}) {
       if (response.ok) {
         const newComment = await response.json();
         setLatestComment(newComment);
-        console.log(newComment);
-        /* if (categoryId) {
-          await submitTag(newPost.id, categoryId);
-        } */
       }
-    } /*else {
-      router.back();
-    }*/
+    }
   };
 
   return (

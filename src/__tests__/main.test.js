@@ -34,29 +34,6 @@ describe("Client-side testing of secure pages", () => {
     jest.resetAllMocks();
   });
 
-  /* test("Renders secure portions of page when logged in", async () => {
-    // When rendering an individual page we can just mock useSession (in this case to
-    // simulate an authenticated user)
-    useSession.mockReturnValue({
-      data: {
-        user: { id: 1 },
-        expires: new Date(Date.now() + 2 * 86400).toISOString(),
-      },
-      status: "authenticated",
-    });
-    render(<Secure />);
-    expect(useSession).toBeCalledWith({ required: true });
-    expect(screen.getByText(/\{ "user": \{ "id": 1 \}/i)).toBeInTheDocument();
-  });
-
-  test("Doesn't render secure portions when not logged in", async () => {
-    useSession.mockReturnValue({ data: null, status: "unauthenticated" });
-    render(<Secure />);
-    expect(
-      screen.queryByText(/\{ "user": \{ "id": 1 \}/i)
-    ).not.toBeInTheDocument();
-  });
-*/
   test("Render app with session provider", async () => {
     // When rendering _app, (or any component containing the SessionProvider component)
     // we need to mock the provider to prevent NextAuth from attempting to make API requests

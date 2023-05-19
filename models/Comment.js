@@ -4,7 +4,6 @@ import { Model } from "objection";
 import BaseModel from "./BaseModel";
 import User from "./User";
 import Post from "./Post";
-//import { Mode } from "@mui/icons-material";
 import CommentUpvote from "./CommentUpvote";
 
 export default class Comment extends BaseModel {
@@ -14,12 +13,6 @@ export default class Comment extends BaseModel {
   }
 
   // Objection.js assumes primary key is `id` by default
-  /* table.increments("id").primary();
-  table.integer("author");
-  table.foreign("author").references("User.id").onDelete("SET NULL");
-  table.text("contents");
-  table.integer("parentID");
-  table.string("posted").notNullable(); */
   static get jsonSchema() {
     return {
       type: "object",
@@ -36,8 +29,6 @@ export default class Comment extends BaseModel {
     };
   }
   static get relationMappings() {
-    //const Post = require("./Post");
-
     return {
       parent: {
         relation: Model.BelongsToOneRelation,

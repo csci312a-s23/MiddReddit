@@ -10,10 +10,10 @@ import PropTypes from "prop-types";
 const PostShape = PropTypes.shape({
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  author: PropTypes.number, //will be required eventually
+  author: PropTypes.number,
   contents: PropTypes.string.isRequired,
-  tags: PropTypes.array, //will be required
-  edited: PropTypes.string, //will be required
+  tags: PropTypes.array,
+  edited: PropTypes.string,
 });
 
 export default PostShape;

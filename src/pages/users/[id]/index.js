@@ -57,12 +57,6 @@ export default function Profile({ setLatestUpvote }) {
 
   return (
     <div>
-      {/*
-      <Box component="header" sx={{ p: 2 }}>
-        <button>My Account</button>
-        <button>My Comments</button>
-        <button>Following</button>
-      </Box>*/}
       {/* eslint-disable-next-line react/no-unescaped-entities*/}
       <h2>Your Posts</h2>
       {!exists && <p>You currently have no posts</p>}

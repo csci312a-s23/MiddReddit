@@ -1,7 +1,5 @@
 //code adapted from https://stackoverflow.com/questions/63297109/nested-sidebar-menu-with-material-ui-and-reactjs
 import MenuItem from "./categorySidebarComponents/MenuItem";
-//eslint-disable-next-line
-import CurrentCategorySidebar from "./categorySidebarComponents/currentCategory";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 
@@ -30,9 +28,6 @@ export default function CategorySidebar({
       setSearchBarQuery={setSearchBarQuery}
     />
   ));
-
-  //    {currentCategory && <CurrentCategorySidebar currentCategory={currentCategory}/>}
-  //    currently only works about half the time, will have to investigate
 
   return <div>{newMenu}</div>;
 }

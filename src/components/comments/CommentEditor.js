@@ -13,7 +13,7 @@ export default function CommentEditor({
     } else {
       setContents("");
     }
-  }; //need a wrapper function because sometimes we call editor without collapse option
+  };
   const router = useRouter();
   const { postID } = router.query;
   const parentID = parentComment ? parentComment.id : null;
@@ -61,8 +61,6 @@ export default function CommentEditor({
           onClick={() => {
             complete(false);
             collapseEditor();
-            //setOpenRightSideBar(true);
-            //setCreatePost(true);
           }}
         >
           Cancel

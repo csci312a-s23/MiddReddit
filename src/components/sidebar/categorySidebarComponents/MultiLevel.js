@@ -13,7 +13,6 @@ export default function MultiLevel({ item, goToCategory, setSearchBarQuery }) {
   const [open, setOpen] = useState(false);
 
   const handleClick = (clickBool) => {
-    //goToCategory(item.name);
     if (clickBool) {
       goToCategory(item.name);
       setSearchBarQuery("");

@@ -137,7 +137,6 @@ export default function MenuBar({
             categoriesList={categoriesList}
           />
 
-          {/*Change location of name*/}
           {!!session && <p>{session.user.name}</p>}
 
           <Box sx={{ flexGrow: 1 }} />
